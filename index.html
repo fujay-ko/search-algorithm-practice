@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>搜尋演算法 — 練習</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--panel:#1a1d2e;--panel2:#22263a;
+  --accent:#4f8ef7;--accent2:#a78bfa;--green:#34d399;
+  --yellow:#fbbf24;--orange:#fb923c;--text:#e8eaf6;--muted:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,.04)1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.04)1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+.wrap{max-width:760px;margin:0 auto;padding:48px 20px 80px;position:relative;z-index:1;}
+
+/* Header */
+header{text-align:center;margin-bottom:48px;}
+.badge{display:inline-block;background:linear-gradient(135deg,#4f8ef720,#a78bfa20);border:1px solid #4f8ef740;border-radius:50px;padding:6px 18px;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+h1{font-family:'Nunito',sans-serif;font-size:clamp(28px,6vw,46px);font-weight:900;background:linear-gradient(135deg,#4f8ef7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:10px;}
+.sub{color:var(--muted);font-size:15px;font-weight:500;}
+
+/* Section */
+.section{margin-bottom:36px;}
+.section-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent);}
+.section-title.linear::before{background:var(--orange);}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:1fr;gap:12px;}
+.card{display:flex;align-items:stretch;background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;overflow:hidden;transition:all .2s;text-decoration:none;}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px #00000060;border-color:#ffffff20;}
+.card-accent{width:5px;flex-shrink:0;}
+.card-body{padding:18px 20px;flex:1;}
+.card-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.card-icon{font-size:22px;}
+.card-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;color:var(--text);}
+.card-badge{font-size:10px;font-weight:800;padding:2px 9px;border-radius:50px;margin-left:auto;white-space:nowrap;}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:500;}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.tag{font-size:10px;font-weight:800;padding:2px 8px;border-radius:50px;border:1px solid;}
+.card-arrow{display:flex;align-items:center;padding:0 18px;color:var(--muted);font-size:20px;transition:color .2s;}
+.card:hover .card-arrow{color:var(--text);}
+
+/* Linear card */
+.card.linear .card-accent{background:var(--orange);}
+.card.linear .card-title{color:var(--orange);}
+.card.linear .card-badge{background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;}
+
+/* Binary cards */
+.card.bv1 .card-accent{background:var(--accent);}
+.card.bv1 .card-title{color:var(--accent);}
+.card.bv1 .card-badge{background:#4f8ef720;color:var(--accent);border:1px solid #4f8ef740;}
+
+.card.bv2 .card-accent{background:var(--accent2);}
+.card.bv2 .card-title{color:var(--accent2);}
+.card.bv2 .card-badge{background:#a78bfa20;color:var(--accent2);border:1px solid #a78bfa40;}
+
+.card.bv3 .card-accent{background:var(--green);}
+.card.bv3 .card-title{color:var(--green);}
+.card.bv3 .card-badge{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+
+/* Progress guide */
+.guide{background:linear-gradient(135deg,#1a1d30,#1d1a2e);border:1px solid #ffffff10;border-radius:16px;padding:18px 22px;margin-bottom:36px;}
+.guide-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.guide-steps{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+.guide-step{display:flex;flex-direction:column;align-items:center;flex:1;min-width:100px;text-align:center;}
+.guide-step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:6px;border:2px solid;}
+.guide-step-label{font-size:11px;font-weight:700;color:var(--muted);line-height:1.4;}
+.guide-arrow{color:var(--muted);font-size:18px;padding:0 4px;margin-bottom:20px;}
+
+.gs1 .guide-step-circle{background:#fb923c20;border-color:var(--orange);}
+.gs2 .guide-step-circle{background:#4f8ef720;border-color:var(--accent);}
+.gs3 .guide-step-circle{background:#a78bfa20;border-color:var(--accent2);}
+.gs4 .guide-step-circle{background:#34d39920;border-color:var(--green);}
+
+@media(max-width:500px){
+  .guide-steps{gap:8px;}
+  .guide-arrow{display:none;}
+  .guide-step{min-width:70px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">國中資訊</div>
+    <h1>🔍 搜尋演算法練習</h1>
+    <p class="sub">循序搜尋 &amp; 二分搜尋法 — 互動練習</p>
+  </header>
+
+  <!-- Learning path guide -->
+  <div class="guide">
+    <div class="guide-title">📚 建議學習順序</div>
+    <div class="guide-steps">
+      <div class="guide-step gs1">
+        <div class="guide-step-circle">🐢</div>
+        <div class="guide-step-label">循序搜尋<br>建立概念</div>
+      </div>
+      <div class="guide-arrow">→</div>
+      <div class="guide-step gs2">
+        <div class="guide-step-circle">⚡</div>
+        <div class="guide-step-label">二分搜尋<br>v1 選擇題</div>
+      </div>
+      <div class="guide-arrow">→</div>
+      <div class="guide-step gs3">
+        <div class="guide-step-circle">🚀</div>
+        <div class="guide-step-label">二分搜尋<br>v3 填空強化</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Linear search -->
+  <div class="section">
+    <div class="section-title linear">🐢 循序搜尋</div>
+    <div class="cards">
+      <a class="card linear" href="practice/linear.html">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-icon">🐢</div>
+            <div class="card-title">循序搜尋練習</div>
+            <div class="card-badge">選擇題</div>
+          </div>
+          <div class="card-desc">從頭開始一格一格比對。每步選擇「找到了」或「繼續往後」，掌握最壞情況的概念。</div>
+          <div class="card-tags">
+            <span class="tag" style="color:var(--orange);border-color:#fb923c40;">掃描進度條</span>
+            <span class="tag" style="color:var(--orange);border-color:#fb923c40;">最壞情況挑戰</span>
+            <span class="tag" style="color:var(--orange);border-color:#fb923c40;">vs 二分搜尋比較</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Binary search -->
+  <div class="section">
+    <div class="section-title">⚡ 二分搜尋</div>
+    <div class="cards">
+
+      <a class="card bv1" href="practice/binary_v1.html">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-icon">⚡</div>
+            <div class="card-title">二分搜尋 v1</div>
+            <div class="card-badge">選擇題</div>
+          </div>
+          <div class="card-desc">每步選擇「往左找」、「往右找」或「找到了」。系統顯示 Left、Mid、Right 的位置，適合初學。</div>
+          <div class="card-tags">
+            <span class="tag" style="color:var(--accent);border-color:#4f8ef740;">方向選擇</span>
+            <span class="tag" style="color:var(--accent);border-color:#4f8ef740;">即時提示</span>
+            <span class="tag" style="color:var(--accent);border-color:#4f8ef740;">效率評分</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <a class="card bv3" href="practice/binary_v3.html">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">二分搜尋 v3</div>
+            <div class="card-badge">填空強化</div>
+          </div>
+          <div class="card-desc">五步填空互動，加入每步計時、答題後白話解釋、練習結束後的錯誤分析，以及步驟重播功能。</div>
+          <div class="card-tags">
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">⏱️ 每步計時</span>
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">📊 錯誤分析</span>
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">🔄 步驟重播</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Quiz section -->
+  <div class="section">
+    <div class="section-title" style="color:var(--green);">
+      📝 測驗模式
+      <span style="font-size:10px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;margin-left:4px;">（老師指定才開放）</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#0d2318,#0f1f14);border:1px solid #34d39930;border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:12px;color:#b0b8d4;line-height:1.7;">
+      📌 測驗頁面需要填寫<b style="color:var(--yellow)">班級、座號、姓名</b>後才能開始，完成後成績自動送出給老師。老師會告訴你要做哪一個版本。
+    </div>
+    <div class="cards">
+
+      <a class="card" href="quiz/quiz_linear.html" style="--accent-color:var(--orange);">
+        <div class="card-accent" style="background:var(--orange);"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-icon">🐢</div>
+            <div class="card-title" style="color:var(--orange);">循序搜尋測驗</div>
+            <div class="card-badge" style="background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;">選擇題</div>
+          </div>
+          <div class="card-desc">5 題難度分級測驗（7格/12格/17格），選擇題作答，完成後送出成績。</div>
+          <div class="card-tags">
+            <span class="tag" style="color:var(--orange);border-color:#fb923c40;">🟢🟡🔴 難度分級</span>
+            <span class="tag" style="color:var(--orange);border-color:#fb923c40;">📤 自動送出成績</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <a class="card" href="quiz/quiz_binary_v3.html">
+        <div class="card-accent" style="background:var(--green);"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-icon">🚀</div>
+            <div class="card-title" style="color:var(--green);">二分搜尋填空計時測驗 v3</div>
+            <div class="card-badge" style="background:#34d39920;color:var(--green);border:1px solid #34d39940;">填空＋計時</div>
+          </div>
+          <div class="card-desc">在 v2 基礎上加入每題計時，完成後顯示詳細成績單（每步得分、花費時間），並自動送出成績。</div>
+          <div class="card-tags">
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">🟢🟡🔴 難度分級</span>
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">⏱️ 計時</span>
+            <span class="tag" style="color:var(--green);border-color:#34d39940;">📤 自動送出成績</span>
+          </div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
