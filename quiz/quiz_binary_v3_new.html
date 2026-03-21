@@ -709,7 +709,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
 
 <script>
-const GAS_URL='https://script.google.com/macros/s/AKfycbwUkaLjIDZubkCD79VFf2vEEFaC9mMjUh-lfv_f081392f8YrDJOOFeJvWBrmtdviVw/exec';
+const GAS_URL='填入你的GAS網址';
 const QUIZ_TYPE='二分搜尋v3';
 
 // ── v3: Step time summary ─────────────────────────────
@@ -766,6 +766,7 @@ let gameOver=false,gameFoundAt=undefined,isWorstCase=false;
 let maxSteps=0,predDone=false;
 // v2 fill-in state
 let fiMid=-1,fiDir='',fiBound='',fiStepScores=[];
+let fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0};
 const quizMode=true; // always quiz in this page
 // v3: per-step timing and error tracking
 let stepTimers={};       // {stepName: startTime}
@@ -831,9 +832,10 @@ function genArr(size,forceNF=false){
 // Returns {size, forceNotFound} based on question index
 function diffForQ(i,total){
   const pct=(i+1)/total;
-  if(pct<=0.4) return {size:7,nf:false,label:'簡單(7格)',cls:'di-E',icon:'🟢'};
-  if(pct<=0.8) return {size:12,nf:false,label:'中等(12格)',cls:'di-M',icon:'🟡'};
-  return {size:17,nf:true,label:'困難(17格)',cls:'di-H',icon:'🔴'};
+  function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+  if(pct<=0.4){var s=rnd(5,8);  return {size:s,nf:false,label:'簡單('+s+'格)',cls:'di-E',icon:'🟢'};}
+  if(pct<=0.8){var s=rnd(9,13); return {size:s,nf:false,label:'中等('+s+'格)',cls:'di-M',icon:'🟡'};}
+  var s=rnd(14,17); return {size:s,nf:true,label:'困難('+s+'格)',cls:'di-H',icon:'🔴'};
 }
 
 // ── Practice: new problem ──────────────────────────────
@@ -1075,7 +1077,7 @@ function renderQ(){
   } else {
     q.innerHTML = '目標 = <span class="mv">'+target+'</span>';
     bc.innerHTML = '';
-    fiMid=-1; fiDir=''; fiBound=''; fiStepScores=[]; stepTimes={}; curQSteps=[]; curStepStart=Date.now();previewL=-1;previewR=-1;previewM=-1;fiHideLR=true;fiHideM=true;
+    fiMid=-1; fiDir=''; fiBound=''; fiStepScores=[]; fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0}; stepTimes={}; curQSteps=[]; curStepStart=Date.now();previewL=-1;previewR=-1;previewM=-1;fiHideLR=true;fiHideM=true;
     renderFiS0();
   }
 }
@@ -1425,9 +1427,10 @@ function cfmFiS0(){
   var errR=valR!==bR;
   if(!errL&&!errR){
     correctAns++;
-    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
+    fiStepScores.push(Math.max(0,4-stepWrong));
     if(inpL)inpL.classList.add('ok2');
     if(inpR)inpR.classList.add('ok2');
+    if(fiStepErrors)fiStepErrors['確認L/R']=(fiStepErrors['確認L/R']||0)+stepWrong;
     endStepTimer('確認L/R'); recordStep('確認L/R',stepWrong,'Left='+bL+',Right='+bR,'Left是最左邊的索引，Right是最右邊的索引。');
     showFb(true,'✅ 正確！');
     addLog('確認 Left/Right（正確）','sl');
@@ -1444,11 +1447,10 @@ function cfmFiS0(){
     addLog('答錯（Left/Right確認）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
+        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
         addLog('答錯上限，繼續','wl');
         fiHideLR=false; renderAll();
-        showFb(false,'💡 提示：Left = '+bL+'，Right = '+bR+'。繼續下一步。');
-        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS1();},1200);
+        document.getElementById('fb').className='fb'; renderFiS1();
       },1000);
     } else {
       setTimeout(function(){
@@ -1472,9 +1474,10 @@ function cfmFiS1(){
   }
   if(val===correct){
     correctAns++;
-    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
+    fiStepScores.push(Math.max(0,4-stepWrong));
     fiMid=val;
     if(inp)inp.classList.add('ok2');
+    if(fiStepErrors)fiStepErrors['計算mid']=(fiStepErrors['計算mid']||0)+stepWrong;
     endStepTimer('計算mid'); recordStep('計算mid',stepWrong,'mid='+correct,'mid=⌊(Left+Right)/2⌋，每次取範圍正中間。');
     showFb(true,'✅ 正確！');
     addLog('第'+stepCount+'步：mid 正確','sl');
@@ -1489,11 +1492,10 @@ function cfmFiS1(){
     addLog('答錯（mid）：填了'+val,'wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiMid=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
+        skippedSteps++; fiMid=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
         addLog('答錯上限，繼續','wl');
         fiHideM=false; renderAll();
-        showFb(false,'💡 提示：mid = ⌊('+bL+'+'+bR+')/2⌋ = '+correct+'。繼續下一步。');
-        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS2();},1200);
+        document.getElementById('fb').className='fb'; renderFiS2();
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1567,7 +1569,7 @@ function cfmFiS2(dir){
   if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
   if(dir===correct){
     correctAns++; fiDir=dir;
-    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
+    fiStepScores.push(Math.max(0,4-stepWrong));
     if(dir==='found'){
       showFb(true,'✅ 正確！找到了！');
       addLog('第'+stepCount+'步：找到目標','cl');
@@ -1576,6 +1578,7 @@ function cfmFiS2(dir){
     }
     var _dirHint=dir==='left'?'arr[mid] > 目標，所以目標在左半邊，把 <b>Right 移到 mid-1</b>，縮小右界。':'arr[mid] < 目標，所以目標在右半邊，把 <b>Left 移到 mid+1</b>，縮小左界。';
     var msg=dir==='left'?'✅ 正確！arr[mid] > 目標，往左找。':'✅ 正確！arr[mid] < 目標，往右找。';
+    if(fiStepErrors)fiStepErrors['判斷方向']=(fiStepErrors['判斷方向']||0)+stepWrong;
     endStepTimer('判斷方向'); recordStep('判斷方向',stepWrong,dir==='left'?'往左':'往右',_dirHint);
     showFb(true,msg);
     addLog('第'+stepCount+'步：方向='+(dir==='left'?'左':'右'),'sl');
@@ -1591,12 +1594,10 @@ function cfmFiS2(dir){
     addLog('答錯（方向）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiDir=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
+        skippedSteps++; fiDir=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
         addLog('答錯上限，繼續','wl');
         if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
-        var dirHint=correct==='found'?'找到了！':'往'+(correct==='left'?'左':'右')+'找。';
-        showFb(false,'💡 提示：'+dirHint+'繼續下一步。');
-        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS3();},1200);
+        document.getElementById('fb').className='fb'; renderFiS3();
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1635,9 +1636,10 @@ function cfmFiS3(bound){
   if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
   if(bound===correct){
     correctAns++; fiBound=bound;
-    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
+    fiStepScores.push(Math.max(0,4-stepWrong));
     var bname=bound==='right'?'Right':'Left';
     var _bHint=fiDir==='left'?'往左找要縮小右界，Right = mid - 1，這樣下次的搜尋範圍就只剩左半邊。':'往右找要縮小左界，Left = mid + 1，這樣下次的搜尋範圍就只剩右半邊。';
+    if(fiStepErrors)fiStepErrors['選邊界']=(fiStepErrors['選邊界']||0)+stepWrong;
     endStepTimer('選邊界'); recordStep('選邊界',stepWrong,(fiBound==='right'?'改Right':'改Left'),_bHint);
     showFb(true,'✅ 正確！往'+(fiDir==='left'?'左':'右')+'找，移動 '+bname+'。');
     addLog('第'+stepCount+'步：改'+bname,'sl');
@@ -1650,11 +1652,9 @@ function cfmFiS3(bound){
     addLog('答錯（邊界選擇）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiBound=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
+        skippedSteps++; fiBound=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
         addLog('答錯上限，繼續','wl');
-        var bndHint=correct==='right'?'應改 Right（右界）。':'應改 Left（左界）。';
-        showFb(false,'💡 提示：往'+(fiDir==='left'?'左':'右')+'找，'+bndHint+'繼續下一步。');
-        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS4();},1200);
+        document.getElementById('fb').className='fb'; renderFiS4();
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1707,9 +1707,10 @@ function cfmFiS4(){
   }
   if(val===correctIdx){
     correctAns++;
-    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
+    fiStepScores.push(Math.max(0,4-stepWrong));
     if(inp)inp.classList.add('ok2');
     var _idxHint=fiBound==='right'?'Right = mid - 1 = '+fiMid+' - 1 = '+correctIdx+'，搜尋範圍縮小到左半邊了！':'Left = mid + 1 = '+fiMid+' + 1 = '+correctIdx+'，搜尋範圍縮小到右半邊了！';
+    if(fiStepErrors)fiStepErrors['填索引']=(fiStepErrors['填索引']||0)+stepWrong;
     endStepTimer('填索引'); recordStep('填索引',stepWrong,(fiBound==='right'?'Right':'Left')+'='+correctIdx,_idxHint);
     var msg='✅ 正確！';
     showFb(true,msg);
@@ -1724,11 +1725,9 @@ function cfmFiS4(){
     addLog('答錯（索引）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
+        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
         addLog('答錯上限，繼續','wl');
-        var idxHint=fiBound==='right'?'Right = mid-1 = '+fiMid+'-1 = '+correctIdx:'Left = mid+1 = '+fiMid+'+1 = '+correctIdx;
-        showFb(false,'💡 提示：'+idxHint+'。');
-        setTimeout(function(){applyFiBin();},1200);
+        applyFiBin();
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1842,7 +1841,7 @@ function endGame(found,foundIdx){
 
   if(quizMode){
     const diff=diffForQ(qCurrent,qTotal);
-    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores]});
+    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores],stepErrors:Object.assign({},fiStepErrors)});
     qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
     document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下一題→(${qCurrent+2}/${qTotal})`:'查看成績單 📊';
   } else {
@@ -1864,32 +1863,12 @@ function showScorecard(){
   const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
   const found=qResults.filter(function(r){return r.found;}).length;
   // Plan 2: binary=4 steps×25pts; linear=result(60%)+acc(40%)
-  // Scoring: 5 steps × 20pts per question, weighted by difficulty
-  // Weight distribution (for 5Q): Q1=30%, Q2=30%, Q3=15%, Q4=15%, Q5=10%
-  var weights5=[30,30,15,15,10];
-  var weights3=[40,35,25];
-  var weights4=[30,30,25,15];
-  var weights8=[15,15,15,15,10,10,10,10];
-  var weights10=[12,12,12,12,10,10,8,8,8,8];
-  var getWeights=function(n){
-    if(n===3) return weights3;
-    if(n===4) return weights4;
-    if(n===5) return weights5;
-    if(n===8) return weights8;
-    if(n===10) return weights10;
-    // fallback: equal weights
-    var w=[]; for(var i=0;i<n;i++) w.push(Math.round(100/n)); return w;
-  };
-  var nDone=qResults.length;
-  var ws=getWeights(qTotal);
-  var perQArr=qResults.map(function(r,i){
+  // Scoring: 5 steps × 4pts each = 20pts/question
+  var perQArr=qResults.map(function(r){
     var ss=r.stepScores||[];
-    return Math.min(100,ss.reduce(function(a,s){return a+s*20;},0));
+    return ss.reduce(function(a,s){return a+s;},0);
   });
-  // Weighted score: sum(score_i * weight_i) / sum(weight_i for completed questions)
-  var weightedSum=perQArr.reduce(function(acc,score,i){return acc+score*(ws[i]||10);},0);
-  var weightSum=qResults.reduce(function(acc,r,i){return acc+(ws[i]||10);},0);
-  const pct=Math.round(weightedSum/weightSum);
+  const pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0));
 
   let grade,gc,trophy,lbl;
   if(pct>=90){grade='A';gc='gA';trophy='🏆';lbl='優秀！';}
@@ -1906,7 +1885,7 @@ function showScorecard(){
   document.getElementById('scGr').textContent=grade;
   document.getElementById('scGL').textContent=lbl;
   document.getElementById('scPct').textContent=pct+'分';
-  document.getElementById('scPctNote').textContent='計分：每步20分，每答錯1次扣1分，答錯3次後給提示（扣3分）';
+  document.getElementById('scPctNote').textContent='計分：每步4分（共5步=20分/題），每答錯1次扣1分，5題總分最高100分';
   document.getElementById('scTime').textContent=fmt(totalTimerSec);
   document.getElementById('scSt').textContent=qTotSteps;
   document.getElementById('scWr').textContent=qWrongAll;
@@ -1993,17 +1972,29 @@ function submitGS(){
   st.className='submit-st sending';
   st.textContent='⏳ 傳送中...';
 
-  var ws2=[30,30,15,15,10];
-  var perQArr=qResults.map(function(r){
+  var perQArr2=qResults.map(function(r){
     var ss=r.stepScores||[];
-    return Math.min(100,ss.reduce(function(a,s){return a+s*20;},0));
+    return ss.reduce(function(a,s){return a+s;},0);
   });
-  var weightedSum2=perQArr.reduce(function(acc,score,i){return acc+score*(ws2[i]||10);},0);
-  var weightSum2=qResults.reduce(function(acc,r,i){return acc+(ws2[i]||10);},0);
-  var pct=Math.round(weightedSum2/weightSum2);
+  var pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0));
   var perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
+
+  // 各步驟累計答錯次數
+  var stepNames=['確認L/R','計算mid','判斷方向','選邊界','填索引'];
+  var stepErrTotals=[0,0,0,0,0];
+  qResults.forEach(function(r){
+    if(r.stepErrors){
+      stepNames.forEach(function(n,i){
+        stepErrTotals[i]+=(r.stepErrors[n]||0);
+      });
+    }
+  });
+  var stepErrStr=stepNames.map(function(n,i){return n+':'+stepErrTotals[i]+'次';}).join('、');
+
   var detail=qResults.map(function(r,i){
-    return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+r.steps+'步 錯'+r.wrong+'次 '+fmt(r.sec);
+    var ss=r.stepScores||[];
+    var qScore=ss.reduce(function(a,s){return a+s;},0);
+    return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+qScore+'/20分 錯'+r.wrong+'次';
   }).join(' | ');
 
   var payload=JSON.stringify({
@@ -2011,7 +2002,8 @@ function submitGS(){
     type:QUIZ_TYPE, pct:pct,
     perfect:perfect+'/'+qTotal,
     steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
-    time:totalTimerSec, detail:detail
+    time:totalTimerSec, detail:detail,
+    stepErrors:stepErrStr
   });
 
   function doFetch(retries){
@@ -2031,22 +2023,20 @@ function submitGS(){
         var grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
         var copyText='【成績記錄】'+sClass+' '+sSeat+'號 '+sName+
           ' | 測驗：'+QUIZ_TYPE+' | 分數：'+pct+'分('+grade+')'+
-          ' | 時間：'+fmt(totalTimerSec)+
-          ' | 明細：'+qResults.map(function(r,i){
-            return '第'+(i+1)+'題'+(r.found?'✓':'✗')+r.steps+'步';
-          }).join(' ');
+          ' | 各步錯誤：'+stepErrStr+
+          ' | 明細：'+detail;
         var ta=document.createElement('textarea');
         ta.value=copyText;
         ta.style.cssText='width:100%;margin-top:8px;padding:8px;font-size:12px;border-radius:8px;border:1px solid #ffffff20;background:#1a1d2e;color:#e8eaf6;resize:none;';
-        ta.rows=3;ta.readOnly=true;
+        ta.rows=4; ta.readOnly=true;
         ta.onclick=function(){this.select();document.execCommand('copy');};
         st.appendChild(ta);
         btn.disabled=false;
         btn.textContent='🔄 再次嘗試';
         btn.onclick=function(){
-          st.innerHTML='';st.className='submit-st sending';
-          st.textContent='⏳ 傳送中...';btn.disabled=true;
-          btn.textContent='送出成績 →';btn.onclick=submitGS;
+          st.innerHTML=''; st.className='submit-st sending';
+          st.textContent='⏳ 傳送中...'; btn.disabled=true;
+          btn.textContent='送出成績 →'; btn.onclick=submitGS;
           doFetch(3);
         };
       }
