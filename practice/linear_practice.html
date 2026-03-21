@@ -596,6 +596,8 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
 
 <script>
+const GAS_URL='填入你的GAS網址';
+const QUIZ_TYPE='循序搜尋練習';
 // ══════════════════════════════════════════════════════// ══════════════════════════════════════════════════════
 
 // ── State ──────────────────────────────────────────────
@@ -1100,32 +1102,79 @@ function showScorecard(){
 
 // ── Submit to Google Sheet ─────────────────────────────
 function submitGS(){
-  const btn=(document.getElementById('submitBtn')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}),st=(document.getElementById('submitSt')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});
-  if(GFORM.FORM_ID==='填入你的表單ID'){st.className='submit-st fail';st.textContent='⚠️ 老師尚未設定Google表單，請通知老師。';return;}
-  btn.disabled=true;st.className='submit-st sending';st.textContent='⏳ 傳送中...';
-  const perfect=qResults.filter(r=>r.found&&r.wrong===0).length;
-  const found=qResults.filter(r=>r.found).length;
-  const resultPct2=qResults.reduce((sum,r)=>{
-    if(r.skipped===0)  return sum+60;
-    if(r.found)        return sum+45;
-    return sum+20;
-  },0)/qTotal;
-  const totalStepsAllQ=qResults.reduce((a,r)=>a+(r.steps+r.wrong),0);
-  const correctSteps=qResults.reduce((a,r)=>a+r.steps,0);
-  const accPct=totalStepsAllQ>0?(correctSteps/totalStepsAllQ)*40:40;
-  const pct=Math.round(resultPct2+accPct);
-  const pctGrade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
-  const detail=qResults.map((r,i)=>`第${i+1}題(${r.diff.label}/${r.type==='binary'?'二分':'循序'})目標${r.target} ${r.found?'找到':'未找到'} ${r.steps}步 錯${r.wrong}次 ${fmt(r.sec)}`).join(' | ');
-  const url=`https://docs.google.com/forms/d/e/${GFORM.FORM_ID}/formResponse`;
-  const p=new URLSearchParams();
-  p.append(GFORM.entry_class,sClass);p.append(GFORM.entry_seat,sSeat);p.append(GFORM.entry_name,sName);
-  p.append(GFORM.entry_grade,pctGrade);p.append(GFORM.entry_pct,pct);p.append(GFORM.entry_perfect,`${perfect}/${qTotal}`);
-  p.append(GFORM.entry_steps,qTotSteps);p.append(GFORM.entry_wrong,qWrongAll);p.append(GFORM.entry_skip,qSkipAll);
-  p.append(GFORM.entry_time,totalTimerSec);p.append(GFORM.entry_detail,detail);
-  fetch(url,{method:'POST',mode:'no-cors',body:p}).then(()=>{st.className='submit-st ok';st.textContent='✅ 成績已送出！老師那邊可以看到你的結果。';btn.textContent='已送出 ✓';}).catch(()=>{st.className='submit-st fail';st.textContent='❌ 送出失敗，請截圖成績單交給老師。';btn.disabled=false;});
+  var btn=document.getElementById('submitBtn');
+  var st=document.getElementById('submitSt');
+  if(!btn||!st) return;
+  if(GAS_URL==='填入你的GAS網址'){
+    st.className='submit-st fail';
+    st.textContent='⚠️ 老師尚未設定 GAS 網址，請通知老師。';
+    return;
+  }
+  btn.disabled=true;
+  st.className='submit-st sending';
+  st.textContent='⏳ 傳送中...';
+
+  // 計分：結果(60%)+步驟正確率(40%)
+  var perQArr2=qResults.map(function(r){
+    var rp=r.skipped===0?60:r.found?45:20;
+    var ts=r.steps+r.wrong;
+    var ap=ts>0?(r.steps/ts)*40:40;
+    return Math.round(rp+ap);
+  });
+  var pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0)/qResults.length);
+  var perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
+
+  var detail=qResults.map(function(r,i){
+    return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+r.steps+'步 錯'+r.wrong+'次';
+  }).join(' | ');
+
+  var payload=JSON.stringify({
+    class:sClass, seat:sSeat, name:sName,
+    type:QUIZ_TYPE, pct:pct,
+    perfect:perfect+'/'+qTotal,
+    steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
+    time:totalTimerSec, detail:detail,
+    stepErrors:''
+  });
+
+  function doFetch(retries){
+    fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
+    .then(function(){
+      st.className='submit-st ok';
+      st.textContent='✅ 成績已送出！';
+      btn.textContent='已送出 ✓';
+    })
+    .catch(function(){
+      if(retries>0){
+        st.textContent='⏳ 送出中，重試第'+(4-retries)+'次...';
+        setTimeout(function(){doFetch(retries-1);},2000);
+      } else {
+        st.className='submit-st fail';
+        st.textContent='❌ 送出失敗，請複製下方文字交給老師：';
+        var grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
+        var copyText='【成績記錄】'+sClass+' '+sSeat+'號 '+sName+
+          ' | 測驗：'+QUIZ_TYPE+' | 分數：'+pct+'分('+grade+')'+
+          ' | 明細：'+detail;
+        var ta=document.createElement('textarea');
+        ta.value=copyText;
+        ta.style.cssText='width:100%;margin-top:8px;padding:8px;font-size:12px;border-radius:8px;border:1px solid #ffffff20;background:#1a1d2e;color:#e8eaf6;resize:none;';
+        ta.rows=3; ta.readOnly=true;
+        ta.onclick=function(){this.select();document.execCommand('copy');};
+        st.appendChild(ta);
+        btn.disabled=false;
+        btn.textContent='🔄 再次嘗試';
+        btn.onclick=function(){
+          st.innerHTML=''; st.className='submit-st sending';
+          st.textContent='⏳ 傳送中...'; btn.disabled=true;
+          btn.textContent='送出成績 →'; btn.onclick=submitGS;
+          doFetch(3);
+        };
+      }
+    });
+  }
+  doFetch(3);
 }
 
-// ── Compare (practice) ─────────────────────────────────
 function showCompare(){
   const cp=document.getElementById('cmpPanel');cp.style.display='block';
   document.getElementById('cmpL').textContent=linSteps;document.getElementById('cmpB').textContent=binSteps;
