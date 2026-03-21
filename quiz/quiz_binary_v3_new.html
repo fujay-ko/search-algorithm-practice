@@ -510,7 +510,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
       <select id="qTot"><option value="3">3題</option><option value="5" selected>5題</option><option value="8">8題</option><option value="10">10題</option></select>
     </div>
     <div class="cfi"><label>每步最多答錯</label>
-      <select id="qMW"><option value="1">1次</option><option value="2" selected>2次</option><option value="3">3次</option></select>
+      <select id="qMW"><option value="1">1次</option><option value="2">2次</option><option value="3" selected>3次</option></select>
     </div>
     <div class="cfi"><label>搜尋方式</label>
       <input type="hidden" id="qST" value="binary">
@@ -709,6 +709,8 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
 
 <script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbwUkaLjIDZubkCD79VFf2vEEFaC9mMjUh-lfv_f081392f8YrDJOOFeJvWBrmtdviVw/exec';
+const QUIZ_TYPE='二分搜尋v3';
 
 // ── v3: Step time summary ─────────────────────────────
 
@@ -863,7 +865,7 @@ function confirmStudent(){
   sClass=c;sSeat=s;sName=n;
   document.getElementById('sModal').style.display='none';
   qTotal=parseInt(document.getElementById('qTot').value)||5;
-  qMaxWrong=parseInt(document.getElementById('qMW').value)||2;
+  qMaxWrong=parseInt(document.getElementById('qMW').value)||3;
   qSearchType=document.getElementById('qST').value;
   (document.getElementById('qTotLbl')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qTotal;
   (document.getElementById('qMWLbl')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qMaxWrong;
@@ -1858,12 +1860,32 @@ function showScorecard(){
   const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
   const found=qResults.filter(function(r){return r.found;}).length;
   // Plan 2: binary=4 steps×25pts; linear=result(60%)+acc(40%)
-  // All questions are binary: 5 steps × 20pts
-  var perQArr=qResults.map(function(r){
+  // Scoring: 5 steps × 20pts per question, weighted by difficulty
+  // Weight distribution (for 5Q): Q1=30%, Q2=30%, Q3=15%, Q4=15%, Q5=10%
+  var weights5=[30,30,15,15,10];
+  var weights3=[40,35,25];
+  var weights4=[30,30,25,15];
+  var weights8=[15,15,15,15,10,10,10,10];
+  var weights10=[12,12,12,12,10,10,8,8,8,8];
+  var getWeights=function(n){
+    if(n===3) return weights3;
+    if(n===4) return weights4;
+    if(n===5) return weights5;
+    if(n===8) return weights8;
+    if(n===10) return weights10;
+    // fallback: equal weights
+    var w=[]; for(var i=0;i<n;i++) w.push(Math.round(100/n)); return w;
+  };
+  var nDone=qResults.length;
+  var ws=getWeights(qTotal);
+  var perQArr=qResults.map(function(r,i){
     var ss=r.stepScores||[];
     return Math.min(100,ss.reduce(function(a,s){return a+s*20;},0));
   });
-  const pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0)/qTotal);
+  // Weighted score: sum(score_i * weight_i) / sum(weight_i for completed questions)
+  var weightedSum=perQArr.reduce(function(acc,score,i){return acc+score*(ws[i]||10);},0);
+  var weightSum=qResults.reduce(function(acc,r,i){return acc+(ws[i]||10);},0);
+  const pct=Math.round(weightedSum/weightSum);
 
   let grade,gc,trophy,lbl;
   if(pct>=90){grade='A';gc='gA';trophy='🏆';lbl='優秀！';}
@@ -1880,7 +1902,7 @@ function showScorecard(){
   document.getElementById('scGr').textContent=grade;
   document.getElementById('scGL').textContent=lbl;
   document.getElementById('scPct').textContent=pct+'分';
-  document.getElementById('scPctNote').textContent='二分搜尋：5步各20分｜循序搜尋：結果(60%)+正確率(40%)';
+  document.getElementById('scPctNote').textContent='計分：每步20分，難度權重 Q1=30% Q2=30% Q3=15% Q4=15% Q5=10%';
   document.getElementById('scTime').textContent=fmt(totalTimerSec);
   document.getElementById('scSt').textContent=qTotSteps;
   document.getElementById('scWr').textContent=qWrongAll;
@@ -1958,7 +1980,7 @@ function submitGS(){
   var btn=document.getElementById('submitBtn');
   var st=document.getElementById('submitSt');
   if(!btn||!st) return;
-  if(GAS_URL==='https://script.google.com/macros/s/AKfycbwUkaLjIDZubkCD79VFf2vEEFaC9mMjUh-lfv_f081392f8YrDJOOFeJvWBrmtdviVw/exec'){
+  if(GAS_URL==='填入你的GAS網址'){
     st.className='submit-st fail';
     st.textContent='⚠️ 老師尚未設定 GAS 網址，請通知老師。';
     return;
@@ -1967,11 +1989,14 @@ function submitGS(){
   st.className='submit-st sending';
   st.textContent='⏳ 傳送中...';
 
+  var ws2=[30,30,15,15,10];
   var perQArr=qResults.map(function(r){
     var ss=r.stepScores||[];
     return Math.min(100,ss.reduce(function(a,s){return a+s*20;},0));
   });
-  var pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0)/qTotal);
+  var weightedSum2=perQArr.reduce(function(acc,score,i){return acc+score*(ws2[i]||10);},0);
+  var weightSum2=qResults.reduce(function(acc,r,i){return acc+(ws2[i]||10);},0);
+  var pct=Math.round(weightedSum2/weightSum2);
   var perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
   var detail=qResults.map(function(r,i){
     return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+r.steps+'步 錯'+r.wrong+'次 '+fmt(r.sec);
