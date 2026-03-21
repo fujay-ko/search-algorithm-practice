@@ -1425,7 +1425,7 @@ function cfmFiS0(){
   var errR=valR!==bR;
   if(!errL&&!errR){
     correctAns++;
-    fiStepScores.push(stepWrong===0?1:0.5);
+    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
     if(inpL)inpL.classList.add('ok2');
     if(inpR)inpR.classList.add('ok2');
     endStepTimer('確認L/R'); recordStep('確認L/R',stepWrong,'Left='+bL+',Right='+bR,'Left是最左邊的索引，Right是最右邊的索引。');
@@ -1444,11 +1444,11 @@ function cfmFiS0(){
     addLog('答錯（Left/Right確認）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiStepScores.push(0);
+        skippedSteps++; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
         addLog('答錯上限，繼續','wl');
         fiHideLR=false; renderAll();
-        document.getElementById('fb').className='fb';
-        renderFiS1();
+        showFb(false,'💡 提示：Left = '+bL+'，Right = '+bR+'。繼續下一步。');
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS1();},1200);
       },1000);
     } else {
       setTimeout(function(){
@@ -1472,7 +1472,7 @@ function cfmFiS1(){
   }
   if(val===correct){
     correctAns++;
-    fiStepScores.push(stepWrong===0?1:0.5);
+    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
     fiMid=val;
     if(inp)inp.classList.add('ok2');
     endStepTimer('計算mid'); recordStep('計算mid',stepWrong,'mid='+correct,'mid=⌊(Left+Right)/2⌋，每次取範圍正中間。');
@@ -1489,11 +1489,11 @@ function cfmFiS1(){
     addLog('答錯（mid）：填了'+val,'wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiMid=correct; fiStepScores.push(0);
+        skippedSteps++; fiMid=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
         addLog('答錯上限，繼續','wl');
         fiHideM=false; renderAll();
-        document.getElementById('fb').className='fb';
-        renderFiS2();
+        showFb(false,'💡 提示：mid = ⌊('+bL+'+'+bR+')/2⌋ = '+correct+'。繼續下一步。');
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS2();},1200);
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1567,7 +1567,7 @@ function cfmFiS2(dir){
   if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
   if(dir===correct){
     correctAns++; fiDir=dir;
-    fiStepScores.push(stepWrong===0?1:0.5);
+    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
     if(dir==='found'){
       showFb(true,'✅ 正確！找到了！');
       addLog('第'+stepCount+'步：找到目標','cl');
@@ -1591,11 +1591,12 @@ function cfmFiS2(dir){
     addLog('答錯（方向）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiDir=correct; fiStepScores.push(0);
+        skippedSteps++; fiDir=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
         addLog('答錯上限，繼續','wl');
-        document.getElementById('fb').className='fb';
         if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
-        renderFiS3();
+        var dirHint=correct==='found'?'找到了！':'往'+(correct==='left'?'左':'右')+'找。';
+        showFb(false,'💡 提示：'+dirHint+'繼續下一步。');
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS3();},1200);
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1634,7 +1635,7 @@ function cfmFiS3(bound){
   if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
   if(bound===correct){
     correctAns++; fiBound=bound;
-    fiStepScores.push(stepWrong===0?1:0.5);
+    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
     var bname=bound==='right'?'Right':'Left';
     var _bHint=fiDir==='left'?'往左找要縮小右界，Right = mid - 1，這樣下次的搜尋範圍就只剩左半邊。':'往右找要縮小左界，Left = mid + 1，這樣下次的搜尋範圍就只剩右半邊。';
     endStepTimer('選邊界'); recordStep('選邊界',stepWrong,(fiBound==='right'?'改Right':'改Left'),_bHint);
@@ -1649,10 +1650,11 @@ function cfmFiS3(bound){
     addLog('答錯（邊界選擇）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiBound=correct; fiStepScores.push(0);
+        skippedSteps++; fiBound=correct; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
         addLog('答錯上限，繼續','wl');
-        document.getElementById('fb').className='fb';
-        renderFiS4();
+        var bndHint=correct==='right'?'應改 Right（右界）。':'應改 Left（左界）。';
+        showFb(false,'💡 提示：往'+(fiDir==='left'?'左':'右')+'找，'+bndHint+'繼續下一步。');
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS4();},1200);
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1705,7 +1707,7 @@ function cfmFiS4(){
   }
   if(val===correctIdx){
     correctAns++;
-    fiStepScores.push(stepWrong===0?1:0.5);
+    fiStepScores.push(Math.max(0,(20-stepWrong)/20));
     if(inp)inp.classList.add('ok2');
     var _idxHint=fiBound==='right'?'Right = mid - 1 = '+fiMid+' - 1 = '+correctIdx+'，搜尋範圍縮小到左半邊了！':'Left = mid + 1 = '+fiMid+' + 1 = '+correctIdx+'，搜尋範圍縮小到右半邊了！';
     endStepTimer('填索引'); recordStep('填索引',stepWrong,(fiBound==='right'?'Right':'Left')+'='+correctIdx,_idxHint);
@@ -1722,9 +1724,11 @@ function cfmFiS4(){
     addLog('答錯（索引）','wl');
     if(stepWrong>=qMaxWrong){
       setTimeout(function(){
-        skippedSteps++; fiStepScores.push(0);
+        skippedSteps++; fiStepScores.push(Math.max(0,(20-qMaxWrong)/20));
         addLog('答錯上限，繼續','wl');
-        applyFiBin();
+        var idxHint=fiBound==='right'?'Right = mid-1 = '+fiMid+'-1 = '+correctIdx:'Left = mid+1 = '+fiMid+'+1 = '+correctIdx;
+        showFb(false,'💡 提示：'+idxHint+'。');
+        setTimeout(function(){applyFiBin();},1200);
       },1000);
     } else {
       stepCount--; document.getElementById('stepNum').textContent=stepCount;
@@ -1902,7 +1906,7 @@ function showScorecard(){
   document.getElementById('scGr').textContent=grade;
   document.getElementById('scGL').textContent=lbl;
   document.getElementById('scPct').textContent=pct+'分';
-  document.getElementById('scPctNote').textContent='計分：每步20分，難度權重 Q1=30% Q2=30% Q3=15% Q4=15% Q5=10%';
+  document.getElementById('scPctNote').textContent='計分：每步20分，每答錯1次扣1分，答錯3次後給提示（扣3分）';
   document.getElementById('scTime').textContent=fmt(totalTimerSec);
   document.getElementById('scSt').textContent=qTotSteps;
   document.getElementById('scWr').textContent=qWrongAll;
@@ -2010,17 +2014,45 @@ function submitGS(){
     time:totalTimerSec, detail:detail
   });
 
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
-  .then(function(){
-    st.className='submit-st ok';
-    st.textContent='✅ 成績已送出！';
-    btn.textContent='已送出 ✓';
-  })
-  .catch(function(){
-    st.className='submit-st fail';
-    st.textContent='❌ 送出失敗，請截圖成績單交給老師。';
-    btn.disabled=false;
-  });
+  function doFetch(retries){
+    fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
+    .then(function(){
+      st.className='submit-st ok';
+      st.textContent='✅ 成績已送出！';
+      btn.textContent='已送出 ✓';
+    })
+    .catch(function(){
+      if(retries>0){
+        st.textContent='⏳ 送出中，重試第'+(4-retries)+'次...';
+        setTimeout(function(){doFetch(retries-1);},2000);
+      } else {
+        st.className='submit-st fail';
+        st.textContent='❌ 送出失敗，請複製下方文字交給老師：';
+        var grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
+        var copyText='【成績記錄】'+sClass+' '+sSeat+'號 '+sName+
+          ' | 測驗：'+QUIZ_TYPE+' | 分數：'+pct+'分('+grade+')'+
+          ' | 時間：'+fmt(totalTimerSec)+
+          ' | 明細：'+qResults.map(function(r,i){
+            return '第'+(i+1)+'題'+(r.found?'✓':'✗')+r.steps+'步';
+          }).join(' ');
+        var ta=document.createElement('textarea');
+        ta.value=copyText;
+        ta.style.cssText='width:100%;margin-top:8px;padding:8px;font-size:12px;border-radius:8px;border:1px solid #ffffff20;background:#1a1d2e;color:#e8eaf6;resize:none;';
+        ta.rows=3;ta.readOnly=true;
+        ta.onclick=function(){this.select();document.execCommand('copy');};
+        st.appendChild(ta);
+        btn.disabled=false;
+        btn.textContent='🔄 再次嘗試';
+        btn.onclick=function(){
+          st.innerHTML='';st.className='submit-st sending';
+          st.textContent='⏳ 傳送中...';btn.disabled=true;
+          btn.textContent='送出成績 →';btn.onclick=submitGS;
+          doFetch(3);
+        };
+      }
+    });
+  }
+  doFetch(3);
 }
 
 function showCompare(){
