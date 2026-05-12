@@ -1978,15 +1978,14 @@ function submitGS(){
     return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+r.steps+'步 錯'+r.wrong+'次 '+fmt(r.sec);
   }).join(' | ');
 
-  var payload=JSON.stringify({
-    class:sClass, seat:sSeat, name:sName,
-    type:QUIZ_TYPE, pct:pct,
-    perfect:perfect+'/'+qTotal,
-    steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
-    time:totalTimerSec, detail:detail
-  });
+  var fd=new FormData();
+  fd.append('class',sClass);fd.append('seat',sSeat);fd.append('name',sName);
+  fd.append('type',QUIZ_TYPE);fd.append('pct',pct);
+  fd.append('perfect',perfect+'/'+qTotal);
+  fd.append('steps',qTotSteps);fd.append('wrong',qWrongAll);fd.append('skip',qSkipAll);
+  fd.append('time',totalTimerSec);fd.append('detail',detail);
 
-  fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:fd})
   .then(function(){
     st.className='submit-st ok';
     st.textContent='✅ 成績已送出！';
