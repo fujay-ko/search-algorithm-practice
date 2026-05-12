@@ -688,7 +688,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">📤 送出成績給老師</div>
     <button class="btn bq" style="width:100%" id="submitBtn" onclick="submitGS()">送出成績 →</button>
     <div class="submit-st" id="submitSt"></div>
-    <button id="testSubmitBtn" onclick="testSubmitGS()" style="margin-top:8px;width:100%;padding:8px;background:rgba(255,190,69,0.15);border:1px dashed rgba(255,190,69,0.5);border-radius:8px;color:#ffbe45;font-size:13px;cursor:pointer;">🧪 測試送出（老師測試用，會寫入假資料）</button>
   </div>
 
   <button class="btn bq" onclick="startQuiz()" style="margin-right:8px">🔄 再測一次</button>
@@ -1955,36 +1954,6 @@ function showScorecard(){
   sc.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ── 測試送出（老師用）────────────────────────────────
-function testSubmitGS(){
-  if(!sClass||!sSeat||!sName){alert('請先在上方填好班級、座號、姓名再測試！');return;}
-  var btn=document.getElementById('testSubmitBtn');
-  var st=document.getElementById('submitSt');
-  if(!st)return;
-  btn.disabled=true;
-  btn.textContent='⏳ 傳送中...';
-  st.className='submit-st sending';
-  st.textContent='⏳ 測試傳送中...';
-  var fd=new FormData();
-  fd.append('class',sClass);fd.append('seat',sSeat);fd.append('name',sName+"（測試）");
-  fd.append('type',QUIZ_TYPE);fd.append('pct','99');
-  fd.append('perfect','5/5');
-  fd.append('steps','10');fd.append('wrong','0');fd.append('skip','0');
-  fd.append('time','60');fd.append('detail','測試資料，請忽略');
-  fetch(GAS_URL,{method:"POST",mode:"no-cors",body:fd})
-  .then(function(){
-    st.className='submit-st ok';
-    st.textContent='✅ 測試送出成功！請到試算表確認有沒有收到';
-    btn.textContent='測試完成 ✓';
-  })
-  .catch(function(){
-    st.className='submit-st fail';
-    st.textContent='❌ 送出失敗，請確認 GAS 網址與部署設定';
-    btn.disabled=false;
-    btn.textContent='🧪 測試送出';
-  });
-}
-
 // ── Submit to Google Sheet ─────────────────────────────
 function submitGS(){
   var btn=document.getElementById('submitBtn');
@@ -2010,12 +1979,13 @@ function submitGS(){
   }).join(' | ');
 
   var fd=new FormData();
-  fd.append("class",sClass);fd.append("seat",sSeat);fd.append("name",sName);
-  fd.append("type",QUIZ_TYPE);fd.append("pct",pct);
-  fd.append("perfect",perfect+"/"+qTotal);
-  fd.append("steps",qTotSteps);fd.append("wrong",qWrongAll);fd.append("skip",qSkipAll);
-  fd.append("time",totalTimerSec);fd.append("detail",detail);
-  fetch(GAS_URL,{method:"POST",mode:"no-cors",body:fd})
+  fd.append('class',sClass);fd.append('seat',sSeat);fd.append('name',sName);
+  fd.append('type',QUIZ_TYPE);fd.append('pct',pct);
+  fd.append('perfect',perfect+'/'+qTotal);
+  fd.append('steps',qTotSteps);fd.append('wrong',qWrongAll);fd.append('skip',qSkipAll);
+  fd.append('time',totalTimerSec);fd.append('detail',detail);
+
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:fd})
   .then(function(){
     st.className='submit-st ok';
     st.textContent='✅ 成績已送出！';
