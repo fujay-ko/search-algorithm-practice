@@ -22,22 +22,10 @@ header{text-align:center;margin-bottom:22px;}
 h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:900;background:linear-gradient(135deg,#4f8ef7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:6px;}
 .subtitle{color:var(--muted);font-size:14px;}
 
-/* Mode bar */
-.mode-bar{display:flex;gap:6px;background:var(--panel2);border-radius:14px;padding:5px;margin-bottom:20px;border:1px solid #ffffff0a;}
-.mbtn{flex:1;padding:10px;border:none;border-radius:10px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;transition:all .2s;color:var(--muted);background:transparent;}
-.mbtn.al{background:linear-gradient(135deg,#92400e,#fb923c30);color:var(--orange);border:1px solid #fb923c50;}
-.mbtn.ab{background:linear-gradient(135deg,#1e3a6e,#4f8ef730);color:var(--accent);border:1px solid #4f8ef750;}
-.mbtn.aq{background:linear-gradient(135deg,#1e3a20,#34d39930);color:var(--green);border:1px solid #34d39950;}
-.mbtn:not(.al):not(.ab):not(.aq):hover{color:var(--text);}
-
 /* Concept */
 .cb{border-radius:14px;padding:16px 20px;margin-bottom:10px;display:flex;gap:13px;align-items:flex-start;}
-.cb-l{background:linear-gradient(135deg,#2d1a0a,#1e1508);border:1px solid #fb923c30;}
 .cb-b{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;}
-.cb-q{background:linear-gradient(135deg,#0d2318,#0f1f14);border:1px solid #34d39930;}
-.ci{font-size:24px;flex-shrink:0;margin-top:1px;}
-.cb h3{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
-.cb-l h3{color:var(--orange);}.cb-b h3{color:var(--accent);}.cb-q h3{color:var(--green);}
+.cb h3{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;color:var(--accent);}
 .cb p{font-size:13px;color:#b0b8d4;line-height:1.65;}
 .cb strong{color:var(--yellow);}
 
@@ -75,22 +63,13 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;padding:20px;margin-bottom:16px;}
 .pt{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
 .pt::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent);}
-.pt.lo::before{background:var(--orange);}
 
 /* Config */
 .cfgr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
 .cfi{display:flex;flex-direction:column;gap:4px;}
 .cfi label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
 .cfi input[type=number],.cfi select{background:var(--panel2);border:1px solid #ffffff15;border-radius:9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;padding:7px 12px;width:82px;outline:none;transition:border-color .2s;}
-.cfi select{width:auto;}
 .cfi input:focus,.cfi select:focus{border-color:var(--accent);}
-
-/* Difficulty badges in quiz config */
-.diff-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
-.diff-badge{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:800;border:1px solid;}
-.diff-E{background:#34d39915;border-color:#34d39940;color:var(--green);}
-.diff-M{background:#fbbf2415;border-color:#fbbf2440;color:var(--yellow);}
-.diff-H{background:#f8717115;border-color:#f8717140;color:var(--red);}
 
 /* Buttons */
 .btn{border:none;border-radius:11px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;padding:9px 18px;transition:all .18s;}
@@ -98,65 +77,31 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .bp:hover{transform:translateY(-2px);}
 .bg2{background:var(--panel2);color:var(--muted);border:1px solid #ffffff10;}
 .bg2:hover{color:var(--text);border-color:#ffffff30;}
-.bo{background:linear-gradient(135deg,#c2410c,#fb923c);color:#fff;}
-.bo:hover{transform:translateY(-2px);}
-.bq{background:linear-gradient(135deg,#059669,#34d399);color:#fff;box-shadow:0 3px 12px #34d39940;}
-.bq:hover{transform:translateY(-2px);}
-.btn:disabled{opacity:.4;cursor:not-allowed;transform:none !important;}
 
-/* Quiz header */
-.qhdr{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:14px;padding:11px 14px;margin-bottom:14px;border:1px solid #34d39930;}
-.qpl{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
-.qbb{flex:1;background:#ffffff10;border-radius:50px;height:7px;overflow:hidden;}
-.qbf{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .5s;}
-.qqn{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--green);white-space:nowrap;}
-.wps{display:flex;gap:4px;margin-left:4px;}
-.wp{width:9px;height:9px;border-radius:50%;background:#ffffff15;transition:background .2s;}
-.wp.u{background:var(--red);}
-
-/* ── Timer ── */
-.timer-row{display:flex;gap:10px;margin-bottom:14px;}
-.timer-box{flex:1;background:var(--panel2);border-radius:12px;padding:10px 14px;border:1px solid #ffffff0a;display:flex;align-items:center;gap:10px;}
-.timer-icon{font-size:18px;}
-.timer-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
-.timer-val{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--text);line-height:1;}
-.timer-val.warn{color:var(--yellow);}
-.timer-val.danger{color:var(--red);animation:pulse-r .6s infinite;}
-@keyframes pulse-r{0%,100%{opacity:1}50%{opacity:.5}}
-
-/* Difficulty indicator */
-.diff-indicator{display:inline-flex;align-items:center;gap:5px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;margin-left:auto;}
-.di-E{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
-.di-M{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2440;}
-.di-H{background:#f8717120;color:var(--red);border:1px solid #f8717140;}
+/* Predict */
+.pred-ban{background:var(--panel2);border:1px solid #fbbf2430;border-radius:12px;padding:12px 14px;margin-bottom:12px;display:none;}
+.pred-ban.show{display:block;animation:fi .3s;}
+.pred-q{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.pred-opts{display:flex;gap:6px;flex-wrap:wrap;}
+.pred-opt{padding:6px 14px;border:2px solid #ffffff15;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--muted);background:transparent;transition:all .18s;}
+.pred-opt:hover{border-color:var(--yellow);color:var(--yellow);}
+.pred-opt.sel{border-color:var(--accent);color:var(--accent);background:#4f8ef720;}
+.pred-r{font-size:12px;font-weight:700;margin-top:8px;color:var(--muted);}
 
 /* Target */
 .tdisp{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:13px;padding:10px 16px;margin-bottom:14px;border:1px solid #ffffff0f;}
 .tlbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
 .tval{font-family:'Nunito',sans-serif;font-size:25px;font-weight:900;color:var(--yellow);text-shadow:0 0 18px #fbbf2450;}
-.mpill{font-size:11px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;}
-.mp-l{background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;}
-.mp-b{background:#4f8ef720;color:var(--accent);border:1px solid #4f8ef740;}
-.mp-q{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+.mpill{font-size:11px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;background:#4f8ef720;color:var(--accent);border:1px solid #4f8ef740;}
 
 /* Step cards */
 .si{display:grid;gap:9px;margin-bottom:14px;}
 .sg3{grid-template-columns:repeat(3,1fr);}
-.sg2{grid-template-columns:repeat(2,1fr);}
 .sc{background:var(--panel2);border-radius:13px;padding:11px 13px;border:1px solid #ffffff08;text-align:center;}
 .scl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
 .scv{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;}
 
-/* Progress bars */
-.lin-prog{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #fb923c20;}
-.lpt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.lpl{font-size:11px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:1px;}
-.lpc{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
-.lpb{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
-.lpbf{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--orange));transition:width .4s;}
-.lwh{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
-.lwh b{color:var(--red);}
-
+/* Binary range */
 .bin-rng{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #4f8ef720;}
 .brt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .brl{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;}
@@ -177,15 +122,14 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .cl{font-size:9px;font-weight:700;color:var(--muted);margin-bottom:2px;height:14px;display:flex;align-items:center;justify-content:center;}
 .cell{width:44px;height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;border:2px solid transparent;transition:all .32s cubic-bezier(.34,1.56,.64,1);background:var(--panel2);color:#8899bb;}
 .cell.active{color:var(--text);border-color:#ffffff15;}
-.cell.cur-l{border-color:var(--oc);background:#fb923c20;color:var(--oc);box-shadow:0 0 16px #fb923c45;transform:scale(1.09);}
-.cell.chk-l{background:#1e1208;color:#4a2a10;border-color:transparent;transform:scale(0.86);}
-@keyframes scan{0%{box-shadow:0 0 0 0 #fb923c60}70%{box-shadow:0 0 0 10px #fb923c00}100%{box-shadow:0 0 0 0 #fb923c00}}
-.cell.scanning{animation:scan .5s ease-out;}
 .cell.lm{border-color:var(--lc);background:#4f8ef720;color:var(--text);box-shadow:0 0 12px #4f8ef740;}
 .cell.rm{border-color:var(--rc);background:#a78bfa20;color:var(--text);box-shadow:0 0 12px #a78bfa40;}
 .cell.mm{border-color:var(--mc);background:#fbbf2420;color:var(--yellow);box-shadow:0 0 16px #fbbf2455;transform:scale(1.1);}
 .cell.found{border-color:var(--green);background:#34d39930;color:var(--green);box-shadow:0 0 20px #34d39975;transform:scale(1.14);}
 .cell.elim{background:var(--elim);color:#1e2850;border-color:transparent;transform:scale(0.86);}
+.cell.preview-l{border-color:var(--lc);opacity:.6;box-shadow:0 0 8px var(--lc)40;}
+.cell.preview-r{border-color:var(--rc);opacity:.6;box-shadow:0 0 8px var(--rc)40;}
+.cell.preview-m{border-color:var(--mc);opacity:.6;box-shadow:0 0 8px var(--mc)40;}
 .ci2{font-size:10px;color:var(--muted);margin-top:3px;font-family:'Nunito',sans-serif;font-weight:700;}
 .cal{height:15px;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:5px;padding:0 3px;min-width:34px;}
 .rbk{font-size:11px;font-weight:800;color:var(--accent);text-align:center;margin-top:4px;font-family:'Nunito',sans-serif;opacity:.7;}
@@ -195,31 +139,11 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .li{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--muted);}
 .ld{width:10px;height:10px;border-radius:3px;border:2px solid;}
 
-/* Predict */
-.pred-ban{background:var(--panel2);border:1px solid #fbbf2430;border-radius:12px;padding:12px 14px;margin-bottom:12px;display:none;}
-.pred-ban.show{display:block;animation:fi .3s;}
-.pred-q{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;}
-.pred-opts{display:flex;gap:6px;flex-wrap:wrap;}
-.pred-opt{padding:6px 14px;border:2px solid #ffffff15;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--muted);background:transparent;transition:all .18s;}
-.pred-opt:hover{border-color:var(--yellow);color:var(--yellow);}
-.pred-opt.sel{border-color:var(--accent);color:var(--accent);background:#4f8ef720;}
-.pred-r{font-size:12px;font-weight:700;margin-top:8px;color:var(--muted);}
-
 /* Choice */
 .cq{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.6;}
-.cq .mv{color:var(--yellow);font-size:16px;}.cq .cv{color:var(--orange);font-size:16px;}
+.cq .mv{color:var(--yellow);font-size:16px;}
 .cbtns{display:flex;gap:9px;flex-wrap:wrap;}
 .cbtn{flex:1;min-width:110px;padding:11px 12px;border:2px solid transparent;border-radius:13px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:12px;font-weight:800;transition:all .18s;text-align:center;line-height:1.4;}
-.cb-L{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
-.cb-L:hover{background:#4f8ef730;border-color:var(--lc);transform:translateY(-2px);}
-.cb-R{background:#a78bfa15;border-color:#a78bfa40;color:var(--accent2);}
-.cb-R:hover{background:#a78bfa30;border-color:var(--accent2);transform:translateY(-2px);}
-.cb-M{background:#fbbf2415;border-color:#fbbf2440;color:var(--yellow);}
-.cb-M:hover{background:#fbbf2430;border-color:var(--yellow);transform:translateY(-2px);}
-.cb-N{background:#fb923c15;border-color:#fb923c40;color:var(--orange);}
-.cb-N:hover{background:#fb923c30;border-color:var(--orange);transform:translateY(-2px);}
-.cb-F{background:#34d39915;border-color:#34d39940;color:var(--green);}
-.cb-F:hover{background:#34d39930;border-color:var(--green);transform:translateY(-2px);}
 .cbtn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 .cbtn.correct{background:#34d39930;border-color:var(--green);color:var(--green);animation:pg .5s;}
 .cbtn.wrong{background:#f8717130;border-color:var(--red);color:var(--red);animation:sk .4s;}
@@ -234,7 +158,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .fb.wrong{background:#f8717120;border:1px solid #f8717160;color:#f87171;}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
-/* Per-Q result */
+/* Result */
 .res-ov{background:var(--panel2);border-radius:18px;padding:24px;text-align:center;border:2px solid var(--green);box-shadow:0 0 36px #34d39925;animation:fi .4s;display:none;}
 .res-ov.show{display:block;}
 .res-ov.nf{border-color:var(--red);box-shadow:0 0 36px #f8717125;}
@@ -249,133 +173,36 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .eff-l{font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
 .eff-bg{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
 .eff-f{height:100%;border-radius:50px;transition:width 1s;background:linear-gradient(90deg,var(--accent),var(--green));}
-.wr-rev{background:#f8717115;border:1px solid #f8717130;border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;color:#f8b0b0;font-weight:600;line-height:1.6;}
-.wr-rev b{color:var(--red);}
 
-/* Compare */
-.cmp-panel{background:linear-gradient(135deg,#1a1d30,#1d1a2e);border:1px solid #ffffff10;border-radius:18px;padding:20px;margin-bottom:16px;animation:fi .5s;}
-.cmp-t{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:18px;text-align:center;}
-.cmp-g{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;}
-.cmp-c{background:var(--panel2);border-radius:14px;padding:16px;text-align:center;}
-.cmp-c.lc{border:1px solid #fb923c30;}.cmp-c.bc{border:1px solid #4f8ef730;}
-.cmp-ct{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.cmp-c.lc .cmp-ct{color:var(--orange);}.cmp-c.bc .cmp-ct{color:var(--accent);}
-.cmp-n{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;line-height:1;}
-.cmp-c.lc .cmp-n{color:var(--orange);}.cmp-c.bc .cmp-n{color:var(--accent);}
-.cmp-s{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600;}
-.cmp-vs{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:var(--muted);text-align:center;}
-.bar-s{margin-top:14px;}
-.bar-l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.bar-r{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
-.bar-n{font-size:10px;font-weight:700;width:36px;text-align:right;}
-.bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:9px;overflow:hidden;}
-.bar-f{height:100%;border-radius:50px;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
-.bar-f.lf{background:linear-gradient(90deg,#c2410c,var(--orange));}
-.bar-f.bf{background:linear-gradient(90deg,var(--accent),var(--green));}
-.bar-num{font-size:11px;font-weight:900;font-family:'Nunito',sans-serif;width:18px;}
-.cmp-i{background:#fbbf2410;border:1px solid #fbbf2430;border-radius:11px;padding:10px 14px;margin-top:12px;font-size:12px;font-weight:600;color:#e8d5a0;line-height:1.6;text-align:center;}
+/* Teach hint */
+.teach-hint{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;
+  border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;font-weight:600;
+  color:#b0b8d4;line-height:1.7;display:none;animation:fi .3s;}
+.teach-hint.show{display:block;}
+.teach-hint b{color:var(--yellow);}
 
-/* ── SCORECARD ── */
-.scorecard{background:var(--panel);border-radius:20px;padding:28px;border:2px solid var(--green);box-shadow:0 0 48px #34d39930;animation:fi .5s;display:none;}
-.scorecard.show{display:block;}
-.sc-trophy{font-size:60px;margin-bottom:10px;text-align:center;}
-.sc-title{font-family:'Nunito',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px;text-align:center;background:linear-gradient(135deg,#34d399,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sc-stag{display:inline-flex;align-items:center;gap:6px;background:#34d39915;border:1px solid #34d39940;border-radius:50px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;}
-.sc-sub{font-size:12px;color:var(--muted);margin-bottom:20px;text-align:center;}
-.sc-top{display:flex;gap:16px;align-items:center;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
-.sc-ring{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid var(--green);background:linear-gradient(135deg,#34d39915,#4f8ef715);box-shadow:0 0 30px #34d39940;}
-.sc-ring-n{font-family:'Nunito',sans-serif;font-size:38px;font-weight:900;color:var(--green);line-height:1;}
-.sc-ring-s{font-size:11px;color:var(--muted);font-weight:700;}
-.sc-grade{font-family:'Nunito',sans-serif;font-size:56px;font-weight:900;line-height:1;}
-.sc-gl{font-size:13px;font-weight:700;color:var(--muted);}
-.gA{color:var(--green);}.gB{color:var(--accent);}.gC{color:var(--yellow);}.gD{color:var(--red);}
-.sc-pct{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--text);}
-.sc-pct-l{font-size:11px;color:var(--muted);font-weight:700;}
-.sc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:18px;}
-.sc-stat{background:var(--panel2);border-radius:12px;padding:12px;border:1px solid #ffffff08;text-align:center;}
-.sc-sl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
-.sc-sv{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;}
+/* Error analysis */
+.err-panel{background:linear-gradient(135deg,#1e1010,#1a0f0f);border:1px solid #f8717130;
+  border-radius:16px;padding:18px 20px;margin-bottom:16px;animation:fi .4s;}
+.err-panel-title{font-size:12px;font-weight:800;color:var(--red);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.err-panel-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--red);}
+.err-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.err-bar-name{font-size:11px;font-weight:700;width:70px;color:var(--muted);}
+.err-bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:9px;overflow:hidden;}
+.err-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--red));transition:width 1s;}
+.err-bar-num{font-size:11px;font-weight:900;font-family:'Nunito',sans-serif;width:28px;color:var(--red);}
+.err-insight{background:#f8717115;border:1px solid #f8717130;border-radius:10px;
+  padding:9px 13px;margin-top:10px;font-size:12px;font-weight:600;color:#f8b0b0;line-height:1.6;}
 
-/* ── Learning recap (per-question analysis) ── */
-.recap-section{margin-bottom:18px;}
-.recap-title{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
-.recap-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent2);}
-.recap-card{background:var(--panel2);border-radius:12px;padding:14px;margin-bottom:8px;border-left:4px solid var(--green);}
-.recap-card.had-err{border-left-color:var(--yellow);}
-.recap-card.not-found{border-left-color:var(--red);}
-.recap-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
-.recap-qnum{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
-.recap-time{font-size:11px;color:var(--muted);font-weight:600;}
-.tag{display:inline-block;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:800;}
-.tag-ok{background:#34d39920;color:var(--green);border:1px solid #34d39950;}
-.tag-err{background:#f8717120;color:var(--red);border:1px solid #f8717150;}
-.tag-skip{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2450;}
-.recap-arr{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px;}
-.recap-cell{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:900;border:1px solid transparent;}
-.rc-norm{background:var(--panel);color:#8899bb;}
-.rc-found{background:#34d39930;border-color:var(--green);color:var(--green);}
-.rc-elim{background:var(--elim);color:#2e3455;}
-.recap-hint{font-size:12px;color:#b0b8d4;line-height:1.6;font-weight:600;}
-.recap-hint b{color:var(--text);}
-.recap-hint .good{color:var(--green);}
-.recap-hint .warn{color:var(--yellow);}
-.recap-hint .bad{color:var(--red);}
+/* Step progress bar */
+.sp-row{display:flex;align-items:center;gap:4px;margin-bottom:14px;flex-wrap:wrap;}
+.sp-item{font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;background:var(--bg);color:var(--muted);border:1px solid transparent;white-space:nowrap;flex-shrink:0;}
+.sp-item.sp-current{background:#4f8ef720;border-color:var(--accent);color:var(--accent);}
+.sp-item.sp-done{background:#34d39920;border-color:var(--green);color:var(--green);}
+.sp-arrow{font-size:10px;color:var(--muted);flex-shrink:0;}
 
-/* ── Learning suggestion ── */
-.suggestion-box{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;border-radius:14px;padding:16px 20px;margin-bottom:18px;}
-.sug-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
-.sug-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#b0b8d4;line-height:1.6;margin-bottom:6px;font-weight:600;}
-.sug-item:last-child{margin-bottom:0;}
-.sug-icon{flex-shrink:0;font-size:14px;margin-top:1px;}
-
-/* ── Scorecard table ── */
-.sc-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;}
-.sc-table th{color:var(--muted);font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:6px 8px;border-bottom:1px solid #ffffff10;text-align:left;}
-.sc-table td{padding:8px 8px;border-bottom:1px solid #ffffff08;font-weight:600;}
-.sc-table tr:last-child td{border-bottom:none;}
-
-/* Submit */
-.submit-sec{background:var(--panel2);border-radius:14px;padding:16px;margin-bottom:16px;border:1px solid #34d39930;}
-.submit-st{font-size:13px;font-weight:700;text-align:center;margin-top:10px;min-height:20px;}
-.submit-st.sending{color:var(--yellow);}
-.submit-st.ok{color:var(--green);}
-.submit-st.fail{color:var(--red);}
-
-/* Student modal */
-.smod-bg{position:fixed;inset:0;background:#00000090;z-index:200;display:flex;align-items:center;justify-content:center;animation:fi .2s;}
-.smod{background:var(--panel);border:1px solid #34d39950;border-radius:20px;padding:28px;width:min(420px,90vw);box-shadow:0 8px 40px #00000080;}
-.smod-t{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--green);margin-bottom:6px;}
-.smod-s{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
-.sfd{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
-.sfd label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.sfd input{background:var(--panel2);border:1px solid #ffffff15;border-radius:10px;color:var(--text);font-family:'Noto Sans TC','Nunito',sans-serif;font-size:15px;font-weight:700;padding:10px 14px;outline:none;transition:border-color .2s;}
-.sfd input:focus{border-color:var(--green);}
-.sfd input.err{border-color:var(--red);}
-.serr{font-size:11px;color:var(--red);font-weight:700;margin-top:-10px;margin-bottom:8px;display:none;}
-.serr.show{display:block;}
-
-/* Log */
-.log-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:3px;}
-.log-list::-webkit-scrollbar{width:3px;}
-.log-list::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:3px;}
-.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
-.le.sl{border-color:var(--accent);}
-.le.ll{border-color:var(--orange);}
-.le.cl{border-color:var(--green);}
-.le.wl{border-color:var(--red);}
-.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--accent);}
-.lsn.ln{background:var(--orange);}
-.ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
-
-#stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
-
-@media(max-width:600px){
-  .cmp-g{grid-template-columns:1fr 1fr;}.cmp-vs{display:none;}
-  .sc-stats{grid-template-columns:repeat(2,1fr);}
-  .sc-top{gap:10px;}
-}
-
-/* ── v2 fill-in ── */
+/* v2 fill-in */
 .fiw{background:var(--panel2);border:1px solid #ffffff10;border-radius:14px;padding:16px 18px;margin-top:4px;}
 .fistep{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .fistep.active{color:var(--accent);}
@@ -412,72 +239,23 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .cfbtn2:hover{transform:translateY(-2px);}
 .cfbtn2:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 .chk-ok2{color:var(--green);font-size:11px;font-weight:700;margin-left:6px;}
-.cell.preview-l{border-color:var(--lc);opacity:.6;box-shadow:0 0 8px var(--lc)40;}
-.cell.preview-r{border-color:var(--rc);opacity:.6;box-shadow:0 0 8px var(--rc)40;}
-.cell.preview-m{border-color:var(--mc);opacity:.6;box-shadow:0 0 8px var(--mc)40;}
 .stepsc-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;}
 .stepsc-tag{font-size:10px;font-weight:800;padding:2px 8px;border-radius:50px;}
 
-/* ── v3 enhancements ── */
-/* Step timer */
-.step-timer-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.step-timer-box{background:var(--panel2);border:1px solid #ffffff0a;border-radius:10px;
-  padding:7px 14px;font-size:12px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:6px;}
-.step-timer-val{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:var(--text);}
-.step-timer-val.slow{color:var(--yellow);}
-.step-timer-val.very-slow{color:var(--red);}
+/* Log */
+.log-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:3px;}
+.log-list::-webkit-scrollbar{width:3px;}
+.log-list::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:3px;}
+.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
+.le.sl{border-color:var(--accent);}
+.le.cl{border-color:var(--green);}
+.le.wl{border-color:var(--red);}
+.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--accent);}
+.ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
 
-/* Teach hint after correct */
-.teach-hint{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;
-  border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;font-weight:600;
-  color:#b0b8d4;line-height:1.7;display:none;animation:fi .3s;}
-.teach-hint.show{display:block;}
-.teach-hint b{color:var(--yellow);}
-.teach-hint .good{color:var(--green);}
+#stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
 
-/* Error analysis panel */
-.err-panel{background:linear-gradient(135deg,#1e1010,#1a0f0f);border:1px solid #f8717130;
-  border-radius:16px;padding:18px 20px;margin-bottom:16px;animation:fi .4s;}
-.err-panel-title{font-size:12px;font-weight:800;color:var(--red);text-transform:uppercase;
-  letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-.err-panel-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--red);}
-.err-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.err-bar-name{font-size:11px;font-weight:700;width:70px;color:var(--muted);}
-.err-bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:9px;overflow:hidden;}
-.err-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--red));transition:width 1s;}
-.err-bar-num{font-size:11px;font-weight:900;font-family:'Nunito',sans-serif;width:28px;color:var(--red);}
-.err-insight{background:#f8717115;border:1px solid #f8717130;border-radius:10px;
-  padding:9px 13px;margin-top:10px;font-size:12px;font-weight:600;color:#f8b0b0;line-height:1.6;}
 
-/* Step time summary */
-.time-summary{background:var(--panel2);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
-.time-summary-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
-.time-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.time-step-name{font-size:11px;font-weight:700;width:80px;color:var(--muted);}
-.time-bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
-.time-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 1s;}
-.time-bar-num{font-size:11px;font-weight:800;font-family:'Nunito',sans-serif;width:36px;color:var(--text);}
-
-/* Replay panel */
-.replay-panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;
-  padding:20px;margin-bottom:16px;animation:fi .4s;}
-.replay-title{font-size:12px;font-weight:800;color:var(--accent2);text-transform:uppercase;
-  letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-.replay-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent2);}
-.replay-step{background:var(--panel2);border-radius:11px;padding:12px 14px;margin-bottom:8px;
-  border-left:3px solid var(--accent);cursor:pointer;transition:all .2s;}
-.replay-step:hover{border-color:var(--accent2);background:#a78bfa10;}
-.replay-step.rs-ok{border-left-color:var(--green);}
-.replay-step.rs-partial{border-left-color:var(--yellow);}
-.replay-step.rs-skip{border-left-color:var(--red);}
-.replay-step-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
-.replay-step-num{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
-.replay-step-time{font-size:11px;color:var(--muted);font-weight:600;}
-.replay-step-ans{font-size:12px;color:#b0b8d4;font-weight:600;line-height:1.5;}
-.replay-step-hint{font-size:12px;color:var(--accent);font-weight:600;margin-top:4px;
-  display:none;padding-top:6px;border-top:1px solid #ffffff08;line-height:1.6;}
-.replay-step-hint.open{display:block;}
-.replay-nav{display:flex;gap:8px;margin-top:10px;}
 </style>
 </head>
 <body>
@@ -486,23 +264,14 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 <header>
   <div class="badge">二分搜尋</div>
   <h1>⚡ 二分搜尋</h1>
-  <p class="subtitle">填空+計時+錯誤分析+步驟重播</p>
+  <p class="subtitle">五步填空練習 — 每一步都有提示</p>
 </header>
 
-
-<!-- Concept: Linear -->
-<div id="cbL" style="display:none">
-  <div class="cb cb-l">
-    <div class="ci">🐢</div>
-    <div><h3>循序搜尋</h3><p>從頭開始，<strong>一個一個</strong>比對，直到找到為止。最壞情況要比對 <strong>全部 n 個</strong>元素。就像從書架左到右翻每一本確認。</p></div>
-  </div>
-</div>
-
 <!-- Concept: Binary -->
-<div id="cbB" style="display:none">
+<div id="cbB">
   <div class="cb cb-b">
     <div class="ci">⚡</div>
-    <div><h3>二分搜尋</h3><p>每次猜<strong>中間</strong>的數，比較後把範圍砍掉一半。陣列<strong>必須排序</strong>，換來驚人效率：<strong>1000 個元素最多只需 10 步</strong>！<br><span style="color:var(--yellow);font-size:12px;">✏️ v3：五步填空 + 計時 + 錯誤分析 + 步驟重播！</span></p></div>
+    <div><h3>二分搜尋</h3><p>每次猜<strong>中間</strong>的數，比較後把範圍砍掉一半。陣列<strong>必須排序</strong>，換來驚人效率：<strong>1000 個元素最多只需 10 步</strong>！</p></div>
   </div>
   <div class="log2-box">
     <div class="l2t">🧮 為什麼這麼快？砍半的威力</div>
@@ -515,12 +284,12 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div class="l2s">
       <div class="l2sl">方法二：用次方反推步數</div>
       <p style="font-size:13px;color:#b0b8d4;line-height:1.65;margin-bottom:10px;">問「<strong>2的幾次方 ≥ 陣列大小</strong>」，答案就是最多步數：</p>
-      <table class="et"><thead><tr><th>陣列大小</th><th>最接近的次方</th><th>最多步數</th><th>循序最多</th></tr></thead><tbody>
-        <tr><td>8格</td><td class="pow">2³=8</td><td class="stp">3步</td><td style="color:var(--orange)">8步</td></tr>
-        <tr class="hr"><td>10格</td><td class="pow">2⁴=16≥10</td><td class="stp">4步</td><td style="color:var(--orange)">10步</td></tr>
-        <tr><td>16格</td><td class="pow">2⁴=16</td><td class="stp">4步</td><td style="color:var(--orange)">16步</td></tr>
-        <tr><td>100格</td><td class="pow">2⁷=128≥100</td><td class="stp">7步</td><td style="color:var(--orange)">100步</td></tr>
-        <tr><td>1000格</td><td class="pow">2¹⁰=1024≥1000</td><td class="stp">10步</td><td style="color:var(--orange)">1000步</td></tr>
+      <table class="et"><thead><tr><th>陣列大小</th><th>最接近的次方</th><th>最多步數</th></tr></thead><tbody>
+        <tr><td>8格</td><td class="pow">2³=8</td><td class="stp">3步</td></tr>
+        <tr class="hr"><td>10格</td><td class="pow">2⁴=16≥10</td><td class="stp">4步</td></tr>
+        <tr><td>16格</td><td class="pow">2⁴=16</td><td class="stp">4步</td></tr>
+        <tr><td>100格</td><td class="pow">2⁷=128≥100</td><td class="stp">7步</td></tr>
+        <tr><td>1000格</td><td class="pow">2¹⁰=1024≥1000</td><td class="stp">10步</td></tr>
       </tbody></table>
       <p class="hint">💡 數學上把「2的幾次方等於n」寫成 <strong style="color:var(--accent2)">log₂n</strong>，但你已經會算了！</p>
     </div>
@@ -540,49 +309,19 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
   </div>
 </div>
 
-
-</div>
-
 <!-- Config -->
 <div class="panel" id="cfgPanel">
-  <div class="pt" id="cfgPt">題目設定</div>
+  <div class="pt">題目設定</div>
   <div class="cfgr" id="pracCfg">
     <div class="cfi"><label>陣列大小</label><input type="number" id="arrSize" value="10" min="6" max="16"></div>
     <div class="cfi"><label>目標值（留空隨機）</label><input type="number" id="targetInput" value="" placeholder="自動"></div>
     <button class="btn bp" onclick="newProblem()">🎲 出新題目</button>
     <button class="btn bg2" onclick="newProblem(true)">找不存在的數</button>
-    <button class="btn bo" id="worstBtn" onclick="newProblem('worst')" style="display:none">😱 最壞情況</button>
   </div>
-  
+</div>
 
 <!-- Game area -->
 <div id="gameArea" style="display:none">
-
-  <!-- Quiz progress -->
-  <div class="qhdr" id="qHdr" style="display:none">
-    <div class="qpl">進度</div>
-    <div class="qbb"><div class="qbf" id="qBF" style="width:0%"></div></div>
-    <div class="qqn" id="qQN">1/5</div>
-    <div class="wps" id="wPills"></div>
-  </div>
-
-  <!-- Timer row (quiz only) -->
-  <div class="timer-row" id="timerRow" style="display:none">
-    <div class="timer-box">
-      <div class="timer-icon">⏱️</div>
-      <div>
-        <div class="timer-lbl">本題時間</div>
-        <div class="timer-val" id="qTimer">0:00</div>
-      </div>
-    </div>
-    <div class="timer-box">
-      <div class="timer-icon">🕐</div>
-      <div>
-        <div class="timer-lbl">總時間</div>
-        <div class="timer-val" id="totalTimer">0:00</div>
-      </div>
-    </div>
-  </div>
 
   <!-- Predict banner -->
   <div class="pred-ban" id="predBan">
@@ -600,8 +339,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
   <div class="tdisp">
     <div class="tlbl">🎯 目標</div>
     <div class="tval" id="tDisp">—</div>
-    <div class="diff-indicator" id="diffInd" style="display:none"></div>
-    <div class="mpill" id="mPill"></div>
+    <div class="mpill" id="mPill">⚡ 二分搜尋</div>
   </div>
 
   <!-- Binary step cards -->
@@ -610,6 +348,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div class="sc"><div class="scl" style="color:var(--mc)">Mid（比對中）</div><div class="scv" id="mVal" style="color:var(--mc)">—</div></div>
     <div class="sc"><div class="scl" style="color:var(--rc)">Right</div><div class="scv" id="rVal" style="color:var(--rc)">—</div></div>
   </div>
+
   <!-- Binary range -->
   <div class="bin-rng" id="binRng">
     <div class="brt"><div class="brl">🔭 剩餘範圍</div><div class="brc"><span id="rngCnt" style="color:var(--accent)">—</span> 格可能</div></div>
@@ -618,21 +357,9 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div id="slBadge"></div>
   </div>
 
-  <!-- Linear step cards -->
-  <div class="si sg2" id="lSI" style="display:none">
-    <div class="sc"><div class="scl" style="color:var(--oc)">目前位置</div><div class="scv" id="curPos" style="color:var(--oc)">—</div></div>
-    <div class="sc"><div class="scl" style="color:var(--muted)">已檢查</div><div class="scv" id="chkCnt" style="color:var(--text)">0</div></div>
-  </div>
-  <!-- Linear progress -->
-  <div class="lin-prog" id="linProg" style="display:none">
-    <div class="lpt"><div class="lpl">📊 掃描進度</div><div class="lpc"><span id="lpCnt">0</span>/<span id="lpTot">—</span> 格</div></div>
-    <div class="lpb"><div class="lpbf" id="lpBar" style="width:0%"></div></div>
-    <div class="lwh" id="lwh"></div>
-  </div>
-
   <!-- Array -->
   <div class="panel">
-    <div class="pt" id="arrPt">陣列</div>
+    <div class="pt">陣列</div>
     <div class="aw"><div class="at" id="arrTrack"></div></div>
     <div id="rbk" class="rbk"></div>
     <div class="legend" id="legB">
@@ -642,23 +369,17 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
       <div class="li"><div class="ld" style="border-color:var(--green);background:#34d39930"></div>找到！</div>
       <div class="li"><div class="ld" style="border-color:transparent;background:var(--elim)"></div>已排除</div>
     </div>
-    <div class="legend" id="legL" style="display:none">
-      <div class="li"><div class="ld" style="border-color:var(--oc);background:#fb923c20"></div>目前比對</div>
-      <div class="li"><div class="ld" style="border-color:var(--green);background:#34d39930"></div>找到！</div>
-      <div class="li"><div class="ld" style="border-color:transparent;background:#1e1208"></div>已跳過</div>
-      <div class="li"><div class="ld" style="border-color:#ffffff15;background:var(--panel2)"></div>未檢查</div>
-    </div>
   </div>
 
   <!-- Choice -->
   <div class="panel" id="choicePanel">
-    <div class="pt" id="choicePt">你的決定</div>
+    <div class="pt">你的決定</div>
     <div class="cq" id="cq"></div>
     <div class="cbtns" id="cbtns"></div>
     <div class="fb" id="fb"></div>
   </div>
 
-  <!-- Per-Q result -->
+  <!-- Result -->
   <div class="res-ov" id="resOv">
     <div class="re" id="re"></div>
     <div class="rt" id="rt2"></div>
@@ -669,30 +390,13 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
       <div class="eff-bg"><div class="eff-f" id="effBar" style="width:0%"></div></div>
       <div style="font-size:10px;color:var(--muted);margin-top:3px;" id="effLbl"></div>
     </div>
-    <div id="wrRev"></div>
     <div id="resExtra"></div>
     <button class="btn bp" id="nextBtn" onclick="nextAction()" style="margin-top:12px">再來一題 🎲</button>
   </div>
 
-  <!-- Compare -->
-  <div class="cmp-panel" id="cmpPanel" style="display:none">
-    <div class="cmp-t">⚖️ 兩種方法比較（同一題）</div>
-    <div class="cmp-g">
-      <div class="cmp-c lc"><div class="cmp-ct">🐢 循序</div><div class="cmp-n" id="cmpL">—</div><div class="cmp-s">步</div></div>
-      <div class="cmp-vs">VS</div>
-      <div class="cmp-c bc"><div class="cmp-ct">⚡ 二分</div><div class="cmp-n" id="cmpB">—</div><div class="cmp-s">步</div></div>
-    </div>
-    <div class="bar-s">
-      <div class="bar-l">步驟視覺化</div>
-      <div class="bar-r"><div class="bar-n" style="color:var(--orange)">循序</div><div class="bar-bg"><div class="bar-f lf" id="cmpLB" style="width:0%"></div></div><div class="bar-num" id="cmpLN" style="color:var(--orange)"></div></div>
-      <div class="bar-r"><div class="bar-n" style="color:var(--accent)">二分</div><div class="bar-bg"><div class="bar-f bf" id="cmpBB" style="width:0%"></div></div><div class="bar-num" id="cmpBN" style="color:var(--accent)"></div></div>
-    </div>
-    <div class="cmp-i" id="cmpI"></div>
-  </div>
-
   <!-- Log -->
   <div class="panel" id="logPanel" style="display:none">
-    <div class="pt" id="logPt">搜尋紀錄</div>
+    <div class="pt">搜尋紀錄</div>
     <div class="log-list" id="logList"></div>
   </div>
 </div>
@@ -700,1340 +404,822 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
 
 <script>
-// ╔══════════════════════════════════════════════════════╗
-// ║  GAS 設定區（老師請在這裡填入）                       ║
-// ║  把部署後的「網路應用程式網址」貼入 GAS_URL            ║
-// ╚══════════════════════════════════════════════════════╝
-const GAS_URL   = '填入你的GAS網址';
-const QUIZ_TYPE = '二分搜尋v3練習';
+// ── Helpers ──────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const delay = ms => new Promise(r => setTimeout(r, ms));
 
+const C = {
+  ARRAY_MIN: 6,   ARRAY_MAX: 16,
+  VALUE_MIN: 5, VALUE_MAX: 84,
+  GEN_RETRY_LIMIT: 200,
+  FEEDBACK_DELAY: 2000,
+  SKIP_DELAY: 2000,
+  RETRY_DELAY: 2500,
+  MAX_WRONG_PER_STEP: 4,
+  MAX_SCORE_PER_STEP: 4
+};
 
-// ── v3: Step time summary ─────────────────────────────
-
-
-// ── v3: Replay ────────────────────────────────────────
-
-
-// ── v3: Error analysis ────────────────────────────────
-
-
-// ══════════════════════════════════════════════════════
-// ── v3: Step time summary ─────────────────────────────
-
-
-// ── v3: Replay ────────────────────────────────────────
-
-
-// ── v3: Error analysis ────────────────────────────────
-
-
-// ══════════════════════════════════════════════════════
-
-// ── State ──────────────────────────────────────────────
-let arr=[],target=0,mode='binary';
-let bL,bR,bM,linCur;
-let stepCount=0,correctAns=0,wrongAns=0,skippedSteps=0,stepWrong=0;
-let gameOver=false,gameFoundAt=undefined,isWorstCase=false;
-let maxSteps=0,predDone=false;
-// v2 fill-in state
-let fiMid=-1,fiDir='',fiBound='',fiStepScores=[];
-let fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0};
-// v3: per-step timing and error tracking
-let stepTimers={};       // {stepName: startTime}
-let stepTimes={};        // {stepName: seconds}
-let stepErrors={};       // {stepName: errorCount} across whole practice session
-let practiceLog=[];      // [{q, steps:[{name,time,wrong,ans,hint}]}] for replay
-let curQSteps=[];        // steps for current question
-let curStepStart=0;      // timestamp when current step started
-let previewL=-1,previewR=-1,previewM=-1; // live preview while typing
-let fiHideLR=false;  // hide Left/Right colours (step 0)
-let fiHideM=false;   // hide Mid colour (step 1)
-let linDone=false,binDone=false,linSteps=null,binSteps=null;
-let savedArr=null,savedTarget=null;
-
-// Student
-let sClass='',sSeat='',sName='';
-
-// Quiz
-let quizMode=false,qTotal=5,qMaxWrong=2,qSearchType='binary';
-let qCurrent=0,qResults=[],qTotSteps=0,qWrongAll=0,qSkipAll=0;
-
-// Timer
-let qTimerSec=0,totalTimerSec=0;
-let qTimerInt=null,totalTimerInt=null;
-let qStartTime=0;
+// ── State ────────────────────────────────────────────────
+let arr = [], target = 0;
+let bL, bR, bM;
+let stepCount = 0, correctAns = 0, wrongAns = 0, skippedSteps = 0, stepWrong = 0;
+let gameOver = false, gameFoundAt = undefined;
+let maxSteps = 0, predDone = false;
+let fiMid = -1, fiDir = '', fiBound = '', fiStepScores = [];
+let stepErrors = {};
+let previewL = -1, previewR = -1, previewM = -1;
+let fiHideLR = false, fiHideM = false;
 
 // ── log₂ quiz ──────────────────────────────────────────
-function chkH(btn,ok){
-  document.querySelectorAll('.ho').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('halveFb');
-  btn.classList.add(ok?'hok':'hno');
-  if(ok){fb.style.color='var(--green)';fb.textContent='✅ 正確！2⁵=32，所以32格最多只需5步！';}
-  else{fb.style.color='var(--red)';fb.textContent='❌ 再想想：2¹=2,2²=4,2³=8,2⁴=16,2⁵=32 ✓';setTimeout(()=>{document.querySelectorAll('.ho').forEach(b=>{b.disabled=false;b.classList.remove('hok','hno');});fb.textContent='';},2000);}
-}
-
-// ── Mode switch ────────────────────────────────────────
-function switchMode(m){
-  mode=m;quizMode=(m==='quiz');
-  ['btnL','btnB','btnQ'].forEach(id=>{var _b=document.getElementById(id);if(_b)_b.className='mbtn';});
-  var _bmb=document.getElementById(m==='linear'?'btnL':m==='binary'?'btnB':'btnQ'); if(_bmb)_bmb.className='mbtn '+(m==='linear'?'al':m==='binary'?'ab':'aq');
-  ['cbL','cbB','cbQ'].forEach(id=>{var _b=document.getElementById(id);if(_b)_b.style.display='none';});
-  var _cb=document.getElementById(m==='linear'?'cbL':m==='binary'?'cbB':'cbQ');if(_cb)_cb.style.display='block';
-  var _pc=document.getElementById('pracCfg');if(_pc)_pc.style.display=m==='quiz'?'none':'flex';
-  (document.getElementById('quizCfg')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display=m==='quiz'?'flex':'none';
-  (document.getElementById('diffRow')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display=m==='quiz'?'flex':'none';
-  document.getElementById('cfgPt').textContent=m==='quiz'?'測驗設定':'題目設定';
-  (document.getElementById('scorecard')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='scorecard';
-  document.getElementById('gameArea').style.display='none';
-  var _wb=document.getElementById('worstBtn');if(_wb)_wb.style.display=m==='linear'?'inline-block':'none';
-  if(m!=='quiz'){savedArr=null;linDone=false;binDone=false;linSteps=null;binSteps=null;newProblem();}
+function chkH(btn, ok) {
+  document.querySelectorAll('.ho').forEach(b => b.disabled = true);
+  const fb = $('halveFb');
+  btn.classList.add(ok ? 'hok' : 'hno');
+  if (ok) {
+    fb.style.color = 'var(--green)';
+    fb.textContent = '✅ 正確！2⁵=32，所以32格最多只需5步！';
+  } else {
+    fb.style.color = 'var(--red)';
+    fb.textContent = '❌ 再想想：2¹=2,2²=4,2³=8,2⁴=16,2⁵=32 ✓';
+    setTimeout(() => {
+      document.querySelectorAll('.ho').forEach(b => { b.disabled = false; b.classList.remove('hok', 'hno'); });
+      fb.textContent = '';
+    }, 2000);
+  }
 }
 
 // ── Generate array ─────────────────────────────────────
-function genArr(size,forceNF=false){
-  const set=new Set();
-  while(set.size<size)set.add(Math.floor(Math.random()*80)+5);
-  arr=Array.from(set).sort((a,b)=>a-b);
-  if(forceNF){let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);target=arr.includes(t)?arr[arr.length-1]+3:t;}
-  else{const ui=parseInt(document.getElementById('targetInput')?.value);if(!isNaN(ui)&&!quizMode)target=ui;else target=Math.random()<0.8?arr[Math.floor(Math.random()*arr.length)]:(() => {let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);return t;})();}
-}
-
-// ── Quiz difficulty levels ─────────────────────────────
-// Returns {size, forceNotFound} based on question index
-function diffForQ(i,total){
-  const pct=(i+1)/total;
-  function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
-  if(pct<=0.4){var s=rnd(5,8);  return {size:s,nf:false,label:'簡單('+s+'格)',cls:'di-E',icon:'🟢'};}
-  if(pct<=0.8){var s=rnd(9,13); return {size:s,nf:false,label:'中等('+s+'格)',cls:'di-M',icon:'🟡'};}
-  var s=rnd(14,17); return {size:s,nf:true,label:'困難('+s+'格)',cls:'di-H',icon:'🔴'};
-}
-
-// ── Practice: new problem ──────────────────────────────
-function newProblem(type=false){
-  savedArr=null;linDone=false;binDone=false;linSteps=null;binSteps=null;isWorstCase=(type==='worst');
-  const size=Math.max(6,Math.min(17,parseInt(document.getElementById('arrSize').value)||10));
-  genArr(size,type===true||type==='worst');
-  if(type==='worst')target=arr[arr.length-1]+1;
-  savedArr=[...arr];savedTarget=target;
-  startGame(mode);
-}
-
-// ── Quiz ───────────────────────────────────────────────
-function startQuiz(){
-  (document.getElementById('sModal')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='flex';
-  (document.getElementById('sErr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='serr';
-  ['inClass','inSeat','inName'].forEach(id=>{var _e=document.getElementById(id);if(_e)_e.classList.remove('err');});
-}
-
-function confirmStudent(){
-  const c=(document.getElementById('inClass')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value.trim();
-  const s=(document.getElementById('inSeat')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value.trim();
-  const n=(document.getElementById('inName')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value.trim();
-  let err=false;
-  if(!c){(document.getElementById('inClass')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).classList.add('err');err=true;}
-  if(!s){(document.getElementById('inSeat')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).classList.add('err');err=true;}
-  if(!n){(document.getElementById('inName')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).classList.add('err');err=true;}
-  if(err){(document.getElementById('sErr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='serr show';return;}
-  sClass=c;sSeat=s;sName=n;
-  (document.getElementById('sModal')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='none';
-  qTotal=parseInt((document.getElementById('qTot')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value)||5;
-  qMaxWrong=parseInt((document.getElementById('qMW')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value)||2;
-  qSearchType=(document.getElementById('qST')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value;
-  (document.getElementById('qTotLbl')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qTotal;
-  (document.getElementById('qMWLbl')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qMaxWrong;
-  qCurrent=0;qResults=[];qTotSteps=0;qWrongAll=0;qSkipAll=0;
-  (document.getElementById('scorecard')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='scorecard';
-  quizMode=true;
-  // Start total timer
-  totalTimerSec=0;
-  clearInterval(totalTimerInt);
-  totalTimerInt=setInterval(()=>{totalTimerSec++;(document.getElementById('totalTimer')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=fmt(totalTimerSec);},1000);
-  launchQ();
-}
-
-function launchQ(){
-  const diff=diffForQ(qCurrent,qTotal);
-  const type=qSearchType==='both'?(qCurrent%2===0?'binary':'linear'):qSearchType;
-  genArr(diff.size,diff.nf);
-  mode=type;
-  updateModeUI(diff);
-  startGame(type,diff);
-}
-
-function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
-
-// ── Start game session ─────────────────────────────────
-function startGame(m,diff=null){
-  mode=m;
-  bL=0;bR=arr.length-1;bM=Math.floor((arr.length-1)/2);
-  linCur=0;
-  stepCount=0;correctAns=0;wrongAns=0;skippedSteps=0;stepWrong=0;
-  gameOver=false;gameFoundAt=undefined;predDone=false;fiMid=-1;fiDir='';fiBound='';fiStepScores=[];
-  maxSteps=Math.ceil(Math.log2(arr.length));
-
-  document.getElementById('gameArea').style.display='block';
-  document.getElementById('resOv').style.display='none';
-  document.getElementById('cmpPanel').style.display='none';
-  document.getElementById('logPanel').style.display='none';
-  document.getElementById('choicePanel').style.display='block';
-  document.getElementById('stepCtr').style.display='block';
-  document.getElementById('logList').innerHTML='';
-  document.getElementById('fb').className='fb';
-  document.getElementById('resExtra').innerHTML='';
-  document.getElementById('effS').style.display='none';
-  document.getElementById('wrRev').innerHTML='';
-
-  // Quiz header & timer
-  if(quizMode){
-    (document.getElementById('qHdr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='flex';
-    (document.getElementById('timerRow')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='flex';
-    (document.getElementById('qQN')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=`${qCurrent+1}/${qTotal}`;
-    (document.getElementById('qBF')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.width=`${(qCurrent/qTotal)*100}%`;
-    updateWPills(0);
-    document.getElementById('nextBtn').textContent='下一題 →';
-    // Per-Q timer
-    qTimerSec=0;qStartTime=Date.now();
-    clearInterval(qTimerInt);
-    qTimerInt=setInterval(()=>{
-      qTimerSec=Math.floor((Date.now()-qStartTime)/1000);
-      const el=(document.getElementById('qTimer')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});
-      el.textContent=fmt(qTimerSec);
-      el.className='timer-val'+(qTimerSec>60?' warn':qTimerSec>120?' danger':'');
-    },1000);
-    // Difficulty indicator
-    if(diff){
-      const di=document.getElementById('diffInd');
-      di.style.display='inline-flex';
-      di.className='diff-indicator '+diff.cls;
-      di.textContent=diff.icon+' '+diff.label;
-    }
+function genArr(size, forceNF = false) {
+  const set = new Set();
+  while (set.size < size) set.add(Math.floor(Math.random() * (C.VALUE_MAX - C.VALUE_MIN + 1)) + C.VALUE_MIN);
+  arr = Array.from(set).sort((a, b) => a - b);
+  if (forceNF) {
+    let t, tr = 0;
+    do { t = Math.floor(Math.random() * (C.VALUE_MAX - C.VALUE_MIN + 1)) + C.VALUE_MIN; tr++; } while (arr.includes(t) && tr < C.GEN_RETRY_LIMIT);
+    target = arr.includes(t) ? arr[arr.length - 1] + 3 : t;
   } else {
-    (document.getElementById('qHdr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='none';
-    (document.getElementById('timerRow')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='none';
-    document.getElementById('diffInd').style.display='none';
-    document.getElementById('nextBtn').textContent='再來一題 🎲';
+    const ui = parseInt($('targetInput')?.value);
+    if (!isNaN(ui)) target = ui;
+    else target = Math.random() < 0.8
+      ? arr[Math.floor(Math.random() * arr.length)]
+      : (() => { let t, tr = 0; do { t = Math.floor(Math.random() * (C.VALUE_MAX - C.VALUE_MIN + 1)) + C.VALUE_MIN; tr++; } while (arr.includes(t) && tr < C.GEN_RETRY_LIMIT); return t; })();
   }
-
-  updateModeUI(diff);
-  const pb=document.getElementById('predBan');
-  if(m==='binary'&&!quizMode){pb.className='pred-ban show';document.getElementById('predR').textContent='';document.querySelectorAll('.pred-opt').forEach(b=>{b.disabled=false;b.classList.remove('sel');});}
-  else{pb.className='pred-ban';}
-
-  addLog(m==='linear'?`開始循序搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。從[0]逐一比對。`:`開始二分搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。Left=0, Right=${arr.length-1}`,m==='linear'?'ll':'sl');
-  renderAll();renderQ();
 }
 
-// ── UI helpers ─────────────────────────────────────────
-function updateModeUI(diff=null){
-  const m=mode;
-  document.getElementById('bSI').style.display=m==='binary'?'grid':'none';
-  document.getElementById('binRng').style.display=m==='binary'?'block':'none';
-  document.getElementById('lSI').style.display=m==='linear'?'grid':'none';
-  document.getElementById('linProg').style.display=m==='linear'?'block':'none';
-  document.getElementById('legB').style.display=m==='binary'?'flex':'none';
-  document.getElementById('legL').style.display=m==='linear'?'flex':'none';
-  ['arrPt','choicePt','logPt'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='pt'+(m==='linear'?' lo':'');});
-  document.getElementById('stepNum').style.color=m==='linear'?'var(--orange)':'var(--accent)';
-  const pill=document.getElementById('mPill');
-  if(quizMode){pill.className='mpill mp-q';pill.textContent=`📝 第${qCurrent+1}題`;}
-  else if(m==='linear'){pill.className='mpill mp-l';pill.textContent='🐢 循序搜尋';}
-  else{pill.className='mpill mp-b';pill.textContent='⚡ 二分搜尋';}
+// ── New problem ────────────────────────────────────────
+function newProblem(forceNF = false) {
+  const size = Math.max(C.ARRAY_MIN, Math.min(C.ARRAY_MAX, parseInt($('arrSize').value) || 10));
+  genArr(size, forceNF);
+  startGame();
 }
 
-function updateWPills(n){
-  const c=(document.getElementById('wPills')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});c.innerHTML='';
-  for(let i=0;i<qMaxWrong;i++){const d=document.createElement('div');d.className='wp'+(i<n?' u':'');c.appendChild(d);}
+// ── Start game ─────────────────────────────────────────
+function startGame() {
+
+  bL = 0; bR = arr.length - 1; bM = Math.floor((arr.length - 1) / 2);
+  stepCount = 0; correctAns = 0; wrongAns = 0; skippedSteps = 0; stepWrong = 0;
+  gameOver = false; gameFoundAt = undefined; predDone = false;
+  fiMid = -1; fiDir = ''; fiBound = ''; fiStepScores = [];
+  maxSteps = Math.ceil(Math.log2(arr.length));
+
+  $('gameArea').style.display = 'block';
+  $('resOv').style.display = 'none';
+  $('logPanel').style.display = 'none';
+  $('choicePanel').style.display = 'block';
+  $('stepCtr').style.display = 'block';
+  $('logList').innerHTML = '';
+  $('fb').className = 'fb';
+  $('effS').style.display = 'none';
+  $('resExtra').innerHTML = '';
+
+  const pb = $('predBan');
+  pb.className = 'pred-ban show';
+  $('predR').textContent = '';
+  pb.querySelectorAll('.pred-opt').forEach(b => { b.disabled = false; b.classList.remove('sel'); });
+
+  addLog(`開始二分搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。Left=0, Right=${arr.length-1}`, 'sl');
+  renderAll(); renderQ();
 }
 
-function updateLinProg(){
-  const pct=Math.round((linCur/arr.length)*100);
-  document.getElementById('lpCnt').textContent=linCur;
-  document.getElementById('lpTot').textContent=arr.length;
-  document.getElementById('lpBar').style.width=pct+'%';
-  const wh=document.getElementById('lwh');
-  if(linCur===0)wh.innerHTML=`<b>最壞情況</b>：目標在最後或不存在 → 要比對 <b>${arr.length}次</b>`;
-  else wh.innerHTML=`已掃描${linCur}格，還剩<b>${arr.length-linCur}</b>格`;
-}
-
-function updateBinRange(){
-  const rs=bR-bL+1,pct=Math.round((rs/arr.length)*100);
-  document.getElementById('rngCnt').textContent=fiHideLR?'?':rs;
-  document.getElementById('rngBar').style.width=pct+'%';
-  document.getElementById('rngCnt').style.color=pct>50?'var(--accent)':pct>20?'var(--yellow)':'var(--green)';
-  const rem=Math.ceil(Math.log2(rs+1));
-  document.getElementById('binHint').innerHTML='<b style="color:var(--accent2)">最多還需'+rem+'步</b>就能確定（範圍每步砍半）';
-  const left=maxSteps-stepCount;
-  const badge=document.getElementById('slBadge');
-  if(stepCount===0)badge.innerHTML=`<span class="slb slb-n">⚡ 挑戰：最佳步數${maxSteps}步</span>`;
-  else if(left<=1)badge.innerHTML=`<span class="slb slb-d">⚡ 快到最佳步數了！還剩${left}步</span>`;
-  else badge.innerHTML=`<span class="slb slb-k">✅ 已用${stepCount}步，最佳${maxSteps}步</span>`;
+// ── UI updates ─────────────────────────────────────────
+function updateBinRange() {
+  const rs = bR - bL + 1, pct = Math.round((rs / arr.length) * 100);
+  $('rngCnt').textContent = fiHideLR ? '?' : rs;
+  $('rngBar').style.width = pct + '%';
+  $('rngCnt').style.color = pct > 50 ? 'var(--accent)' : pct > 20 ? 'var(--yellow)' : 'var(--green)';
+  const rem = Math.ceil(Math.log2(rs + 1));
+  $('binHint').innerHTML = '<b style="color:var(--accent2)">最多還需' + rem + '步</b>就能確定（範圍每步砍半）';
+  const left = maxSteps - stepCount;
+  const badge = $('slBadge');
+  if (stepCount === 0) badge.innerHTML = '<span class="slb slb-n">⚡ 挑戰：最佳步數' + maxSteps + '步</span>';
+  else if (left <= 1) badge.innerHTML = '<span class="slb slb-d">⚡ 快到最佳步數了！還剩' + left + '步</span>';
+  else badge.innerHTML = '<span class="slb slb-k">✅ 已用' + stepCount + '步，最佳' + maxSteps + '步</span>';
 }
 
 // ── Predict ────────────────────────────────────────────
-function predict(btn,choice){
-  if(predDone)return;predDone=true;
-  document.querySelectorAll('.pred-opt').forEach(b=>{b.disabled=true;b.classList.remove('sel');});
+function predict(btn, choice) {
+  if (predDone) return; predDone = true;
+  document.querySelectorAll('.pred-opt').forEach(b => { b.disabled = true; b.classList.remove('sel'); });
   btn.classList.add('sel');
-  const mv=arr[bM];
-  let actual=!arr.includes(target)?'none':target===mv?'mid':target<mv?'left':'right';
-  const pr=document.getElementById('predR');
-  pr.style.color=choice===actual?'var(--green)':'var(--orange)';
-  pr.textContent=choice===actual?'✅ 猜對了！繼續開始搜尋吧。':'🤔 不太一樣哦！試試看會怎麼發展。';
+  const mv = arr[bM];
+  let actual = (target < arr[bL] || target > arr[bR]) ? 'none' : target === mv ? 'mid' : target < mv ? 'left' : 'right';
+  const pr = $('predR');
+  pr.style.color = choice === actual ? 'var(--green)' : 'var(--orange)';
+  pr.textContent = choice === actual ? '✅ 猜對了！繼續開始搜尋吧。' : '🤔 不太一樣哦！試試看會怎麼發展。';
 }
 
 // ── Render array ───────────────────────────────────────
-function renderAll(){
-  document.getElementById('tDisp').textContent=target;
-  document.getElementById('stepNum').textContent=stepCount;
-  if(mode==='binary'){
-    document.getElementById('lVal').textContent=fiHideLR?'?':`${arr[bL]}[${bL}]`;
-    document.getElementById('mVal').textContent=fiHideM?'?':`${arr[bM]}[${bM}]`;
-    document.getElementById('rVal').textContent=fiHideLR?'?':`${arr[bR]}[${bR}]`;
-    if(!gameOver)updateBinRange();
-  } else {
-    document.getElementById('curPos').textContent=gameOver?'—':`${arr[linCur]??'?'}[${linCur}]`;
-    document.getElementById('chkCnt').textContent=linCur;
-    updateLinProg();
-  }
-  const track=document.getElementById('arrTrack');track.innerHTML='';
-  for(let i=0;i<arr.length;i++){
-    const w=el('div','cw'),tl=el('div','cl'),cell=el('div','cell'),idx=el('div','ci2'),al=el('div','cal');
-    idx.textContent=i;
-    if(mode==='binary'){
-      const lb=[];
-      // Show ▼L ▼R when L/R revealed; ▼M removed (use mid label instead)
-      if(!fiHideLR){
-        if(i===bL&&!gameOver) lb.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
-        if(i===bR&&!gameOver) lb.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
-      }
-      tl.innerHTML=lb.join(' ');
-      if(gameOver){
-        cell.classList.add(gameFoundAt===i?'found':'elim');
-      } else if(fiHideLR){
-        // Step 0: all cells neutral, wait for student to fill L/R
-        cell.classList.add('active');
-      } else if(i<bL||i>bR){
-        cell.classList.add('elim');
-      } else if(i===bM&&!fiHideM){
-        cell.classList.add('mm');
-      } else if(i===bL){
-        cell.classList.add('lm');
-      } else if(i===bR){
-        cell.classList.add('rm');
-      } else {
-        cell.classList.add('active');
-      }
-      if(!fiHideM&&!gameOver&&i===bM){al.style.background='#fbbf2420';al.style.color='var(--mc)';al.textContent='mid';}
-    } else {
-      if(gameOver){if(gameFoundAt===i)cell.classList.add('found');else if(i<(gameFoundAt??linCur))cell.classList.add('chk-l');else cell.classList.add('elim');}
-      else{if(i<linCur)cell.classList.add('chk-l');else if(i===linCur){cell.classList.add('cur-l');cell.classList.add('scanning');tl.innerHTML='';}else cell.classList.add('active');}
+function renderAll() {
+  $('tDisp').textContent = target;
+  $('stepNum').textContent = stepCount;
+  $('lVal').textContent = fiHideLR ? '?' : `${arr[bL]}[${bL}]`;
+  $('mVal').textContent = fiHideM ? '?' : `${arr[bM]}[${bM}]`;
+  $('rVal').textContent = fiHideLR ? '?' : `${arr[bR]}[${bR}]`;
+  if (!gameOver) updateBinRange();
+
+  const track = $('arrTrack'); track.innerHTML = '';
+  for (let i = 0; i < arr.length; i++) {
+    const w = el('div', 'cw'), tl = el('div', 'cl'), cell = el('div', 'cell'), idx = el('div', 'ci2'), al = el('div', 'cal');
+    idx.textContent = i;
+    const lb = [];
+    if (!fiHideLR) {
+      if (i === bL && !gameOver) lb.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
+      if (i === bR && !gameOver) lb.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
     }
-    cell.textContent=arr[i];
-    w.appendChild(tl);w.appendChild(cell);w.appendChild(idx);w.appendChild(al);track.appendChild(w);
+    tl.innerHTML = lb.join(' ');
+    if (gameOver) {
+      cell.classList.add(gameFoundAt === i ? 'found' : 'elim');
+    } else if (fiHideLR) {
+      cell.classList.add('active');
+    } else if (i < bL || i > bR) {
+      cell.classList.add('elim');
+    } else if (i === bM && !fiHideM) {
+      cell.classList.add('mm');
+    } else if (i === bL) {
+      cell.classList.add('lm');
+    } else if (i === bR) {
+      cell.classList.add('rm');
+    } else {
+      cell.classList.add('active');
+    }
+    if (!fiHideM && !gameOver && i === bM) { al.style.background = '#fbbf2420'; al.style.color = 'var(--mc)'; al.textContent = 'mid'; }
+    cell.textContent = arr[i];
+    w.appendChild(tl); w.appendChild(cell); w.appendChild(idx); w.appendChild(al); track.appendChild(w);
   }
-  const rbk=document.getElementById('rbk');
-  if(mode==='binary'&&!gameOver&&!fiHideLR&&!fiHideM)rbk.textContent='← 搜尋範圍 ['+bL+'…'+bR+'] →';
-  else rbk.textContent='';
+  const rbk = $('rbk');
+  if (!gameOver && !fiHideLR && !fiHideM) rbk.textContent = '← 搜尋範圍 [' + bL + '…' + bR + '] →';
+  else rbk.textContent = '';
+  if (!gameOver && ($('fi0inpL') || $('fi0inpR') || $('fi1inp'))) {
+    updatePreview();
+  }
 }
-function el(tag,cls){const e=document.createElement(tag);e.className=cls;return e;}
+function el(tag, cls) { const e = document.createElement(tag); e.className = cls; return e; }
 
 // ── Render question ────────────────────────────────────
-function renderQ(){
-  if(gameOver)return;
-  document.getElementById('fb').className='fb';
-  const q=document.getElementById('cq'),bc=document.getElementById('cbtns');bc.innerHTML='';
-  if(mode==='linear'){
-    q.innerHTML=`目前在[${linCur}]，值是<span class="cv">${arr[linCur]}</span>，目標是<span class="cv">${target}</span>。<br>這個值符合嗎？`;
-    bc.appendChild(mkBtn('cbtn cb-F',`✅ 找到了！<br><small>${arr[linCur]}=${target}</small>`,()=>linChoice('found')));
-    bc.appendChild(mkBtn('cbtn cb-N',`➡️ 繼續往後<br><small>${arr[linCur]}≠${target}</small>`,()=>linChoice('next')));
-  } else {
-    q.innerHTML = '目標 = <span class="mv">'+target+'</span>';
-    bc.innerHTML = '';
-    fiMid=-1; fiDir=''; fiBound=''; fiStepScores=[]; fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0}; stepTimes={}; curQSteps=[]; curStepStart=Date.now();previewL=-1;previewR=-1;previewM=-1;fiHideLR=true;fiHideM=true;
-    renderFiS0();
-  }
+function renderQ() {
+  if (gameOver) return;
+  $('fb').className = 'fb';
+  const q = $('cq'), bc = $('cbtns'); bc.innerHTML = '';
+  q.innerHTML = '目標 = <span class="mv">' + target + '</span>';
+  fiMid = -1; fiDir = ''; fiBound = ''; fiStepScores = [];
+  previewL = -1; previewR = -1; previewM = -1;
+  fiHideLR = true; fiHideM = true;
+  renderFiS0();
 }
 
-
-// ── v3: Step time summary ─────────────────────────────
-
-
-// ── v3: Replay ────────────────────────────────────────
-
-
-// ── v3: Error analysis ────────────────────────────────
-
-
-// ═══════════════════════════════════════════════════
-// v2: Four-step fill-in for binary search
-
-// ── v3: Step time summary ─────────────────────────────
-function showStepSummary(){
-  var over=document.getElementById('resOv');
-  if(!over) return;
-  var existing=document.getElementById('v3StepSummary');
-  if(existing) existing.remove();
-
-  var steps=curQSteps;
-  if(!steps||steps.length===0) return;
-  var maxTime=Math.max.apply(null,steps.map(function(s){return s.time;}));
-  if(maxTime===0) return;
-
-  var div=document.createElement('div');
-  div.id='v3StepSummary';
-  div.className='time-summary';
-  div.style.marginTop='10px';
-  div.innerHTML='<div class="time-summary-title">⏱️ 各步驟花費時間</div>';
-  steps.forEach(function(s){
-    var pct=maxTime>0?Math.round((s.time/maxTime)*100):0;
-    var col=s.time<=5?'var(--green)':s.time<=15?'var(--yellow)':'var(--red)';
-    var row=document.createElement('div'); row.className='time-row';
-    row.innerHTML=
-      '<div class="time-step-name">'+s.name+'</div>'+
-      '<div class="time-bar-bg"><div class="time-bar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent),'+col+');transition:width 1s;" data-w="'+pct+'%"></div></div>'+
-      '<div class="time-bar-num" style="color:'+col+';">'+s.time+'秒</div>';
-    div.appendChild(row);
-  });
-
-  var slowest=steps.reduce(function(a,b){return a.time>b.time?a:b;});
-  if(slowest.time>10){
-    var note=document.createElement('div');
-    note.style.cssText='font-size:11px;color:var(--muted);margin-top:6px;font-weight:600;';
-    note.textContent='最慢的步驟：「'+slowest.name+'」（'+slowest.time+'秒），可以多加練習。';
-    div.appendChild(note);
-  }
-
-  over.appendChild(div);
-  setTimeout(function(){
-    div.querySelectorAll('.time-bar-fill').forEach(function(b){b.style.width=b.dataset.w;});
-  },300);
-
-  // Also show replay button
-  var rb=document.createElement('button');
-  rb.className='btn bg2'; rb.style.marginTop='8px'; rb.style.marginRight='8px';
-  rb.textContent='🔄 重播這題步驟';
-  rb.onclick=function(){showReplay(practiceLog[practiceLog.length-1]);};
-  over.appendChild(rb);
-
-  // Show error analysis if has errors
-  if(Object.keys(stepErrors).some(function(k){return stepErrors[k]>0;})){
-    var eb=document.createElement('button');
-    eb.className='btn bg2'; eb.style.marginTop='8px';
-    eb.textContent='📊 查看錯誤分析';
-    eb.onclick=showErrorAnalysis;
-    over.appendChild(eb);
-  }
+// ── Step timing / recording ────────────────────────────
+function recordStep(stepName, wrong, ans, hint) {
+  if (!stepErrors[stepName]) stepErrors[stepName] = 0;
+  stepErrors[stepName] += wrong;
 }
 
-// ── v3: Replay ────────────────────────────────────────
-function showReplay(qLog){
-  if(!qLog) return;
-  var existing=document.getElementById('replayPanel');
-  if(existing){ existing.remove(); return; }
-
-  var panel=document.createElement('div');
-  panel.className='replay-panel'; panel.id='replayPanel';
-
-  var title=document.createElement('div'); title.className='replay-title';
-  title.textContent='🔄 重播：目標 '+qLog.target+(qLog.found?' — 找到了！':' — 找不到');
-  panel.appendChild(title);
-
-  qLog.steps.forEach(function(s,i){
-    var sc=s.wrong===0?'rs-ok':s.wrong<2?'rs-partial':'rs-skip';
-    var card=document.createElement('div');
-    card.className='replay-step '+sc;
-    var pts=s.wrong===0?20:s.wrong===1?10:0;
-    card.innerHTML=
-      '<div class="replay-step-top">'+
-        '<span class="replay-step-num">第'+(i+1)+'步：'+s.name+'</span>'+
-        '<span class="replay-step-time">⏱️ '+s.time+'秒</span>'+
-        '<span class="tag '+(s.wrong===0?'tag-ok':s.wrong<2?'tag-err':'tag-skip')+'">'+
-          (s.wrong===0?'完美':'錯'+s.wrong+'次')+' '+pts+'/20</span>'+
-      '</div>'+
-      '<div class="replay-step-ans">你的答案：<b>'+s.ans+'</b></div>'+
-      '<div class="replay-step-hint" id="rsh'+i+'">'+s.hint+'</div>';
-    card.onclick=function(){
-      var h=document.getElementById('rsh'+i);
-      if(h) h.classList.toggle('open');
-    };
-    panel.appendChild(card);
-  });
-
-  var note=document.createElement('div');
-  note.style.cssText='font-size:11px;color:var(--muted);margin-top:8px;font-weight:600;';
-  note.textContent='點每個步驟可展開/收起學習說明。';
-  panel.appendChild(note);
-
-  var gameArea=document.getElementById('gameArea');
-  var resOv=document.getElementById('resOv');
-  if(resOv&&resOv.nextSibling){
-    gameArea.insertBefore(panel,resOv.nextSibling);
-  } else {
-    gameArea.appendChild(panel);
-  }
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
+function showTeachHint(text) {
+  let existing = $('teachHint');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = 'teach-hint show';
+  div.id = 'teachHint';
+  div.innerHTML = '💡 ' + text;
+  $('fiWrap').appendChild(div);
 }
 
-// ── v3: Error analysis ────────────────────────────────
-function showErrorAnalysis(){
-  var existing=document.getElementById('errPanel');
-  if(existing){ existing.remove(); return; }
-
-  var total=Object.values(stepErrors).reduce(function(a,b){return a+b;},0);
-  if(total===0) return;
-
-  var panel=document.createElement('div');
-  panel.className='err-panel'; panel.id='errPanel';
-
-  var title=document.createElement('div'); title.className='err-panel-title';
-  title.textContent='📊 錯誤分析（本次練習累計）';
-  panel.appendChild(title);
-
-  var maxErr=Math.max.apply(null,Object.values(stepErrors));
-  var stepNames=['確認L/R','計算mid','判斷方向','選邊界','填索引'];
-  stepNames.forEach(function(name){
-    var cnt=stepErrors[name]||0;
-    var pct=maxErr>0?Math.round((cnt/maxErr)*100):0;
-    var row=document.createElement('div'); row.className='err-bar-row';
-    row.innerHTML=
-      '<div class="err-bar-name">'+name+'</div>'+
-      '<div class="err-bar-bg"><div class="err-bar-fill" style="width:0%;" data-w="'+pct+'%"></div></div>'+
-      '<div class="err-bar-num">'+cnt+'次</div>';
-    panel.appendChild(row);
-  });
-
-  // Find weakest step
-  var weakest=Object.keys(stepErrors).reduce(function(a,b){return stepErrors[a]>stepErrors[b]?a:b;});
-  var weakestCount=stepErrors[weakest]||0;
-  if(weakestCount>0){
-    var hints={
-      '確認L/R':'練習從陣列上找到 Left 和 Right 指標的位置，注意從索引 0 開始數。',
-      '計算mid':'多練習 ⌊(Left+Right)/2⌋ 的計算，可以用紙筆練習幾次。',
-      '判斷方向':'記住：arr[mid] > 目標 → 往左找；arr[mid] < 目標 → 往右找。',
-      '選邊界':'往左找要改 Right，往右找要改 Left。方向和邊界是相反的！',
-      '填索引':'往左找：Right = mid - 1；往右找：Left = mid + 1。記住加減1。'
-    };
-    var insight=document.createElement('div'); insight.className='err-insight';
-    insight.innerHTML='<b>最需要加強：</b>「'+weakest+'」（共錯 '+weakestCount+' 次）<br>'+hints[weakest];
-    panel.appendChild(insight);
-  }
-
-  var gameArea=document.getElementById('gameArea');
-  gameArea.appendChild(panel);
-  setTimeout(function(){
-    panel.querySelectorAll('.err-bar-fill').forEach(function(b){b.style.width=b.dataset.w;});
-  },300);
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
+function removeTeachHint() {
+  const el = $('teachHint');
+  if (el) el.remove();
 }
 
-// ═══════════════════════════════════════════════════
+// ── Direction key handler ─────────────────────────────
+function onDirKey(e) {
+  if (gameOver) return;
+  const k = e.key;
+  if (k === '1') cfmFiS2('left');
+  else if (k === '2') cfmFiS2('found');
+  else if (k === '3') cfmFiS2('right');
+}
 
-function getFiWrap(){
-  var bc=document.getElementById('cbtns');
-  var w=document.getElementById('fiWrap');
-  if(!w){
-    w=document.createElement('div');
-    w.className='fiw';
-    w.id='fiWrap';
-    bc.appendChild(w);
-  }
+// ── Fill-in wrappers ───────────────────────────────────
+function getFiWrap() {
+  const bc = $('cbtns');
+  let w = $('fiWrap');
+  if (!w) { w = document.createElement('div'); w.className = 'fiw'; w.id = 'fiWrap'; bc.appendChild(w); }
   return w;
 }
 
-function addFiStep(w,num,text,active){
-  var d=document.createElement('div');
-  d.className='fistep'+(active?' active':'');
-  d.id='fiStep'+num;
-  d.textContent=text;
+function addFiStep(w, num, text, active) {
+  const d = document.createElement('div');
+  d.className = 'fistep' + (active ? ' active' : '');
+  d.id = 'fiStep' + num;
+  d.textContent = text;
   w.appendChild(d);
 }
 
-function markFiStepDone(num,summary){
-  var el=document.getElementById('fiStep'+num);
-  if(el){
-    el.classList.remove('active');
-    el.innerHTML=summary+' <span class="chk-ok2">✓</span>';
-  }
+function markFiStepDone(num, summary) {
+  const el = $('fiStep' + num);
+  if (el) { el.classList.remove('active'); el.innerHTML = summary + ' <span class="chk-ok2">✓</span>'; }
 }
 
-function addFiDivider(w){
-  var hr=document.createElement('hr');
-  hr.className='fi-div';
+function addFiDivider(w) {
+  const hr = document.createElement('hr');
+  hr.className = 'fi-div';
   w.appendChild(hr);
 }
 
-// Live preview: update array display as student types
-function updatePreview(){
-  var inpL=document.getElementById('fi0inpL');
-  var inpR=document.getElementById('fi0inpR');
-  var inpM=document.getElementById('fi1inp');
-  previewL=inpL?parseInt(inpL.value):-1;
-  previewR=inpR?parseInt(inpR.value):-1;
-  previewM=inpM?parseInt(inpM.value):-1;
+function mkBtn(cls, html, fn) { const b = document.createElement('button'); b.className = cls; b.innerHTML = html; b.onclick = fn; return b; }
+function showFb(ok, txt) { const fb = $('fb'); fb.className = 'fb ' + (ok ? 'correct' : 'wrong') + ' show'; fb.innerHTML = (ok ? '✅ ' : '❌ ') + '<div>' + txt + '</div>'; }
+
+// ── Step progress bar ─────────────────────────────────
+const STEP_NAMES = ['確認L/R', '計算mid', '判斷方向', '選邊界', '填索引'];
+
+function renderStepProgress(current) {
+  let existing = $('spRow');
+  if (existing) existing.remove();
+  const row = document.createElement('div'); row.className = 'sp-row'; row.id = 'spRow';
+  for (let i = 0; i < STEP_NAMES.length; i++) {
+    if (i > 0) { const a = document.createElement('span'); a.className = 'sp-arrow'; a.textContent = '→'; row.appendChild(a); }
+    const item = document.createElement('span'); item.className = 'sp-item';
+    if (i < current) item.className += ' sp-done';
+    else if (i === current) item.className += ' sp-current';
+    item.textContent = (i + 1) + '. ' + STEP_NAMES[i];
+    if (i < current) item.textContent += ' ✓';
+    row.appendChild(item);
+  }
+  const wrap = $('fiWrap') || $('cbtns');
+  if (wrap) wrap.parentNode.insertBefore(row, wrap);
+}
+
+// ── Live preview ───────────────────────────────────────
+function updatePreview() {
+  const inpL = $('fi0inpL'), inpR = $('fi0inpR'), inpM = $('fi1inp');
+  previewL = inpL ? parseInt(inpL.value) : -1;
+  previewR = inpR ? parseInt(inpR.value) : -1;
+  previewM = inpM ? parseInt(inpM.value) : -1;
   renderAllPreview();
 }
 
-function renderAllPreview(){
-  // Re-render just the array cells with preview markers
-  var track=document.getElementById('arrTrack');
-  if(!track)return;
-  var cells=track.querySelectorAll('.cw');
-  cells.forEach(function(cw,i){
-    var tl=cw.querySelector('.cl');
-    var cell=cw.querySelector('.cell');
-    if(!tl||!cell)return;
-
-    var ptl=[];
-    // Restore confirmed ▼L ▼R labels
-    if(!fiHideLR&&!gameOver){
-      if(i===bL) ptl.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
-      if(i===bR) ptl.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
+function renderAllPreview() {
+  const track = $('arrTrack');
+  if (!track) return;
+  track.querySelectorAll('.cw').forEach(function (cw, i) {
+    const tl = cw.querySelector('.cl'), cell = cw.querySelector('.cell');
+    if (!tl || !cell) return;
+    const ptl = [];
+    if (!fiHideLR && !gameOver) {
+      if (i === bL) ptl.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
+      if (i === bR) ptl.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
     }
-    // Remove preview classes
-    cell.classList.remove('preview-l','preview-r','preview-m');
-    // Add preview highlight if valid index matches
-    if(!gameOver){
-      if(!isNaN(previewL)&&previewL>=0&&previewL<arr.length&&i===previewL){
+    cell.classList.remove('preview-l', 'preview-r', 'preview-m');
+    if (!gameOver) {
+      if (!isNaN(previewL) && previewL >= 0 && previewL < arr.length && i === previewL) {
         cell.classList.add('preview-l');
         ptl.push('<span style="color:var(--lc);font-size:9px;opacity:.6">▼L?</span>');
       }
-      if(!isNaN(previewR)&&previewR>=0&&previewR<arr.length&&i===previewR){
+      if (!isNaN(previewR) && previewR >= 0 && previewR < arr.length && i === previewR) {
         cell.classList.add('preview-r');
         ptl.push('<span style="color:var(--rc);font-size:9px;opacity:.6">▼R?</span>');
       }
-      if(!isNaN(previewM)&&previewM>=0&&previewM<arr.length&&i===previewM){
+      if (!isNaN(previewM) && previewM >= 0 && previewM < arr.length && i === previewM) {
         cell.classList.add('preview-m');
+        ptl.push('<span style="color:var(--mc);font-size:9px;opacity:.6">▼M?</span>');
       }
     }
-    tl.innerHTML=ptl.join(' ');
+    tl.innerHTML = ptl.join(' ');
   });
 }
 
-
-// ── v3: step timing helpers ────────────────────────────
-function startStepTimer(){
-  curStepStart=Date.now();
-}
-
-function endStepTimer(stepName){
-  var sec=Math.round((Date.now()-curStepStart)/1000);
-  stepTimes[stepName]=sec;
-  return sec;
-}
-
-function recordStep(stepName,wrong,ans,hint){
-  var sec=stepTimes[stepName]||0;
-  curQSteps.push({name:stepName,time:sec,wrong:wrong,ans:ans,hint:hint});
-  // Accumulate errors
-  if(!stepErrors[stepName]) stepErrors[stepName]=0;
-  stepErrors[stepName]+=wrong;
-}
-
-function showTeachHint(text){
-  var existing=document.getElementById('teachHint');
-  if(existing) existing.remove();
-  var div=document.createElement('div');
-  div.className='teach-hint show';
-  div.id='teachHint';
-  div.innerHTML='💡 '+text;
-  document.getElementById('fiWrap').appendChild(div);
-}
-
-function removeTeachHint(){
-  var el=document.getElementById('teachHint');
-  if(el) el.remove();
-}
+// ═══════════════════════════════════════════════════════
+// 五步填空
+// ═══════════════════════════════════════════════════════
 
 // Step 0: confirm Left and Right
-function renderFiS0(){
-  fiHideLR=true; fiHideM=true;
+function renderFiS0() {
+  stepWrong = 0;
+  fiHideLR = true; fiHideM = true;
   renderAll();
-  startStepTimer(); removeTeachHint();
-  var w=getFiWrap();
-  w.innerHTML='';
-  addFiStep(w,0,'第一步：確認目前的 Left 和 Right 索引',true);
-  var info=document.createElement('div'); info.className='fiinfo';
-  info.textContent='看陣列上的 ▼L 和 ▼R 指標，填入它們的索引值：';
+  removeTeachHint();
+  renderStepProgress(0);
+  const w = getFiWrap();
+  w.innerHTML = '';
+  addFiStep(w, 0, '第一步：確認目前的 Left 和 Right 索引', true);
+  const info = document.createElement('div'); info.className = 'fiinfo';
+  info.innerHTML = '觀察陣列上方有沒有 <b style="color:var(--lc)">▼L</b> 和 <b style="color:var(--rc)">▼R</b> 標記？找到它們所在的格子，填入格子的索引（從 0 開始數）：';
   w.appendChild(info);
 
-  // Left input row
-  var row1=document.createElement('div'); row1.className='irow2';
-  var lbl1=document.createElement('span'); lbl1.className='ilbl2';
-  lbl1.innerHTML='Left = ';
-  var inp1=document.createElement('input');
-  inp1.className='iinp2'; inp1.id='fi0inpL'; inp1.type='number'; inp1.placeholder='?';
-  inp1.setAttribute('min',0); inp1.setAttribute('max',arr.length-1);
-  inp1.addEventListener('input',updatePreview);
-  row1.appendChild(lbl1); row1.appendChild(inp1);
+  const row1 = document.createElement('div'); row1.className = 'irow2';
+  const lbl1 = document.createElement('span'); lbl1.className = 'ilbl2';
+  lbl1.innerHTML = 'Left = ';
+  const inp1 = document.createElement('input');
+  inp1.className = 'iinp2'; inp1.id = 'fi0inpL'; inp1.type = 'number'; inp1.placeholder = '?';
+  inp1.setAttribute('min', 0); inp1.setAttribute('max', arr.length - 1);
+  inp1.addEventListener('input', updatePreview);
+  const hint1 = document.createElement('span'); hint1.className = 'ihint2'; hint1.textContent = '(按 Enter 確認)';
+  row1.appendChild(lbl1); row1.appendChild(inp1); row1.appendChild(hint1);
   w.appendChild(row1);
 
-  // Right input row
-  var row2=document.createElement('div'); row2.className='irow2';
-  var lbl2=document.createElement('span'); lbl2.className='ilbl2';
-  lbl2.innerHTML='Right = ';
-  var inp2=document.createElement('input');
-  inp2.className='iinp2'; inp2.id='fi0inpR'; inp2.type='number'; inp2.placeholder='?';
-  inp2.setAttribute('min',0); inp2.setAttribute('max',arr.length-1);
-  inp2.addEventListener('input',updatePreview);
-  inp2.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS0();});
-  row2.appendChild(lbl2); row2.appendChild(inp2);
+  const row2 = document.createElement('div'); row2.className = 'irow2';
+  const lbl2 = document.createElement('span'); lbl2.className = 'ilbl2';
+  lbl2.innerHTML = 'Right = ';
+  const inp2 = document.createElement('input');
+  inp2.className = 'iinp2'; inp2.id = 'fi0inpR'; inp2.type = 'number'; inp2.placeholder = '?';
+  inp2.setAttribute('min', 0); inp2.setAttribute('max', arr.length - 1);
+  inp2.addEventListener('input', updatePreview);
+  inp2.addEventListener('keydown', function (e) { if (e.key === 'Enter') cfmFiS0(); });
+  const hint2 = document.createElement('span'); hint2.className = 'ihint2'; hint2.textContent = '(按 Enter 確認)';
+  row2.appendChild(lbl2); row2.appendChild(inp2); row2.appendChild(hint2);
   w.appendChild(row2);
 
-  var btn=document.createElement('button');
-  btn.className='cfbtn2'; btn.textContent='確認 ✓';
-  btn.addEventListener('click',cfmFiS0);
-  w.appendChild(btn);
-  setTimeout(function(){var i=document.getElementById('fi0inpL');if(i)i.focus();},100);
+  const btns = document.createElement('div'); btns.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:4px;';
+  const btn = document.createElement('button');
+  btn.className = 'cfbtn2'; btn.textContent = '確認 ✓';
+  btn.addEventListener('click', cfmFiS0);
+  btns.appendChild(btn);
+  w.appendChild(btns);
+  setTimeout(function () { const i = $('fi0inpL'); if (i) i.focus(); }, 100);
 }
 
-function cfmFiS0(){
-  var inpL=document.getElementById('fi0inpL');
-  var inpR=document.getElementById('fi0inpR');
-  var valL=parseInt(inpL?inpL.value:'');
-  var valR=parseInt(inpR?inpR.value:'');
+async function cfmFiS0() {
+  const inpL = $('fi0inpL'), inpR = $('fi0inpR');
+  const valL = parseInt(inpL ? inpL.value : '');
+  const valR = parseInt(inpR ? inpR.value : '');
 
-  if(isNaN(valL)||isNaN(valR)){
-    showFb(false,'❌ 請填入 Left 和 Right 的索引！');
+  if (isNaN(valL) || isNaN(valR)) {
+    showFb(false, '❌ 請填入 Left 和 Right 的索引！');
     return;
   }
 
-  var errL = valL !== bL;
-  var errR = valR !== bR;
+  const errL = valL !== bL, errR = valR !== bR;
 
-  if(!errL && !errR){
-    // Both correct
+  if (!errL && !errR) {
     correctAns++;
-    fiStepScores.push(Math.max(0,4-stepWrong));
-    if(inpL)inpL.classList.add('ok2');
-    if(inpR)inpR.classList.add('ok2');
-    endStepTimer('確認L/R'); recordStep('確認L/R',stepWrong,'Left='+bL+',Right='+bR,'Left 是最左邊的索引，Right 是最右邊的索引，搜尋就在這個範圍內進行。');
-    showFb(true,'✅ 正確！Left = '+bL+'，Right = '+bR+'。');
-    addLog('確認 Left='+bL+', Right='+bR+'（正確）','sl');
-    previewL=-1;previewR=-1;
-    fiHideLR=false; renderAll(); // reveal L and R markers
-    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS1();},800);
+    fiStepScores.push(Math.max(0, C.MAX_SCORE_PER_STEP - stepWrong));
+    if (inpL) inpL.classList.add('ok2');
+    if (inpR) inpR.classList.add('ok2');
+    recordStep('確認L/R', stepWrong, 'Left=' + bL + ',Right=' + bR, 'Left 是最左邊的索引，Right 是最右邊的索引，搜尋就在這個範圍內進行。');
+    showFb(true, '✅ 正確！Left = ' + bL + '，Right = ' + bR + '。');
+    addLog('確認 Left=' + bL + ', Right=' + bR + '（正確）', 'sl');
+    previewL = -1; previewR = -1;
+    fiHideLR = false; renderAll();
+    await delay(C.FEEDBACK_DELAY);
+    $('fb').className = 'fb';
+    renderFiS1();
   } else {
     wrongAns++; stepWrong++;
-    updateWPills(stepWrong);
-    var msg='❌ ';
-    if(errL && errR) msg+='Left 和 Right 都填錯了！Left 應該是 '+bL+'，Right 應該是 '+bR+'。';
-    else if(errL) msg+='Left 填錯了！看 ▼L 指標在哪個格子，那個格子的索引就是 Left = '+bL+'。';
-    else msg+='Right 填錯了！看 ▼R 指標在哪個格子，那個格子的索引就是 Right = '+bR+'。';
-    if(errL){if(inpL)inpL.classList.add('err2');}
-    if(errR){if(inpR)inpR.classList.add('err2');}
-    showFb(false,msg);
-    addLog('答錯（Left/Right確認）','wl');
-    if(stepWrong>=qMaxWrong){
-      setTimeout(function(){
-        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
-        addLog('答錯上限，繼續','wl');
-        fiHideLR=false;fiHideM=false; renderAll();
-        document.getElementById('fb').className='fb';
-        renderFiS1();
-      },1000);
+    let msg = '❌ ';
+    if (errL && errR) msg += 'Left 和 Right 都填錯了！Left 應該是 ' + bL + '，Right 應該是 ' + bR + '。';
+    else if (errL) msg += 'Left 填錯了！看 ▼L 指標在哪個格子，那個格子的索引就是 Left = ' + bL + '。';
+    else msg += 'Right 填錯了！看 ▼R 指標在哪個格子，那個格子的索引就是 Right = ' + bR + '。';
+    if (errL && inpL) inpL.classList.add('err2');
+    if (errR && inpR) inpR.classList.add('err2');
+    showFb(false, msg);
+    addLog('答錯（Left/Right確認）', 'wl');
+    if (stepWrong >= C.MAX_WRONG_PER_STEP) {
+      await delay(C.SKIP_DELAY);
+      skippedSteps++; fiStepScores.push(0);
+      addLog('答錯上限，繼續', 'wl');
+      fiHideLR = false; fiHideM = false; renderAll();
+      $('fb').className = 'fb';
+      renderFiS1();
     } else {
-      setTimeout(function(){
-        if(inpL){inpL.classList.remove('err2');inpL.value='';}
-        if(inpR){inpR.classList.remove('err2');inpR.value='';}
-        document.getElementById('fb').className='fb';
-      },1400);
+      await delay(C.RETRY_DELAY);
+      if (inpL) { inpL.classList.remove('err2'); inpL.value = ''; }
+      if (inpR) { inpR.classList.remove('err2'); inpR.value = ''; }
+      $('fb').className = 'fb';
     }
   }
 }
 
 // Step 1: fill mid
-function renderFiS1(){
-  fiHideM=true;
-  renderAll();
-  startStepTimer(); removeTeachHint();
-  // Hide mid until student fills it
-  fiHideM=true;
-  renderAll();
-  var w=getFiWrap();
-  markFiStepDone(0,'第一步：Left = '+bL+'，Right = '+bR);
+function renderFiS1() {
+  stepWrong = 0;
+  fiHideM = true; renderAll();
+  removeTeachHint();
+  renderStepProgress(1);
+  const w = getFiWrap();
+  markFiStepDone(0, '第一步：Left = ' + bL + '，Right = ' + bR);
   addFiDivider(w);
-  addFiStep(w,1,'第二步：計算 mid 的索引',true);
-  var info=document.createElement('div');
-  info.className='fiinfo';
-  info.innerHTML='mid = ⌊( Left + Right ) / 2⌋ = ⌊( <b style="color:var(--lc);">'+bL+'</b> + <b style="color:var(--rc);">'+bR+'</b> ) / 2⌋ = ?';
+  addFiStep(w, 1, '第二步：計算 mid 的索引', true);
+  const info = document.createElement('div');
+  info.className = 'fiinfo';
+  info.innerHTML = 'mid = ⌊( Left + Right ) / 2⌋ = ⌊( <b style="color:var(--lc);">' + bL + '</b> + <b style="color:var(--rc);">' + bR + '</b> ) / 2⌋ = ⌊' + (bL + bR) + ' / 2⌋ = ?';
   w.appendChild(info);
-  var irow=document.createElement('div'); irow.className='irow2';
-  var lbl=document.createElement('span'); lbl.className='ilbl2'; lbl.textContent='mid = ';
-  var inp=document.createElement('input');
-  inp.className='iinp2'; inp.id='fi1inp'; inp.type='number'; inp.placeholder='?';
-  inp.setAttribute('min',bL); inp.setAttribute('max',bR);
-  inp.addEventListener('input',updatePreview);
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS1();});
-  var hint=document.createElement('span'); hint.className='ihint2'; hint.textContent='（填索引數字）';
+  const irow = document.createElement('div'); irow.className = 'irow2';
+  const lbl = document.createElement('span'); lbl.className = 'ilbl2'; lbl.textContent = 'mid = ';
+  const inp = document.createElement('input');
+  inp.className = 'iinp2'; inp.id = 'fi1inp'; inp.type = 'number'; inp.placeholder = '?';
+  inp.setAttribute('min', bL); inp.setAttribute('max', bR);
+  inp.addEventListener('input', updatePreview);
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') cfmFiS1(); });
+  const hint = document.createElement('span'); hint.className = 'ihint2'; hint.textContent = '(按 Enter 確認)';
   irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
   w.appendChild(irow);
-  var btn=document.createElement('button');
-  btn.className='cfbtn2'; btn.textContent='確認 ✓';
-  btn.addEventListener('click',cfmFiS1);
-  w.appendChild(btn);
-  setTimeout(function(){var i=document.getElementById('fi1inp');if(i)i.focus();},100);
+  const btns = document.createElement('div'); btns.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:4px;';
+  const btn = document.createElement('button');
+  btn.className = 'cfbtn2'; btn.textContent = '確認 ✓';
+  btn.addEventListener('click', cfmFiS1);
+  btns.appendChild(btn);
+  const correctM = Math.floor((bL + bR) / 2);
+  w.appendChild(btns);
+  setTimeout(function () { const i = $('fi1inp'); if (i) i.focus(); }, 100);
 }
 
-function cfmFiS1(){
-  var inp=document.getElementById('fi1inp');
-  var val=parseInt(inp?inp.value:'');
-  var correct=Math.floor((bL+bR)/2);
-  stepCount++; document.getElementById('stepNum').textContent=stepCount;
-  if(isNaN(val)){
-    showFb(false,'❌ 請填入數字！');
-    stepCount--; document.getElementById('stepNum').textContent=stepCount;
+async function cfmFiS1() {
+  const inp = $('fi1inp');
+  const val = parseInt(inp ? inp.value : '');
+  const correct = Math.floor((bL + bR) / 2);
+
+  if (isNaN(val)) {
+    showFb(false, '❌ 請填入數字！');
     return;
   }
-  if(val===correct){
+  if (val === correct) {
+    stepCount++; $('stepNum').textContent = stepCount;
     correctAns++;
-    fiStepScores.push(Math.max(0,4-stepWrong));
-    fiMid=val;
-    if(inp)inp.classList.add('ok2');
-    endStepTimer('計算mid'); recordStep('計算mid',stepWrong,'mid='+correct,'mid = ⌊(Left+Right)/2⌋，每次都取範圍的正中間，這樣每步才能把範圍砍掉一半！');
-    showFb(true,'✅ 正確！mid = '+correct+'，arr['+correct+'] = '+arr[correct]);
-    addLog('第'+stepCount+'步：mid='+correct,'sl');
-    previewM=-1;
-    fiHideM=false; renderAll();
-    showTeachHint('mid = ⌊('+bL+'+'+bR+')/2⌋ = <b>'+correct+'</b>，arr['+correct+'] = <b>'+arr[correct]+'</b>');
-    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS2();},800);
+    fiStepScores.push(Math.max(0, C.MAX_SCORE_PER_STEP - stepWrong));
+    fiMid = val;
+    if (inp) inp.classList.add('ok2');
+    recordStep('計算mid', stepWrong, 'mid=' + correct, 'mid = ⌊(Left+Right)/2⌋，每次都取範圍的正中間，這樣每步才能把範圍砍掉一半！');
+    showFb(true, '✅ 正確！mid = ' + correct + '，arr[' + correct + '] = ' + arr[correct]);
+    addLog('第' + stepCount + '步：mid=' + correct, 'sl');
+    previewM = -1;
+    fiHideM = false; renderAll();
+    showTeachHint('mid = ⌊(' + bL + '+' + bR + ')/2⌋ = <b>' + correct + '</b>，arr[' + correct + '] = <b>' + arr[correct] + '</b>');
+    await delay(C.FEEDBACK_DELAY);
+    $('fb').className = 'fb';
+    renderFiS2();
   } else {
     wrongAns++; stepWrong++;
-    if(inp)inp.classList.add('err2');
-    updateWPills(stepWrong);
-    var msg='❌ mid 算錯！⌊('+bL+'+'+bR+')/2⌋ = ⌊'+(bL+bR)+'/2⌋ = '+correct+'，不是 '+val;
-    showFb(false,msg);
-    addLog('答錯（mid）：填了'+val,'wl');
-    if(stepWrong>=qMaxWrong){
-      setTimeout(function(){
-        skippedSteps++; fiMid=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
-        addLog('答錯上限，繼續','wl');
-        fiHideLR=false;fiHideM=false; renderAll();
-        document.getElementById('fb').className='fb';
-        renderFiS2();
-      },1000);
+    if (inp) inp.classList.add('err2');
+    const msg = '❌ mid 算錯！⌊(' + bL + '+' + bR + ')/2⌋ = ⌊' + (bL + bR) + '/2⌋ = ' + correct + '，不是 ' + val + '。<br>📌 先把 Left+Right 加起來 ÷2，再取整數（無條件捨去）。';
+    showFb(false, msg);
+    addLog('答錯（mid）：填了' + val, 'wl');
+    if (stepWrong >= C.MAX_WRONG_PER_STEP) {
+      stepCount++; $('stepNum').textContent = stepCount;
+      await delay(C.SKIP_DELAY);
+      skippedSteps++; fiMid = correct; fiStepScores.push(0);
+      addLog('答錯上限，繼續', 'wl');
+      fiHideLR = false; fiHideM = false; renderAll();
+      $('fb').className = 'fb';
+      renderFiS2();
     } else {
-      stepCount--; document.getElementById('stepNum').textContent=stepCount;
-      setTimeout(function(){
-        if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}
-        document.getElementById('fb').className='fb';
-      },1400);
+      await delay(C.RETRY_DELAY);
+      if (inp) { inp.classList.remove('err2'); inp.value = ''; inp.focus(); }
+      $('fb').className = 'fb';
     }
   }
 }
 
 // Step 2: direction
-function renderFiS2(){
-  startStepTimer(); removeTeachHint();
-  var w=getFiWrap();
-  markFiStepDone(1,'第二步：mid = '+fiMid+'，arr['+fiMid+'] = '+arr[fiMid]);
+function renderFiS2() {
+  stepWrong = 0;
+  removeTeachHint();
+  renderStepProgress(2);
+  const w = getFiWrap();
+  markFiStepDone(1, '第二步：mid = ' + fiMid + '，arr[' + fiMid + '] = ' + arr[fiMid]);
   addFiDivider(w);
-  addFiStep(w,2,'第三步：判斷方向',true);
-  var info=document.createElement('div'); info.className='fiinfo';
-  info.innerHTML='arr['+fiMid+'] = <span class="mv">'+arr[fiMid]+'</span>　目標 = <span class="mv">'+target+'</span>';
+  addFiStep(w, 2, '第三步：判斷方向', true);
+  const arrMv = arr[fiMid];
+  const info = document.createElement('div'); info.className = 'fiinfo';
+  info.innerHTML = 'arr[' + fiMid + '] = <span class="mv">' + arrMv + '</span>　目標 = <span class="mv">' + target + '</span>';
   w.appendChild(info);
-  var drow=document.createElement('div'); drow.className='drow2';
-  var bl=document.createElement('button'); bl.className='db2 db2-l';
-  bl.innerHTML='⬅️ 往左找<br><small>arr[mid] &gt; 目標</small>';
-  bl.addEventListener('click',function(){cfmFiS2('left');});
-  var bf=document.createElement('button'); bf.className='db2 db2-f';
-  bf.innerHTML='✅ 找到了<br><small>arr[mid] = 目標</small>';
-  bf.addEventListener('click',function(){cfmFiS2('found');});
-  var br=document.createElement('button'); br.className='db2 db2-r';
-  br.innerHTML='➡️ 往右找<br><small>arr[mid] &lt; 目標</small>';
-  br.addEventListener('click',function(){cfmFiS2('right');});
+  const drow = document.createElement('div'); drow.className = 'drow2';
+  const bl = document.createElement('button'); bl.className = 'db2 db2-l';
+  bl.innerHTML = '⬅️ [1] 往左找<br><small>arr[mid] &gt; 目標</small>';
+  bl.addEventListener('click', function () { cfmFiS2('left'); });
+  const bf = document.createElement('button'); bf.className = 'db2 db2-f';
+  bf.innerHTML = '✅ [2] 找到了<br><small>arr[mid] = 目標</small>';
+  bf.addEventListener('click', function () { cfmFiS2('found'); });
+  const br = document.createElement('button'); br.className = 'db2 db2-r';
+  br.innerHTML = '➡️ [3] 往右找<br><small>arr[mid] &lt; 目標</small>';
+  br.addEventListener('click', function () { cfmFiS2('right'); });
   drow.appendChild(bl); drow.appendChild(bf); drow.appendChild(br);
+  document.addEventListener('keydown', onDirKey);
   w.appendChild(drow);
 }
 
-function cfmFiS2(dir){
-  var midV=arr[fiMid];
-  var correct=midV===target?'found':(target<midV?'left':'right');
-  stepCount++; document.getElementById('stepNum').textContent=stepCount;
-  var drow=document.getElementById('fiWrap').querySelector('.drow2');
-  if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
-  if(dir===correct){
-    correctAns++; fiDir=dir;
-    fiStepScores.push(Math.max(0,4-stepWrong));
-    if(dir==='found'){
-      showFb(true,'✅ 正確！找到了！');
-      addLog('第'+stepCount+'步：找到目標','cl');
-      setTimeout(function(){endGame(true,fiMid);},700);
+async function cfmFiS2(dir) {
+  document.removeEventListener('keydown', onDirKey);
+  const midV = arr[fiMid];
+  const correct = midV === target ? 'found' : (target < midV ? 'left' : 'right');
+  const drow = $('fiWrap').querySelector('.drow2');
+  if (drow) drow.querySelectorAll('.db2').forEach(function (b) { b.disabled = true; });
+  if (dir === correct) {
+    stepCount++; $('stepNum').textContent = stepCount;
+    correctAns++; fiDir = dir;
+    fiStepScores.push(Math.max(0, C.MAX_SCORE_PER_STEP - stepWrong));
+    if (dir === 'found') {
+      showFb(true, '✅ 正確！找到了！');
+      addLog('第' + stepCount + '步：找到目標', 'cl');
+      await delay(1500);
+      endGame(true, fiMid);
       return;
     }
-    var _dirHint=dir==='left'?'arr[mid] > 目標，所以目標在左半邊，把 <b>Right 移到 mid-1</b>，縮小右界。':'arr[mid] < 目標，所以目標在右半邊，把 <b>Left 移到 mid+1</b>，縮小左界。';
-    var msg=dir==='left'?'✅ 正確！arr[mid] > 目標，往左找。':'✅ 正確！arr[mid] < 目標，往右找。';
-    endStepTimer('判斷方向'); recordStep('判斷方向',stepWrong,dir==='left'?'往左':'往右',_dirHint);
-    showFb(true,msg);
-    addLog('第'+stepCount+'步：方向='+(dir==='left'?'左':'右'),'sl');
-    setTimeout(function(){document.getElementById('fb').className='fb'; showTeachHint(_dirHint); setTimeout(function(){renderFiS3();},1000);},800);
+    const _dirHint = dir === 'left' ? 'arr[mid] > 目標，所以目標在左半邊，把 <b>Right 移到 mid-1</b>，縮小右界。' : 'arr[mid] < 目標，所以目標在右半邊，把 <b>Left 移到 mid+1</b>，縮小左界。';
+    const msg = dir === 'left' ? '✅ 正確！arr[mid] > 目標，往左找。' : '✅ 正確！arr[mid] < 目標，往右找。';
+    recordStep('判斷方向', stepWrong, dir === 'left' ? '往左' : '往右', _dirHint);
+    showFb(true, msg);
+    addLog('第' + stepCount + '步：方向=' + (dir === 'left' ? '左' : '右'), 'sl');
+    await delay(C.FEEDBACK_DELAY);
+    $('fb').className = 'fb';
+    showTeachHint(_dirHint);
+    await delay(C.SKIP_DELAY);
+    renderFiS3();
   } else {
     wrongAns++; stepWrong++;
-    updateWPills(stepWrong);
-    var exp='';
-    if(correct==='found') exp='arr['+fiMid+']='+midV+' 等於目標，應選「找到了」！';
-    else if(correct==='left') exp='arr['+fiMid+']='+midV+' > 目標'+target+'，應往左找！';
-    else exp='arr['+fiMid+']='+midV+' < 目標'+target+'，應往右找！';
-    showFb(false,'❌ 方向選錯！'+exp);
-    addLog('答錯（方向）','wl');
-    if(stepWrong>=qMaxWrong){
-      setTimeout(function(){
-        skippedSteps++; fiDir=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
-        addLog('答錯上限，繼續','wl');
-        document.getElementById('fb').className='fb';
-        if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
-        renderFiS3();
-      },1000);
+    let exp = '';
+      if (correct === 'found') exp = 'arr[' + fiMid + ']=' + midV + ' 等於目標，應選「找到了」！';
+      else if (correct === 'left') exp = 'arr[' + fiMid + ']=' + midV + ' > 目標' + target + '，應往左找！<br>📌 口訣：arr[mid] 比目標大 → 往左邊找（因為數字大的在右邊，目標在左半邊）';
+      else exp = 'arr[' + fiMid + ']=' + midV + ' < 目標' + target + '，應往右找！<br>📌 口訣：arr[mid] 比目標小 → 往右邊找（因為數字小的在左邊，目標在右半邊）';
+    showFb(false, '❌ 方向選錯！' + exp);
+    addLog('答錯（方向）', 'wl');
+    if (stepWrong >= C.MAX_WRONG_PER_STEP) {
+      stepCount++; $('stepNum').textContent = stepCount;
+      await delay(C.SKIP_DELAY);
+      skippedSteps++; fiDir = correct; fiStepScores.push(0);
+      addLog('答錯上限，繼續', 'wl');
+      $('fb').className = 'fb';
+      if (drow) drow.querySelectorAll('.db2').forEach(function (b) { b.disabled = true; });
+      renderFiS3();
     } else {
-      stepCount--; document.getElementById('stepNum').textContent=stepCount;
-      if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});
-      setTimeout(function(){document.getElementById('fb').className='fb';},1400);
+      if (drow) drow.querySelectorAll('.db2').forEach(function (b) { b.disabled = false; });
+      await delay(C.RETRY_DELAY);
+      $('fb').className = 'fb';
     }
   }
 }
 
 // Step 3: which boundary
-function renderFiS3(){
-  startStepTimer(); removeTeachHint();
-  var w=getFiWrap();
-  markFiStepDone(2,'第三步：'+(fiDir==='left'?'往左找':'往右找'));
+function renderFiS3() {
+  stepWrong = 0;
+  removeTeachHint();
+  renderStepProgress(3);
+  const w = getFiWrap();
+  markFiStepDone(2, '第三步：' + (fiDir === 'left' ? '往左找' : '往右找'));
   addFiDivider(w);
-  addFiStep(w,3,'第四步：要改哪個邊界？',true);
-  var info=document.createElement('div'); info.className='fiinfo';
-  info.textContent='往'+(fiDir==='left'?'左':'右')+'找，要把哪個邊界移過來？';
+  addFiStep(w, 3, '第四步：要改哪個邊界？', true);
+  const info = document.createElement('div'); info.className = 'fiinfo';
+  info.textContent = '往' + (fiDir === 'left' ? '左' : '右') + '找，要把哪個邊界移過來？';
   w.appendChild(info);
-  var drow=document.createElement('div'); drow.className='drow2';
-  var bl=document.createElement('button'); bl.className='db2 db2-bl';
-  bl.innerHTML='改 Left<br><small>左界往右移</small>';
-  bl.addEventListener('click',function(){cfmFiS3('left');});
-  var br=document.createElement('button'); br.className='db2 db2-br';
-  br.innerHTML='改 Right<br><small>右界往左移</small>';
-  br.addEventListener('click',function(){cfmFiS3('right');});
+  const drow = document.createElement('div'); drow.className = 'drow2';
+  const bl = document.createElement('button'); bl.className = 'db2 db2-bl';
+  bl.innerHTML = '改 Left<br><small>左界往右移</small>';
+  bl.addEventListener('click', function () { cfmFiS3('left'); });
+  const br = document.createElement('button'); br.className = 'db2 db2-br';
+  br.innerHTML = '改 Right<br><small>右界往左移</small>';
+  br.addEventListener('click', function () { cfmFiS3('right'); });
   drow.appendChild(bl); drow.appendChild(br);
   w.appendChild(drow);
 }
 
-function cfmFiS3(bound){
-  var correct=fiDir==='left'?'right':'left';
-  stepCount++; document.getElementById('stepNum').textContent=stepCount;
-  var drows=document.getElementById('fiWrap').querySelectorAll('.drow2');
-  var lastDrow=drows[drows.length-1];
-  if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
-  if(bound===correct){
-    correctAns++; fiBound=bound;
-    fiStepScores.push(Math.max(0,4-stepWrong));
-    var bname=bound==='right'?'Right':'Left';
-    var _bHint=fiDir==='left'?'往左找要縮小右界，Right = mid - 1，這樣下次的搜尋範圍就只剩左半邊。':'往右找要縮小左界，Left = mid + 1，這樣下次的搜尋範圍就只剩右半邊。';
-    endStepTimer('選邊界'); recordStep('選邊界',stepWrong,(fiBound==='right'?'改Right':'改Left'),_bHint);
-    showFb(true,'✅ 正確！往'+(fiDir==='left'?'左':'右')+'找，移動 '+bname+'。');
-    addLog('第'+stepCount+'步：改'+bname,'sl');
-    setTimeout(function(){document.getElementById('fb').className='fb'; showTeachHint(_bHint); setTimeout(function(){renderFiS4();},1000);},800);
+async function cfmFiS3(bound) {
+  const correct = fiDir === 'left' ? 'right' : 'left';
+  const drows = $('fiWrap').querySelectorAll('.drow2');
+  const lastDrow = drows[drows.length - 1];
+  if (lastDrow) lastDrow.querySelectorAll('.db2').forEach(function (b) { b.disabled = true; });
+  if (bound === correct) {
+    stepCount++; $('stepNum').textContent = stepCount;
+    correctAns++; fiBound = bound;
+    fiStepScores.push(Math.max(0, C.MAX_SCORE_PER_STEP - stepWrong));
+    const bname = bound === 'right' ? 'Right' : 'Left';
+    const _bHint = fiDir === 'left' ? '往左找要縮小右界，Right = mid - 1，這樣下次的搜尋範圍就只剩左半邊。' : '往右找要縮小左界，Left = mid + 1，這樣下次的搜尋範圍就只剩右半邊。';
+    recordStep('選邊界', stepWrong, (fiBound === 'right' ? '改Right' : '改Left'), _bHint);
+    showFb(true, '✅ 正確！往' + (fiDir === 'left' ? '左' : '右') + '找，移動 ' + bname + '。');
+    addLog('第' + stepCount + '步：改' + bname, 'sl');
+    await delay(C.FEEDBACK_DELAY);
+    $('fb').className = 'fb';
+    showTeachHint(_bHint);
+    await delay(C.SKIP_DELAY);
+    renderFiS4();
   } else {
     wrongAns++; stepWrong++;
-    updateWPills(stepWrong);
-    var correctName=correct==='right'?'Right':'Left';
-    showFb(false,'❌ 選錯了！應移動 '+correctName+'。');
-    addLog('答錯（邊界選擇）','wl');
-    if(stepWrong>=qMaxWrong){
-      setTimeout(function(){
-        skippedSteps++; fiBound=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
-        addLog('答錯上限，繼續','wl');
-        document.getElementById('fb').className='fb';
-        renderFiS4();
-      },1000);
+    const correctName = correct === 'right' ? 'Right' : 'Left';
+    const boundTip = fiDir === 'left' ? '往左找要縮小右界（Right 往左移）' : '往右找要縮小左界（Left 往右移）';
+    showFb(false, '❌ 選錯了！應移動 ' + correctName + '。<br>📌 提示：' + boundTip + '。');
+    addLog('答錯（邊界選擇）', 'wl');
+    if (stepWrong >= C.MAX_WRONG_PER_STEP) {
+      stepCount++; $('stepNum').textContent = stepCount;
+      await delay(C.SKIP_DELAY);
+      skippedSteps++; fiBound = correct; fiStepScores.push(0);
+      addLog('答錯上限，繼續', 'wl');
+      $('fb').className = 'fb';
+      renderFiS4();
     } else {
-      stepCount--; document.getElementById('stepNum').textContent=stepCount;
-      if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});
-      setTimeout(function(){document.getElementById('fb').className='fb';},1400);
+      if (lastDrow) lastDrow.querySelectorAll('.db2').forEach(function (b) { b.disabled = false; });
+      await delay(C.RETRY_DELAY);
+      $('fb').className = 'fb';
     }
   }
 }
 
 // Step 4: fill new index
-function renderFiS4(){
-  startStepTimer(); removeTeachHint();
-  var w=getFiWrap();
-  markFiStepDone(3,'第四步：改 '+(fiBound==='right'?'Right':'Left'));
+function renderFiS4() {
+  stepWrong = 0;
+  removeTeachHint();
+  renderStepProgress(4);
+  const w = getFiWrap();
+  markFiStepDone(3, '第四步：改 ' + (fiBound === 'right' ? 'Right' : 'Left'));
   addFiDivider(w);
-  addFiStep(w,4,'第五步：填入新的索引值',true);
-  var correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
-  var formula=fiBound==='right'?'mid - 1 = ?':'mid + 1 = ?';
-  var bcolor=fiBound==='right'?'var(--rc)':'var(--lc)';
-  var info=document.createElement('div'); info.className='fiinfo';
-  info.innerHTML=(fiBound==='right'?'Right':'Left')+' = '+formula;
+  addFiStep(w, 4, '第五步：填入新的索引值', true);
+  const correctIdx = fiBound === 'right' ? fiMid - 1 : fiMid + 1;
+  const formula = fiBound === 'right' ? 'mid - 1 = ' + fiMid + ' - 1 = ?' : 'mid + 1 = ' + fiMid + ' + 1 = ?';
+  const bcolor = fiBound === 'right' ? 'var(--rc)' : 'var(--lc)';
+  const info = document.createElement('div'); info.className = 'fiinfo';
+  info.innerHTML = (fiBound === 'right' ? 'Right' : 'Left') + ' = ' + formula;
   w.appendChild(info);
-  var irow=document.createElement('div'); irow.className='irow2';
-  var lbl=document.createElement('span'); lbl.className='ilbl2';
-  lbl.innerHTML='新的 <b style="color:'+bcolor+';">'+(fiBound==='right'?'Right':'Left')+'</b> = ';
-  var inp=document.createElement('input');
-  inp.className='iinp2'; inp.id='fi4inp'; inp.type='number'; inp.placeholder='?';
-  inp.setAttribute('min',0); inp.setAttribute('max',arr.length-1);
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS4();});
-  var hint=document.createElement('span'); hint.className='ihint2';
-  hint.textContent='（'+formula+'）';
+  const irow = document.createElement('div'); irow.className = 'irow2';
+  const lbl = document.createElement('span'); lbl.className = 'ilbl2';
+  lbl.innerHTML = '新的 <b style="color:' + bcolor + ';">' + (fiBound === 'right' ? 'Right' : 'Left') + '</b> = ';
+  const inp = document.createElement('input');
+  inp.className = 'iinp2'; inp.id = 'fi4inp'; inp.type = 'number'; inp.placeholder = '?';
+  inp.setAttribute('min', 0); inp.setAttribute('max', arr.length - 1);
+  inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') cfmFiS4(); });
+  const hint = document.createElement('span'); hint.className = 'ihint2';
+  hint.textContent = '(按 Enter 確認)';
   irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
   w.appendChild(irow);
-  var btn=document.createElement('button');
-  btn.className='cfbtn2'; btn.textContent='確認 ✓';
-  btn.addEventListener('click',cfmFiS4);
-  w.appendChild(btn);
-  setTimeout(function(){var i=document.getElementById('fi4inp');if(i)i.focus();},100);
+  const btns = document.createElement('div'); btns.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:4px;';
+  const btn = document.createElement('button');
+  btn.className = 'cfbtn2'; btn.textContent = '確認 ✓';
+  btn.addEventListener('click', cfmFiS4);
+  btns.appendChild(btn);
+  w.appendChild(btns);
+  setTimeout(function () { const i = $('fi4inp'); if (i) i.focus(); }, 100);
 }
 
-function cfmFiS4(){
-  var inp=document.getElementById('fi4inp');
-  var val=parseInt(inp?inp.value:'');
-  var correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
-  stepCount++; document.getElementById('stepNum').textContent=stepCount;
-  if(isNaN(val)){
-    showFb(false,'❌ 請填入數字！');
-    stepCount--; document.getElementById('stepNum').textContent=stepCount;
+async function cfmFiS4() {
+  const inp = $('fi4inp');
+  const val = parseInt(inp ? inp.value : '');
+  const correctIdx = fiBound === 'right' ? fiMid - 1 : fiMid + 1;
+
+  if (isNaN(val)) {
+    showFb(false, '❌ 請填入數字！');
     return;
   }
-  if(val===correctIdx){
+  if (val === correctIdx) {
+    stepCount++; $('stepNum').textContent = stepCount;
     correctAns++;
-    fiStepScores.push(Math.max(0,4-stepWrong));
-    if(inp)inp.classList.add('ok2');
-    var _idxHint=fiBound==='right'?'Right = mid - 1 = '+fiMid+' - 1 = '+correctIdx+'，搜尋範圍縮小到左半邊了！':'Left = mid + 1 = '+fiMid+' + 1 = '+correctIdx+'，搜尋範圍縮小到右半邊了！';
-    endStepTimer('填索引'); recordStep('填索引',stepWrong,(fiBound==='right'?'Right':'Left')+'='+correctIdx,_idxHint);
-    var msg='✅ 正確！'+(fiBound==='right'?'Right':'Left')+' = '+correctIdx;
-    showFb(true,msg);
-    addLog('第'+stepCount+'步：'+msg,'sl');
-    setTimeout(function(){showTeachHint(_idxHint); setTimeout(function(){applyFiBin();},1000);},800);
+    fiStepScores.push(Math.max(0, C.MAX_SCORE_PER_STEP - stepWrong));
+    if (inp) inp.classList.add('ok2');
+    const _idxHint = fiBound === 'right' ? 'Right = mid - 1 = ' + fiMid + ' - 1 = ' + correctIdx + '，搜尋範圍縮小到左半邊了！' : 'Left = mid + 1 = ' + fiMid + ' + 1 = ' + correctIdx + '，搜尋範圍縮小到右半邊了！';
+    recordStep('填索引', stepWrong, (fiBound === 'right' ? 'Right' : 'Left') + '=' + correctIdx, _idxHint);
+    const msg = '✅ 正確！' + (fiBound === 'right' ? 'Right' : 'Left') + ' = ' + correctIdx;
+    showFb(true, msg);
+    addLog('第' + stepCount + '步：' + msg, 'sl');
+    await delay(C.FEEDBACK_DELAY);
+    showTeachHint(_idxHint);
+    await delay(C.SKIP_DELAY);
+    applyFiBin();
   } else {
     wrongAns++; stepWrong++;
-    if(inp)inp.classList.add('err2');
-    updateWPills(stepWrong);
-    var formula2=fiBound==='right'?'Right = mid-1 = '+fiMid+'-1 = '+correctIdx:'Left = mid+1 = '+fiMid+'+1 = '+correctIdx;
-    showFb(false,'❌ 索引填錯！正確：'+formula2);
-    addLog('答錯（索引）','wl');
-    if(stepWrong>=qMaxWrong){
-      setTimeout(function(){
-        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
-        addLog('答錯上限，繼續','wl');
-        applyFiBin();
-      },1000);
+    if (inp) inp.classList.add('err2');
+    const formula2 = fiBound === 'right' ? 'Right = mid-1 = ' + fiMid + '-1 = ' + correctIdx : 'Left = mid+1 = ' + fiMid + '+1 = ' + correctIdx;
+    const idxTip = fiBound === 'right' ? '往左找：Right = mid - 1（因為要縮小右邊界）' : '往右找：Left = mid + 1（因為要縮小左邊界）';
+    showFb(false, '❌ 索引填錯！正確：' + formula2 + '<br>📌 ' + idxTip);
+    addLog('答錯（索引）', 'wl');
+    if (stepWrong >= C.MAX_WRONG_PER_STEP) {
+      stepCount++; $('stepNum').textContent = stepCount;
+      await delay(C.SKIP_DELAY);
+      skippedSteps++; fiStepScores.push(0);
+      addLog('答錯上限，繼續', 'wl');
+      applyFiBin();
     } else {
-      stepCount--; document.getElementById('stepNum').textContent=stepCount;
-      setTimeout(function(){
-        if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}
-        document.getElementById('fb').className='fb';
-      },1400);
+      await delay(C.RETRY_DELAY);
+      if (inp) { inp.classList.remove('err2'); inp.value = ''; inp.focus(); }
+      $('fb').className = 'fb';
     }
   }
 }
 
-function applyFiBin(){
-  var savedDir=fiDir;
-  var savedMid=fiMid;
-  stepWrong=0;
-  fiMid=-1; fiDir=''; fiBound='';
-  if(savedDir==='left'){
-    bR=savedMid-1;
-  } else {
-    bL=savedMid+1;
-  }
-  if(bL>bR){endGame(false);return;}
-  bM=Math.floor((bL+bR)/2);
+function applyFiBin() {
+  const savedDir = fiDir;
+  const savedMid = fiMid;
+  stepWrong = 0;
+  fiMid = -1; fiDir = ''; fiBound = '';
+  if (savedDir === 'left') { bR = savedMid - 1; }
+  else { bL = savedMid + 1; }
+  if (bL > bR) { endGame(false); return; }
+  bM = Math.floor((bL + bR) / 2);
   renderAll();
   renderQ();
 }
 
-function mkBtn(cls,html,fn){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;return b;}
-
-// ── Choices ────────────────────────────────────────────
-function linChoice(ch){
-  const correct=arr[linCur]===target?'found':'next';
-  const btns=document.getElementById('cbtns').querySelectorAll('.cbtn');
-  const map={found:0,next:1};
-  proc(ch,correct,btns,map,
-    ()=>{if(ch==='found'){showFb(true,`正確！${arr[linCur]}=${target}，找到了！`);addLog(`第${stepCount}步：[${linCur}]=${arr[linCur]}=目標，<b>找到了</b>！`,'cl');setTimeout(()=>endGame(true,linCur),700);}
-    else{showFb(true,`正確，${arr[linCur]}≠${target}，跳到[${linCur+1}]`);addLog(`第${stepCount}步：[${linCur}]=${arr[linCur]}≠${target}，繼續往後`,'ll');setTimeout(()=>{linCur++;if(linCur>=arr.length){endGame(false);return;}stepWrong=0;renderAll();renderQ();},700);}},
-    ()=>{const exp=correct==='found'?`${arr[linCur]}=${target}，應該選「找到了」！`:`${arr[linCur]}≠${target}，要繼續往後！`;
-    doWrong(btns,map[ch],exp,()=>{skippedSteps++;addLog(`答錯上限，自動跳過（正確：${correct}）`,'wl');linCur++;if(linCur>=arr.length){endGame(false);return;}stepWrong=0;renderAll();renderQ();});}
-  );
-}
-
-function binChoice(ch){
-  const mv=arr[bM],correct=mv===target?'found':(target<mv?'left':'right');
-  const btns=document.getElementById('cbtns').querySelectorAll('.cbtn');
-  const map={left:0,found:1,right:2};
-  proc(ch,correct,btns,map,
-    ()=>{if(ch==='found'){showFb(true,`正確！${mv}=${target}！`);addLog(`第${stepCount}步：Mid[${bM}]=${mv}=目標，<b>找到了</b>！`,'cl');setTimeout(()=>endGame(true,bM),700);}
-    else if(ch==='left'){showFb(true,`正確！${mv}>${target}，Right→[${bM-1}]`);addLog(`第${stepCount}步：Mid=${mv}>${target}，<b>往左</b>，Right→[${bM-1}]`,'sl');setTimeout(()=>{bR=bM-1;if(bL>bR){endGame(false);return;}bM=Math.floor((bL+bR)/2);stepWrong=0;renderAll();renderQ();},700);}
-    else{showFb(true,`正確！${mv}<${target}，Left→[${bM+1}]`);addLog(`第${stepCount}步：Mid=${mv}<${target}，<b>往右</b>，Left→[${bM+1}]`,'sl');setTimeout(()=>{bL=bM+1;if(bL>bR){endGame(false);return;}bM=Math.floor((bL+bR)/2);stepWrong=0;renderAll();renderQ();},700);}},
-    ()=>{let exp='';if(correct==='found')exp=`答案就在中間！${mv}=${target}`;else if(correct==='left')exp=`${mv}>${target}，要往左找`;else exp=`${mv}<${target}，要往右找`;
-    if(!quizMode){if(ch==='left'&&correct==='right')exp+=`<br><small>⚠️ ${target}根本不在左半邊！</small>`;if(ch==='right'&&correct==='left')exp+=`<br><small>⚠️ ${target}根本不在右半邊！</small>`;}
-    doWrong(btns,map[ch],exp,()=>{skippedSteps++;addLog(`答錯上限，自動跳過（正確：${correct}）`,'wl');if(correct==='found'){endGame(false);return;}if(correct==='left'){bR=bM-1;if(bL>bR){endGame(false);return;}}else{bL=bM+1;if(bL>bR){endGame(false);return;}}bM=Math.floor((bL+bR)/2);stepWrong=0;renderAll();renderQ();});}
-  );
-}
-
-function proc(ch,correct,btns,map,onOk,onErr){
-  btns.forEach(b=>b.disabled=true);stepCount++;document.getElementById('stepNum').textContent=stepCount;
-  if(ch===correct){correctAns++;btns[map[ch]].classList.add('correct');onOk();}
-  else{wrongAns++;stepWrong++;btns[map[ch]].classList.add('wrong');onErr();}
-}
-
-function doWrong(btns,wi,exp,onMax){
-  updateWPills(stepWrong);
-  if(quizMode){const fb=document.getElementById('fb');fb.className='fb wrong show';fb.innerHTML=`❌<div>答錯了！（${stepWrong}/${qMaxWrong}）</div>`;}
-  else showFb(false,`再想想！${exp}`);
-  addLog(`答錯（第${stepWrong}次）`,'wl');
-  if(stepWrong>=qMaxWrong){setTimeout(()=>{btns.forEach(b=>{b.disabled=true;b.classList.add('locked');});setTimeout(onMax,800);},400);}
-  else{setTimeout(()=>{btns.forEach(b=>{b.disabled=false;b.classList.remove('wrong','correct');});document.getElementById('fb').className='fb';stepCount--;document.getElementById('stepNum').textContent=stepCount;},1200);}
-}
-
-function showFb(ok,txt){const fb=document.getElementById('fb');fb.className='fb '+(ok?'correct':'wrong')+' show';fb.innerHTML=(ok?'✅ ':'❌ ')+`<div>${txt}</div>`;}
-
 // ── End game ────────────────────────────────────────────
-function endGame(found,foundIdx){
-  gameOver=true;gameFoundAt=found?foundIdx:undefined;
-  clearInterval(qTimerInt);
-  const qSec=quizMode?Math.floor((Date.now()-qStartTime)/1000):0;
+function endGame(found, foundIdx) {
+  document.removeEventListener('keydown', onDirKey);
+  gameOver = true; gameFoundAt = found ? foundIdx : undefined;
   renderAll();
-  document.getElementById('choicePanel').style.display='none';
-  document.getElementById('logPanel').style.display='block';
-  document.getElementById('binRng').style.display='none';
-  document.getElementById('linProg').style.display='none';
-  document.getElementById('predBan').className='pred-ban';
+  $('choicePanel').style.display = 'none';
+  $('logPanel').style.display = 'block';
+  $('binRng').style.display = 'none';
+  $('predBan').className = 'pred-ban';
 
-  if(!quizMode){if(mode==='linear'){linDone=true;linSteps=stepCount;}else{binDone=true;binSteps=stepCount;}}
+  const ov = $('resOv');
+  ov.style.display = 'block';
+  ov.className = 'res-ov show' + (found ? '' : ' nf');
+  $('re').textContent = found ? '🎉' : '🔍';
+  $('rt2').className = 'rt ' + (found ? 'found' : 'nf');
+  $('rt2').textContent = found ? '找到了！' : '找不到！';
+  $('rd').innerHTML = found ? '目標值<strong>' + target + '</strong>在索引[' + foundIdx + ']。共<strong>' + stepCount + '</strong>步。' : '目標值<strong>' + target + '</strong>不在陣列中。共<strong>' + stepCount + '</strong>步確認。';
+  $('srow').innerHTML = '<div class="sp">✅ 答對<span>' + correctAns + '</span></div><div class="sp">❌ 答錯<span>' + wrongAns + '</span></div><div class="sp">⏭️ 跳過<span>' + skippedSteps + '</span></div><div class="sp">🔢 共<span>' + stepCount + '</span>步</div>';
 
-  const ov=document.getElementById('resOv');
-  ov.style.display='block';
-  ov.className='res-ov show'+(found?'':' nf');
-  document.getElementById('re').textContent=found?'🎉':'🔍';
-  document.getElementById('rt2').className='rt '+(found?'found':'nf');
-  document.getElementById('rt2').textContent=found?'找到了！':'找不到！';
-  document.getElementById('rd').innerHTML=found?`目標值<strong>${target}</strong>在索引[${foundIdx}]。共<strong>${stepCount}</strong>步。`:`目標值<strong>${target}</strong>不在陣列中。共<strong>${stepCount}</strong>步確認。`;
-  document.getElementById('srow').innerHTML=`<div class="sp">✅ 答對<span>${correctAns}</span></div><div class="sp">❌ 答錯<span>${wrongAns}</span></div>${quizMode?`<div class="sp">⏭️ 跳過<span>${skippedSteps}</span></div><div class="sp">⏱️<span>${fmt(qSec)}</span></div>`:''}<div class="sp">🔢 共<span>${stepCount}</span>步</div>`;
-
-  if(mode==='binary'&&found&&!quizMode){
-    const eff=Math.round(Math.min(100,(maxSteps/Math.max(stepCount,1))*100));
-    document.getElementById('effS').style.display='block';
-    setTimeout(()=>{document.getElementById('effBar').style.width=eff+'%';document.getElementById('effLbl').textContent=`效率${eff}%（最佳${maxSteps}步/你的${stepCount}步）`;},300);
-  }
-  if(mode==='linear'&&isWorstCase){document.getElementById('wrRev').innerHTML=`<div class="wr-rev">😱 這就是循序搜尋的<b>最壞情況</b>！比對了<b>${stepCount}次</b>，掃過全部${arr.length}格。二分搜尋最多只需<b>${maxSteps}步</b>！</div>`;}
-  else if(mode==='linear'&&!quizMode){document.getElementById('wrRev').innerHTML=`<div style="font-size:12px;color:var(--muted);margin-top:8px;padding:8px 12px;background:var(--panel);border-radius:9px;border:1px solid #ffffff08;">📌 你用了<b style="color:var(--text)">${stepCount}</b>步。循序最壞<b style="color:var(--red)">${arr.length}</b>步，二分最多<b style="color:var(--accent)">${maxSteps}</b>步（2<sup>${maxSteps}</sup>≥${arr.length}）。</div>`;}
-
-  addLog(found?`${mode==='linear'?'🐢':'⚡'}第${stepCount}步找到${target}在[${foundIdx}]！`:`${mode==='linear'?'🐢':'⚡'}搜尋結束，${target}不存在。`,'cl');
-  if(mode==='binary'){
-    practiceLog.push({target:target,found:found,arr:[...arr],steps:[...curQSteps]});
-    // Show step time summary + error panel if in practice mode
-    if(!quizMode){ showStepSummary(); }
+  if (found) {
+    const eff = Math.round(Math.min(100, (maxSteps / Math.max(stepCount, 1)) * 100));
+    $('effS').style.display = 'block';
+    setTimeout(() => { $('effBar').style.width = eff + '%'; $('effLbl').textContent = '效率' + eff + '%（最佳' + maxSteps + '步/你的' + stepCount + '步）'; }, 300);
   }
 
-  if(quizMode){
-    const diff=diffForQ(qCurrent,qTotal);
-    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores]});
-    qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
-    document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下一題→(${qCurrent+2}/${qTotal})`:'查看成績單 📊';
-  } else {
-    const ex=document.getElementById('resExtra');ex.innerHTML='';
-    if(linDone&&binDone){showCompare();}
+  addLog(found ? '⚡第' + stepCount + '步找到' + target + '在[' + foundIdx + ']！' : '⚡搜尋結束，' + target + '不存在。', 'cl');
+
+  // Show error analysis button
+  $('resExtra').innerHTML = '';
+  if (Object.keys(stepErrors).some(function (k) { return stepErrors[k] > 0; })) {
+    const eb = document.createElement('button');
+    eb.className = 'btn bg2'; eb.style.marginTop = '8px';
+    eb.textContent = '📊 查看錯誤分析';
+    eb.onclick = showErrorAnalysis;
+    $('resExtra').appendChild(eb);
   }
 }
 
-function nextAction(){
-  if(quizMode){qCurrent++;if(qCurrent>=qTotal){clearInterval(totalTimerInt);showScorecard();}else launchQ();}
-  else newProblem();
-}
+function nextAction() { newProblem(); }
 
-// ── Scorecard ──────────────────────────────────────────
-function showScorecard(){
-  document.getElementById('gameArea').style.display='none';
-  const sc=(document.getElementById('scorecard')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});sc.className='scorecard show';
-  const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
-  const found=qResults.filter(function(r){return r.found;}).length;
-  // Plan 2: binary=4 steps×25pts; linear=result(60%)+acc(40%)
-  // Practice scoring: 5 steps × 4pts each = 20pts/question
-  var perQArr=qResults.map(function(r){
-    var ss=r.stepScores||[];
-    return ss.reduce(function(a,s){return a+s;},0);
-  });
-  const pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0));
+// ── Error analysis ──────────────────────────────────────
+function showErrorAnalysis() {
+  const existing = $('errPanel');
+  if (existing) { existing.remove(); return; }
 
-  let grade,gc,trophy,lbl;
-  if(pct>=90){grade='A';gc='gA';trophy='🏆';lbl='優秀！';}
-  else if(pct>=75){grade='B';gc='gB';trophy='🥈';lbl='良好，繼續加油！';}
-  else if(pct>=60){grade='C';gc='gC';trophy='🥉';lbl='及格，還有進步空間';}
-  else{grade='D';gc='gD';trophy='📖';lbl='需要多加練習';}
+  const total = Object.values(stepErrors).reduce(function (a, b) { return a + b; }, 0);
+  if (total === 0) return;
 
-  (document.getElementById('scT')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=trophy;
-  (document.getElementById('scStag')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=`👤 ${sClass} ${sSeat}號 ${sName}`;
-  (document.getElementById('scSub')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=`${qTotal}題測驗`;
-  (document.getElementById('scN')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=perfect;
-  (document.getElementById('scD')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=`/${qTotal} 無失誤`;
-  (document.getElementById('scGr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='sc-grade '+gc;
-  (document.getElementById('scGr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=grade;
-  (document.getElementById('scGL')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=lbl;
-  (document.getElementById('scPct')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=pct+'分';
-  (document.getElementById('scPctNote')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent='計分：每步20分，每答錯1次扣1分，各題平均計分';
-  (document.getElementById('scTime')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=fmt(totalTimerSec);
-  (document.getElementById('scSt')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qTotSteps;
-  (document.getElementById('scWr')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qWrongAll;
-  (document.getElementById('scSk')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qSkipAll;
+  const panel = document.createElement('div');
+  panel.className = 'err-panel'; panel.id = 'errPanel';
 
-  // ── Per-question recap ──────────────────────────────
-  const recapList=(document.getElementById('recapList')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});recapList.innerHTML='';
-  qResults.forEach((r,i)=>{
-    const card=document.createElement('div');
-    card.className='recap-card'+(r.found&&r.wrong===0?'':r.found?' had-err':' not-found');
-    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認不存在✓</span>'):r.found?'<span class="tag tag-err">找到(有失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(有失誤)</span>':'<span class="tag tag-skip">未完成</span>';
-    const diffLabel=`<span class="diff-indicator ${r.diff.cls}" style="font-size:10px;padding:2px 8px;">${r.diff.icon}${r.diff.label}</span>`;
+  const title = document.createElement('div'); title.className = 'err-panel-title';
+  title.textContent = '📊 錯誤分析（本次練習累計）';
+  panel.appendChild(title);
 
-    // Mini array visual
-    const arrHtml=r.arr.map((v,j)=>{
-      let cls='rc-norm';
-      if(r.found&&j===r.foundAt)cls='rc-found';
-      else if(!r.found||(r.type==='binary'&&(j<0||j>=r.arr.length)))cls='rc-elim';
-      return `<div class="recap-cell ${cls}" title="[${j}]=${v}">${v}</div>`;
-    }).join('');
-
-    // Learning hint
-    let hint='';
-    if(r.wrong===0&&r.skipped===0){
-      if(r.found)hint=`<span class="good">✅ 完美！每一步判斷都正確，找到目標。</span>`;
-      else hint=`<span class="good">✅ 完美！正確走完所有步驟，確認目標不存在。（得60/60結果分，與找到目標同分！）</span>`;
-    } else if(r.found&&r.wrong>0&&r.skipped===0){
-      hint=`<span class="warn">⚠️ 找到了，但答錯了${r.wrong}次。</span>${r.type==='binary'?'<br>建議複習：比較 mid 與目標的大小，再決定往左還是往右。':'<br>建議複習：仔細比對當前格子的值與目標值。'}`;
-    } else if(!r.found&&r.wrong>0&&r.skipped===0){
-      hint=`<span class="warn">⚠️ 過程有答錯${r.wrong}次，但最終正確確認目標不存在。（無跳過仍得60/60結果分）</span>`;
-    } else if(r.skipped>0){
-      hint=`<span class="bad">❌ 有${r.skipped}步被強制跳過（答錯上限）。</span><br>這些步驟沒有完整作答，結果分打折。建議多練習再來挑戰！</span>`;
-    }
-
-    card.innerHTML=`<div class="recap-card-top">${diffLabel}<span class="recap-qnum">第${i+1}題（${r.type==='binary'?'⚡二分':'🐢循序'}）目標：${r.target}</span>${tag}<span class="recap-time">⏱️ ${fmt(r.sec)} | ${r.steps}步 | 錯${r.wrong}次</span></div><div class="recap-arr">${arrHtml}</div><div class="recap-hint">${hint}</div>`;
-    recapList.appendChild(card);
+  const maxErr = Math.max.apply(null, Object.values(stepErrors));
+  const stepNames = ['確認L/R', '計算mid', '判斷方向', '選邊界', '填索引'];
+  stepNames.forEach(function (name) {
+    const cnt = stepErrors[name] || 0;
+    const pct = maxErr > 0 ? Math.round((cnt / maxErr) * 100) : 0;
+    const row = document.createElement('div'); row.className = 'err-bar-row';
+    row.innerHTML = '<div class="err-bar-name">' + name + '</div><div class="err-bar-bg"><div class="err-bar-fill" style="width:0%;" data-w="' + pct + '%"></div></div><div class="err-bar-num">' + cnt + '次</div>';
+    panel.appendChild(row);
   });
 
-  // ── Learning suggestions ────────────────────────────
-  const binaryWrongs=qResults.filter(r=>r.type==='binary'&&r.wrong>0).length;
-  const linearWrongs=qResults.filter(r=>r.type==='linear'&&r.wrong>0).length;
-  const notFound=qResults.filter(r=>!r.found).length;
-  const sugs=[];
-  if(binaryWrongs>=2)sugs.push({icon:'⚡',txt:'二分搜尋方向判斷常出錯：記住「目標比 mid 小→往左，目標比 mid 大→往右」。'});
-  if(linearWrongs>=2)sugs.push({icon:'🐢',txt:'循序搜尋比對常出錯：每格只需問「這個值等於目標嗎？」，等於就找到，不等就繼續往後。'});
-  if(notFound>=2)sugs.push({icon:'🔍',txt:'有多題未找到目標。當搜尋範圍縮小到零，就代表目標不存在，這是正確結果！'});
-  if(totalTimerSec>qTotal*60)sugs.push({icon:'⏱️',txt:`總時間 ${fmt(totalTimerSec)}，速度可以再快一些。熟練後每題應在60秒內完成。`});
-  if(pct>=90)sugs.push({icon:'🌟',txt:'表現優秀！可以試試更大的陣列，或挑戰限定步數模式。'});
-
-  const sugBox=(document.getElementById('sugBox')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});
-  const sugList=(document.getElementById('sugList')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});sugList.innerHTML='';
-  if(sugs.length>0){
-    sugBox.style.display='block';
-    sugs.forEach(s=>{const d=document.createElement('div');d.className='sug-item';d.innerHTML=`<span class="sug-icon">${s.icon}</span><span>${s.txt}</span>`;sugList.appendChild(d);});
-  } else sugBox.style.display='none';
-
-  // ── Summary table ───────────────────────────────────
-  const tbody=(document.getElementById('scTbody')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});tbody.innerHTML='';
-  qResults.forEach((r,i)=>{
-    const tr=document.createElement('tr');
-    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認✓</span>'):r.found?'<span class="tag tag-err">找到(失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(失誤)</span>':'<span class="tag tag-skip">未完成</span>';
-    tr.innerHTML=`<td>${i+1}</td><td>${r.diff.icon}${r.diff.label}</td><td>${r.type==='binary'?'⚡二分':'🐢循序'}</td><td>${r.target}</td><td>${tag}</td><td>${r.steps}</td><td style="color:${r.wrong>0?'var(--red)':'var(--green)'}">${r.wrong}</td><td>${fmt(r.sec)}</td>`;
-    tbody.appendChild(tr);
-  });
-
-  // Reset submit
-  const sb=(document.getElementById('submitBtn')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});sb.disabled=false;sb.textContent='送出成績 →';
-  (document.getElementById('submitSt')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent='';(document.getElementById('submitSt')||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='submit-st';
-
-  sc.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// ── Submit to Google Sheet ─────────────────────────────
-function submitGS(){
-  var btn=document.getElementById('submitBtn');
-  var st=document.getElementById('submitSt');
-  if(!btn||!st) return;
-  if(GAS_URL==='填入你的GAS網址'){
-    st.className='submit-st fail';
-    st.textContent='⚠️ 老師尚未設定 GAS 網址，請通知老師。';
-    return;
+  const weakest = Object.keys(stepErrors).reduce(function (a, b) { return stepErrors[a] > stepErrors[b] ? a : b; });
+  const weakestCount = stepErrors[weakest] || 0;
+  if (weakestCount > 0) {
+    const hints = {
+      '確認L/R': '練習從陣列上找到 Left 和 Right 指標的位置，注意從索引 0 開始數。',
+      '計算mid': '多練習 ⌊(Left+Right)/2⌋ 的計算，可以用紙筆練習幾次。',
+      '判斷方向': '記住：arr[mid] > 目標 → 往左找；arr[mid] < 目標 → 往右找。',
+      '選邊界': '往左找要改 Right，往右找要改 Left。方向和邊界是相反的！',
+      '填索引': '往左找：Right = mid - 1；往右找：Left = mid + 1。記住加減1。'
+    };
+    const insight = document.createElement('div'); insight.className = 'err-insight';
+    insight.innerHTML = '<b>最需要加強：</b>「' + weakest + '」（共錯 ' + weakestCount + ' 次）<br>' + (hints[weakest] || '');
+    panel.appendChild(insight);
   }
-  btn.disabled=true;
-  st.className='submit-st sending';
-  st.textContent='⏳ 傳送中...';
 
-  var perQArr2=qResults.map(function(r){
-    var ss=r.stepScores||[];
-    return ss.reduce(function(a,s){return a+s;},0);
-  });
-  var pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0));
-  var perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
-
-  var stepNames=['確認L/R','計算mid','判斷方向','選邊界','填索引'];
-  var stepErrTotals=[0,0,0,0,0];
-  qResults.forEach(function(r){
-    if(r.stepErrors){
-      stepNames.forEach(function(n,i){
-        stepErrTotals[i]+=(r.stepErrors[n]||0);
-      });
-    }
-  });
-  var stepErrStr=stepNames.map(function(n,i){return n+':'+stepErrTotals[i]+'次';}).join('、');
-
-  var detail=qResults.map(function(r,i){
-    var ss=r.stepScores||[];
-    var qScore=ss.reduce(function(a,s){return a+s;},0);
-    return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+qScore+'/20分 錯'+r.wrong+'次';
-  }).join(' | ');
-
-  var payload=JSON.stringify({
-    class:sClass, seat:sSeat, name:sName,
-    type:QUIZ_TYPE, pct:pct,
-    perfect:perfect+'/'+qTotal,
-    steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
-    time:totalTimerSec, detail:detail,
-    stepErrors:stepErrStr
-  });
-
-  function doFetch(retries){
-    fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
-    .then(function(){
-      st.className='submit-st ok';
-      st.textContent='✅ 成績已送出！';
-      btn.textContent='已送出 ✓';
-    })
-    .catch(function(){
-      if(retries>0){
-        st.textContent='⏳ 送出中，重試第'+(4-retries)+'次...';
-        setTimeout(function(){doFetch(retries-1);},2000);
-      } else {
-        st.className='submit-st fail';
-        st.textContent='❌ 送出失敗，請截圖成績單交給老師。';
-        btn.disabled=false;
-      }
-    });
-  }
-  doFetch(3);
-}
-
-function showCompare(){
-  const cp=document.getElementById('cmpPanel');cp.style.display='block';
-  document.getElementById('cmpL').textContent=linSteps;document.getElementById('cmpB').textContent=binSteps;
-  document.getElementById('cmpLN').textContent=linSteps;document.getElementById('cmpBN').textContent=binSteps;
-  const mx=Math.max(linSteps,binSteps,1);
-  setTimeout(()=>{document.getElementById('cmpLB').style.width=(linSteps/mx*100)+'%';document.getElementById('cmpBB').style.width=(binSteps/mx*100)+'%';},300);
-  let ins='';
-  if(binSteps<linSteps)ins=`⚡ 二分搜尋少了<strong>${linSteps-binSteps}步</strong>！陣列越大，差距越驚人。`;
-  else if(binSteps===linSteps)ins=`🤝 這次步數相同，陣列越大時二分搜尋優勢越明顯！`;
-  else ins=`這次目標在前段所以循序較快，換一題試試，大多數情況下二分搜尋快很多！`;
-  document.getElementById('cmpI').innerHTML=ins;
-  setTimeout(()=>cp.scrollIntoView({behavior:'smooth',block:'start'}),400);
+  $('gameArea').appendChild(panel);
+  setTimeout(function () {
+    panel.querySelectorAll('.err-bar-fill').forEach(function (b) { b.style.width = b.dataset.w; });
+  }, 300);
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ── Log ────────────────────────────────────────────────
-function addLog(text,cls){
-  document.getElementById('logPanel').style.display='block';
-  const list=document.getElementById('logList');
-  const e=document.createElement('div');e.className=`le ${cls}`;
-  const n=document.createElement('div');n.className='lsn'+(cls==='ll'?' ln':'');n.textContent=list.children.length+1;
-  const t=document.createElement('div');t.className='ltx';t.innerHTML=text;
-  e.appendChild(n);e.appendChild(t);list.appendChild(e);list.scrollTop=list.scrollHeight;
+function addLog(text, cls) {
+  $('logPanel').style.display = 'block';
+  const list = $('logList');
+  const e = document.createElement('div'); e.className = 'le ' + cls;
+  const n = document.createElement('div'); n.className = 'lsn'; n.textContent = list.children.length + 1;
+  const t = document.createElement('div'); t.className = 'ltx'; t.innerHTML = text;
+  e.appendChild(n); e.appendChild(t); list.appendChild(e); list.scrollTop = list.scrollHeight;
 }
 
 // ── Init ───────────────────────────────────────────────
-window.onload=()=>switchMode('binary');
+window.onload = () => newProblem();
 </script>
 </body>
 </html>
