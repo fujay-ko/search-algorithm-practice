@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -22,75 +22,13 @@ header{text-align:center;margin-bottom:22px;}
 h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:900;background:linear-gradient(135deg,#4f8ef7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:6px;}
 .subtitle{color:var(--muted);font-size:14px;}
 
-/* Mode bar */
-.mode-bar{display:flex;gap:6px;background:var(--panel2);border-radius:14px;padding:5px;margin-bottom:20px;border:1px solid #ffffff0a;}
-.mbtn{flex:1;padding:10px;border:none;border-radius:10px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;transition:all .2s;color:var(--muted);background:transparent;}
-.mbtn.al{background:linear-gradient(135deg,#92400e,#fb923c30);color:var(--orange);border:1px solid #fb923c50;}
-.mbtn.ab{background:linear-gradient(135deg,#1e3a6e,#4f8ef730);color:var(--accent);border:1px solid #4f8ef750;}
-.mbtn.aq{background:linear-gradient(135deg,#1e3a20,#34d39930);color:var(--green);border:1px solid #34d39950;}
-.mbtn:not(.al):not(.ab):not(.aq):hover{color:var(--text);}
-
-/* Concept */
-.cb{border-radius:14px;padding:16px 20px;margin-bottom:10px;display:flex;gap:13px;align-items:flex-start;}
-.cb-l{background:linear-gradient(135deg,#2d1a0a,#1e1508);border:1px solid #fb923c30;}
-.cb-b{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;}
-.cb-q{background:linear-gradient(135deg,#0d2318,#0f1f14);border:1px solid #34d39930;}
-.ci{font-size:24px;flex-shrink:0;margin-top:1px;}
-.cb h3{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
-.cb-l h3{color:var(--orange);}.cb-b h3{color:var(--accent);}.cb-q h3{color:var(--green);}
-.cb p{font-size:13px;color:#b0b8d4;line-height:1.65;}
-.cb strong{color:var(--yellow);}
-
-/* log₂ box */
-.log2-box{border-radius:14px;padding:18px 20px;margin-bottom:18px;background:linear-gradient(135deg,#1a1230,#120e24);border:1px solid #a78bfa30;}
-.l2t{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.l2t::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent2);}
-.l2s{margin-bottom:14px;}
-.l2sl{font-size:11px;font-weight:800;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.hd{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-.hb{background:var(--panel2);border:1px solid #a78bfa30;border-radius:8px;padding:5px 10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--text);}
-.hb.ah{background:#a78bfa30;border-color:var(--accent2);color:var(--accent2);}
-.ha{color:var(--muted);font-size:14px;}
-.hs{font-size:12px;color:#b0b8d4;line-height:1.7;}
-.hs b{color:var(--yellow);}
-.et{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px;}
-.et th{color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:6px 10px;border-bottom:1px solid #ffffff10;text-align:left;}
-.et td{padding:7px 10px;border-bottom:1px solid #ffffff08;font-weight:600;}
-.et tr:last-child td{border-bottom:none;}
-.et .pow{font-family:'Nunito',sans-serif;font-weight:900;color:var(--accent2);}
-.et .stp{font-family:'Nunito',sans-serif;font-weight:900;color:var(--green);}
-.et .hr td{background:#a78bfa10;}
-.hint{font-size:11px;color:var(--muted);margin-top:6px;font-weight:600;}
-.hi{background:var(--panel2);border-radius:12px;padding:14px 16px;margin-top:8px;border:1px solid #ffffff0a;}
-.hiq{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.6;}
-.hiq .hy{color:var(--yellow);}
-.hos{display:flex;gap:8px;flex-wrap:wrap;}
-.ho{padding:7px 16px;border:2px solid #ffffff15;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--muted);background:transparent;transition:all .18s;}
-.ho:hover{border-color:#a78bfa;color:var(--accent2);}
-.ho.hok{border-color:var(--green);color:var(--green);background:#34d39920;}
-.ho.hno{border-color:var(--red);color:var(--red);background:#f8717120;}
-.hfb{font-size:12px;font-weight:700;margin-top:8px;min-height:18px;}
-
 /* Panel */
 .panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;padding:20px;margin-bottom:16px;}
 .pt{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
 .pt::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent);}
 .pt.lo::before{background:var(--orange);}
 
-/* Config */
-.cfgr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
-.cfi{display:flex;flex-direction:column;gap:4px;}
-.cfi label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.cfi input[type=number],.cfi select{background:var(--panel2);border:1px solid #ffffff15;border-radius:9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;padding:7px 12px;width:82px;outline:none;transition:border-color .2s;}
-.cfi select{width:auto;}
-.cfi input:focus,.cfi select:focus{border-color:var(--accent);}
 
-/* Difficulty badges in quiz config */
-.diff-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
-.diff-badge{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:800;border:1px solid;}
-.diff-E{background:#34d39915;border-color:#34d39940;color:var(--green);}
-.diff-M{background:#fbbf2415;border-color:#fbbf2440;color:var(--yellow);}
-.diff-H{background:#f8717115;border-color:#f8717140;color:var(--red);}
 
 /* Buttons */
 .btn{border:none;border-radius:11px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;padding:9px 18px;transition:all .18s;}
@@ -195,16 +133,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .li{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--muted);}
 .ld{width:10px;height:10px;border-radius:3px;border:2px solid;}
 
-/* Predict */
-.pred-ban{background:var(--panel2);border:1px solid #fbbf2430;border-radius:12px;padding:12px 14px;margin-bottom:12px;display:none;}
-.pred-ban.show{display:block;animation:fi .3s;}
-.pred-q{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;}
-.pred-opts{display:flex;gap:6px;flex-wrap:wrap;}
-.pred-opt{padding:6px 14px;border:2px solid #ffffff15;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--muted);background:transparent;transition:all .18s;}
-.pred-opt:hover{border-color:var(--yellow);color:var(--yellow);}
-.pred-opt.sel{border-color:var(--accent);color:var(--accent);background:#4f8ef720;}
-.pred-r{font-size:12px;font-weight:700;margin-top:8px;color:var(--muted);}
-
 /* Choice */
 .cq{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.6;}
 .cq .mv{color:var(--yellow);font-size:16px;}.cq .cv{color:var(--orange);font-size:16px;}
@@ -251,29 +179,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .eff-f{height:100%;border-radius:50px;transition:width 1s;background:linear-gradient(90deg,var(--accent),var(--green));}
 .wr-rev{background:#f8717115;border:1px solid #f8717130;border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;color:#f8b0b0;font-weight:600;line-height:1.6;}
 .wr-rev b{color:var(--red);}
-
-/* Compare */
-.cmp-panel{background:linear-gradient(135deg,#1a1d30,#1d1a2e);border:1px solid #ffffff10;border-radius:18px;padding:20px;margin-bottom:16px;animation:fi .5s;}
-.cmp-t{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:18px;text-align:center;}
-.cmp-g{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;}
-.cmp-c{background:var(--panel2);border-radius:14px;padding:16px;text-align:center;}
-.cmp-c.lc{border:1px solid #fb923c30;}.cmp-c.bc{border:1px solid #4f8ef730;}
-.cmp-ct{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.cmp-c.lc .cmp-ct{color:var(--orange);}.cmp-c.bc .cmp-ct{color:var(--accent);}
-.cmp-n{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;line-height:1;}
-.cmp-c.lc .cmp-n{color:var(--orange);}.cmp-c.bc .cmp-n{color:var(--accent);}
-.cmp-s{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600;}
-.cmp-vs{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:var(--muted);text-align:center;}
-.bar-s{margin-top:14px;}
-.bar-l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.bar-r{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
-.bar-n{font-size:10px;font-weight:700;width:36px;text-align:right;}
-.bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:9px;overflow:hidden;}
-.bar-f{height:100%;border-radius:50px;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
-.bar-f.lf{background:linear-gradient(90deg,#c2410c,var(--orange));}
-.bar-f.bf{background:linear-gradient(90deg,var(--accent),var(--green));}
-.bar-num{font-size:11px;font-weight:900;font-family:'Nunito',sans-serif;width:18px;}
-.cmp-i{background:#fbbf2410;border:1px solid #fbbf2430;border-radius:11px;padding:10px 14px;margin-top:12px;font-size:12px;font-weight:600;color:#e8d5a0;line-height:1.6;text-align:center;}
 
 /* ── SCORECARD ── */
 .scorecard{background:var(--panel);border-radius:20px;padding:28px;border:2px solid var(--green);box-shadow:0 0 48px #34d39930;animation:fi .5s;display:none;}
@@ -370,7 +275,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 #stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
 
 @media(max-width:600px){
-  .cmp-g{grid-template-columns:1fr 1fr;}.cmp-vs{display:none;}
   .sc-stats{grid-template-columns:repeat(2,1fr);}
   .sc-top{gap:10px;}
 }
@@ -386,73 +290,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 </header>
 
 
-
-
-</div>
-
-
-  <div class="log2-box">
-    <div class="l2t">🧮 為什麼這麼快？砍半的威力</div>
-    <div class="l2s">
-      <div class="l2sl">方法一：砍半數次數</div>
-      <p style="font-size:13px;color:#b0b8d4;line-height:1.65;margin-bottom:10px;">每次比對後範圍少一半。數砍幾次才剩 1 格，就是最多步數：</p>
-      <div class="hd"><div class="hb ah">16格</div><div class="ha">→÷2→</div><div class="hb">8格</div><div class="ha">→÷2→</div><div class="hb">4格</div><div class="ha">→÷2→</div><div class="hb">2格</div><div class="ha">→÷2→</div><div class="hb">1格</div></div>
-      <div class="hs">16格，砍了 <b>4次</b> 才剩 1格 → 最多只需 <b>4步</b>！</div>
-    </div>
-    <div class="l2s">
-      <div class="l2sl">方法二：用次方反推步數</div>
-      <p style="font-size:13px;color:#b0b8d4;line-height:1.65;margin-bottom:10px;">問「<strong>2的幾次方 ≥ 陣列大小</strong>」，答案就是最多步數：</p>
-      <table class="et"><thead><tr><th>陣列大小</th><th>最接近的次方</th><th>最多步數</th><th>循序最多</th></tr></thead><tbody>
-        <tr><td>8格</td><td class="pow">2³=8</td><td class="stp">3步</td><td style="color:var(--orange)">8步</td></tr>
-        <tr class="hr"><td>10格</td><td class="pow">2⁴=16≥10</td><td class="stp">4步</td><td style="color:var(--orange)">10步</td></tr>
-        <tr><td>16格</td><td class="pow">2⁴=16</td><td class="stp">4步</td><td style="color:var(--orange)">16步</td></tr>
-        <tr><td>100格</td><td class="pow">2⁷=128≥100</td><td class="stp">7步</td><td style="color:var(--orange)">100步</td></tr>
-        <tr><td>1000格</td><td class="pow">2¹⁰=1024≥1000</td><td class="stp">10步</td><td style="color:var(--orange)">1000步</td></tr>
-      </tbody></table>
-      <p class="hint">💡 數學上把「2的幾次方等於n」寫成 <strong style="color:var(--accent2)">log₂n</strong>，但你已經會算了！</p>
-    </div>
-    <div class="l2s" style="margin-bottom:0">
-      <div class="l2sl">小測試：動動腦</div>
-      <div class="hi">
-        <div class="hiq">如果陣列有 <span class="hy">32格</span>，二分搜尋最多需要幾步？<br><small style="color:var(--muted);font-size:11px;">提示：2的幾次方 = 32？</small></div>
-        <div class="hos">
-          <button class="ho" onclick="chkH(this,false)">3步</button>
-          <button class="ho" onclick="chkH(this,false)">4步</button>
-          <button class="ho" onclick="chkH(this,true)">5步</button>
-          <button class="ho" onclick="chkH(this,false)">6步</button>
-        </div>
-        <div class="hfb" id="halveFb"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-</div>
-
-<!-- Config -->
-<div class="panel" id="cfgPanel">
-  <div class="pt" id="cfgPt">測驗設定</div>
-  <div class="cfi"><label>目標值（留空隨機）</label><input type="number" id="targetInput" value="" placeholder="自動"></div>
-    
-    
-    
-  </div>
-  <div class="cfgr" id="quizCfg" style="display:none">
-    <div class="cfi"><label>題數</label>
-      <select id="qTot"><option value="3">3題</option><option value="5" selected>5題</option><option value="8">8題</option><option value="10">10題</option></select>
-    </div>
-    <div class="cfi"><label>每步最多答錯</label>
-      <select id="qMW"><option value="1">1次</option><option value="2" selected>2次</option><option value="3">3次</option></select>
-    </div>
-    <div class="cfi"><label>搜尋方式</label>
-      <input type="hidden" id="qST" value="linear">
-    </div>
-    <div class="cfi"><label>陣列大小</label><input type="number" id="qArr" value="10" min="6" max="17"></div>
-    <button class="btn bq" onclick="startQuiz()">🚀 開始測驗</button>
-  </div>
-  
-</div>
 
 <!-- Game area -->
 <div id="gameArea" style="display:none">
@@ -641,6 +478,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 </div>
 
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
+</div>
 
 <script>
 
@@ -653,7 +491,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 // ╚══════════════════════════════════════════════════╝
 const GAS_URL = 'https://script.google.com/macros/s/AKfycby4ahadZ_awIKoPt34FcPdQkC1L95zEpnOp8dY8AvRl0dJH75G1fTRxO1wBnZ7YffU/exec';  // 貼上網路應用程式網址
 const QUIZ_TYPE = '循序搜尋';        // 測驗類型（勿修改）
-
+const __={className:'',style:{},textContent:'',innerHTML:'',disabled:false,checked:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}};
 
 // ══════════════════════════════════════════════════════// ══════════════════════════════════════════════════════
 
@@ -670,7 +508,7 @@ let savedArr=null,savedTarget=null;
 let sClass='',sSeat='',sName='';
 
 // Quiz
-let quizMode=false,qTotal=5,qMaxWrong=2,qSearchType='binary';
+let quizMode=false,qTotal=5,qMaxWrong=2,qSearchType='linear';
 let qCurrent=0,qResults=[],qTotSteps=0,qWrongAll=0,qSkipAll=0;
 
 // Timer
@@ -678,29 +516,17 @@ let qTimerSec=0,totalTimerSec=0;
 let qTimerInt=null,totalTimerInt=null;
 let qStartTime=0;
 
-// ── log₂ quiz ──────────────────────────────────────────
-function chkH(btn,ok){
-  document.querySelectorAll('.ho').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('halveFb');
-  btn.classList.add(ok?'hok':'hno');
-  if(ok){fb.style.color='var(--green)';fb.textContent='✅ 正確！2⁵=32，所以32格最多只需5步！';}
-  else{fb.style.color='var(--red)';fb.textContent='❌ 再想想：2¹=2,2²=4,2³=8,2⁴=16,2⁵=32 ✓';setTimeout(()=>{document.querySelectorAll('.ho').forEach(b=>{b.disabled=false;b.classList.remove('hok','hno');});fb.textContent='';},2000);}
-}
-
 // ── Mode switch ────────────────────────────────────────
 function switchMode(m){
   mode=m;quizMode=(m==='quiz');
-  ['btnL','btnB','btnQ'].forEach(id=>{var _b=document.getElementById(id);if(_b)_b.className='mbtn';});
+  ['btnL','btnB','btnQ'].forEach(id=>{const _b=document.getElementById(id);if(_b)_b.className='mbtn';});
   document.getElementById(m==='linear'?'btnL':m==='binary'?'btnB':'btnQ').className='mbtn '+(m==='linear'?'al':m==='binary'?'ab':'aq');
-  ['cbL','cbB','cbQ'].forEach(id=>{var _b=document.getElementById(id);if(_b)_b.style.display='none';});
+  ['cbL','cbB','cbQ'].forEach(id=>{const _b=document.getElementById(id);if(_b)_b.style.display='none';});
   document.getElementById(m==='linear'?'cbL':m==='binary'?'cbB':'cbQ').style.display='block';
-  (((document.getElementById('pracCfg')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display=m==='quiz'?'none':'flex';
-  document.getElementById('quizCfg').style.display=m==='quiz'?'flex':'none';
-  ((document.getElementById('diffRow')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display=m==='quiz'?'flex':'none';
-  document.getElementById('cfgPt').textContent=m==='quiz'?'測驗設定':'題目設定';
+  (document.getElementById('pracCfg')||__).style.display=m==='quiz'?'none':'flex';
   document.getElementById('scorecard').className='scorecard';
   document.getElementById('gameArea').style.display='none';
-  (((document.getElementById('worstBtn')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display=m==='linear'?'inline-block':'none';
+  (document.getElementById('worstBtn')||__).style.display=m==='linear'?'inline-block':'none';
   if(m!=='quiz'){savedArr=null;linDone=false;binDone=false;linSteps=null;binSteps=null;newProblem();}
 }
 
@@ -725,7 +551,7 @@ function diffForQ(i,total){
 // ── Practice: new problem ──────────────────────────────
 function newProblem(type=false){
   savedArr=null;linDone=false;binDone=false;linSteps=null;binSteps=null;isWorstCase=(type==='worst');
-  const size=Math.max(6,Math.min(17,parseInt((((document.getElementById('arrSize')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).value)||10));
+  const size=Math.max(6,Math.min(17,parseInt((document.getElementById('arrSize')||__).value)||10));
   genArr(size,type===true||type==='worst');
   if(type==='worst')target=arr[arr.length-1]+1;
   savedArr=[...arr];savedTarget=target;
@@ -736,7 +562,7 @@ function newProblem(type=false){
 function startQuiz(){
   document.getElementById('sModal').style.display='flex';
   document.getElementById('sErr').className='serr';
-  ['inClass','inSeat','inName'].forEach(id=>{var _e=document.getElementById(id);if(_e)_e.classList.remove('err');});
+  ['inClass','inSeat','inName'].forEach(id=>{const _e=document.getElementById(id);if(_e)_e.classList.remove('err');});
 }
 
 function confirmStudent(){
@@ -750,11 +576,7 @@ function confirmStudent(){
   if(err){document.getElementById('sErr').className='serr show';return;}
   sClass=c;sSeat=s;sName=n;
   document.getElementById('sModal').style.display='none';
-  qTotal=parseInt(document.getElementById('qTot').value)||5;
-  qMaxWrong=parseInt(document.getElementById('qMW').value)||2;
-  qSearchType=document.getElementById('qST').value;
-  (((document.getElementById('qTotLbl')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qTotal;
-  (((document.getElementById('qMWLbl')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=qMaxWrong;
+  qTotal=5;qMaxWrong=2;qSearchType='linear';
   qCurrent=0;qResults=[];qTotSteps=0;qWrongAll=0;qSkipAll=0;
   document.getElementById('scorecard').className='scorecard';
   quizMode=true;
@@ -787,7 +609,7 @@ function startGame(m,diff=null){
 
   document.getElementById('gameArea').style.display='block';
   document.getElementById('resOv').style.display='none';
-  (((document.getElementById('cmpPanel')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.display='none';
+  (document.getElementById('cmpPanel')||__).style.display='none';
   document.getElementById('logPanel').style.display='none';
   document.getElementById('choicePanel').style.display='block';
   document.getElementById('stepCtr').style.display='block';
@@ -829,8 +651,8 @@ function startGame(m,diff=null){
   }
 
   updateModeUI(diff);
-  const pb=(((document.getElementById('predBan')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});
-  if(m==='binary'&&!quizMode){pb.className='pred-ban show';(((document.getElementById('predR')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent='';document.querySelectorAll('.pred-opt').forEach(b=>{b.disabled=false;b.classList.remove('sel');});}
+  const pb=document.getElementById('predBan')||__;
+  if(m==='binary'&&!quizMode){pb.className='pred-ban show';(document.getElementById('predR')||__).textContent='';document.querySelectorAll('.pred-opt').forEach(b=>{b.disabled=false;b.classList.remove('sel');});}
   else{pb.className='pred-ban';}
 
   addLog(m==='linear'?`開始循序搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。從[0]逐一比對。`:`開始二分搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。Left=0, Right=${arr.length-1}`,m==='linear'?'ll':'sl');
@@ -890,7 +712,7 @@ function predict(btn,choice){
   btn.classList.add('sel');
   const mv=arr[bM];
   let actual=!arr.includes(target)?'none':target===mv?'mid':target<mv?'left':'right';
-  const pr=(((document.getElementById('predR')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});
+  const pr=document.getElementById('predR')||__;
   pr.style.color=choice===actual?'var(--green)':'var(--orange)';
   pr.textContent=choice===actual?'✅ 猜對了！繼續開始搜尋吧。':'🤔 不太一樣哦！試試看會怎麼發展。';
 }
@@ -1011,7 +833,7 @@ function endGame(found,foundIdx){
   document.getElementById('logPanel').style.display='block';
   document.getElementById('binRng').style.display='none';
   document.getElementById('linProg').style.display='none';
-  (((document.getElementById('predBan')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).className='pred-ban';
+  (document.getElementById('predBan')||__).className='pred-ban';
 
   if(!quizMode){if(mode==='linear'){linDone=true;linSteps=stepCount;}else{binDone=true;binSteps=stepCount;}}
 
@@ -1156,12 +978,13 @@ function showScorecard(){
   document.getElementById('submitSt').textContent='';document.getElementById('submitSt').className='submit-st';
 
   sc.scrollIntoView({behavior:'smooth',block:'start'});
+  submitGS();
 }
 
 // ── Submit to Google Sheet ─────────────────────────────
 function submitGS(){
-  var btn=document.getElementById('submitBtn');
-  var st=document.getElementById('submitSt');
+  const btn=document.getElementById('submitBtn');
+  const st=document.getElementById('submitSt');
   if(!btn||!st) return;
   if(GAS_URL==='填入你的GAS網址'){
     st.className='submit-st fail';
@@ -1173,20 +996,20 @@ function submitGS(){
   st.textContent='⏳ 傳送中...';
 
   // 計分：結果(60%)+步驟正確率(40%)
-  var perQArr2=qResults.map(function(r){
-    var rp=r.skipped===0?60:r.found?45:20;
-    var ts=r.steps+r.wrong;
-    var ap=ts>0?(r.steps/ts)*40:40;
+  const perQArr2=qResults.map(function(r){
+    const rp=r.skipped===0?60:r.found?45:20;
+    const ts=r.steps+r.wrong;
+    const ap=ts>0?(r.steps/ts)*40:40;
     return Math.round(rp+ap);
   });
-  var pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0)/qResults.length);
-  var perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
+  const pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0)/qResults.length);
+  const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
 
-  var detail=qResults.map(function(r,i){
+  const detail=qResults.map(function(r,i){
     return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+(r.found?'找到':'未找到')+' '+r.steps+'步 錯'+r.wrong+'次';
   }).join(' | ');
 
-  var payload=JSON.stringify({
+  const payload=JSON.stringify({
     class:sClass, seat:sSeat, name:sName,
     type:QUIZ_TYPE, pct:pct,
     perfect:perfect+'/'+qTotal,
@@ -1209,11 +1032,11 @@ function submitGS(){
       } else {
         st.className='submit-st fail';
         st.textContent='❌ 送出失敗，請複製下方文字交給老師：';
-        var grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
-        var copyText='【成績記錄】'+sClass+' '+sSeat+'號 '+sName+
+        const grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
+        const copyText='【成績記錄】'+sClass+' '+sSeat+'號 '+sName+
           ' | 測驗：'+QUIZ_TYPE+' | 分數：'+pct+'分('+grade+')'+
           ' | 明細：'+detail;
-        var ta=document.createElement('textarea');
+        const ta=document.createElement('textarea');
         ta.value=copyText;
         ta.style.cssText='width:100%;margin-top:8px;padding:8px;font-size:12px;border-radius:8px;border:1px solid #ffffff20;background:#1a1d2e;color:#e8eaf6;resize:none;';
         ta.rows=3; ta.readOnly=true;
@@ -1234,19 +1057,18 @@ function submitGS(){
 }
 
 function showCompare(){
-  const cp=(((document.getElementById('cmpPanel')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}});cp.style.display='block';
-  (((document.getElementById('cmpL')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=linSteps;(((document.getElementById('cmpB')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=binSteps;
-  (((document.getElementById('cmpLN')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=linSteps;(((document.getElementById('cmpBN')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).textContent=binSteps;
+  const cp=document.getElementById('cmpPanel')||__;cp.style.display='block';
+  (document.getElementById('cmpL')||__).textContent=linSteps;(document.getElementById('cmpB')||__).textContent=binSteps;
+  (document.getElementById('cmpLN')||__).textContent=linSteps;(document.getElementById('cmpBN')||__).textContent=binSteps;
   const mx=Math.max(linSteps,binSteps,1);
-  setTimeout(()=>{(((document.getElementById('cmpLB')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.width=(linSteps/mx*100)+'%';(((document.getElementById('cmpBB')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).style.width=(binSteps/mx*100)+'%';},300);
+  setTimeout(()=>{(document.getElementById('cmpLB')||__).style.width=(linSteps/mx*100)+'%';(document.getElementById('cmpBB')||__).style.width=(binSteps/mx*100)+'%';},300);
   let ins='';
   if(binSteps<linSteps)ins=`⚡ 二分搜尋少了<strong>${linSteps-binSteps}步</strong>！陣列越大，差距越驚人。`;
   else if(binSteps===linSteps)ins=`🤝 這次步數相同，陣列越大時二分搜尋優勢越明顯！`;
   else ins=`這次目標在前段所以循序較快，換一題試試，大多數情況下二分搜尋快很多！`;
-  (((document.getElementById('cmpI')||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',disabled:false,value:'',querySelectorAll:function(){return[];},querySelector:function(){return null;},appendChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}})||{className:'',style:{},textContent:'',innerHTML:'',checked:false,disabled:false,value:'',querySelectorAll:function(){return [];},querySelector:function(){return null;},appendChild:function(){},removeChild:function(){},scrollIntoView:function(){},classList:{add:function(){},remove:function(){},contains:function(){return false;},toggle:function(){}}}).innerHTML=ins;
+  (document.getElementById('cmpI')||__).innerHTML=ins;
   setTimeout(()=>cp.scrollIntoView({behavior:'smooth',block:'start'}),400);
 }
-
 // ── Log ────────────────────────────────────────────────
 function addLog(text,cls){
   document.getElementById('logPanel').style.display='block';
