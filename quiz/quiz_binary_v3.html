@@ -333,7 +333,9 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .lsn.ln{background:var(--orange);}
 .ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
 
-#stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
+#stepCtr{display:none;position:fixed;bottom:16px;left:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
+#giveUpBtn{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #f8717150;border-radius:50px;padding:8px 16px;font-family:'Nunito','Noto Sans TC',sans-serif;font-weight:800;font-size:12px;color:var(--red);z-index:100;box-shadow:0 4px 20px #00000060;cursor:pointer;transition:all .18s;}
+#giveUpBtn:hover{background:#f8717120;border-color:var(--red);}
 
 @media(max-width:600px){
   .cmp-g{grid-template-columns:1fr 1fr;}.cmp-vs{display:none;}
@@ -614,9 +616,10 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 </div>
 
 <div id="stepCtr">第 <span id="stepNum" style="font-size:16px">0</span> 步</div>
+<button id="giveUpBtn" onclick="giveUp()" title="放棄本題（測試用）">🛑 放棄本題</button>
 
 <script>
-const GAS_URL='https://script.google.com/macros/s/AKfycbwUkaLjIDZubkCD79VFf2vEEFaC9mMjUh-lfv_f081392f8YrDJOOFeJvWBrmtdviVw/exec';
+const GAS_URL='https://script.google.com/macros/s/AKfycbxNP8cmdTENvEtQXK7idQocX75GBrIwJgozBNPXayLeMIu4XqwgpphT_Ygwql2Seh8/exec';
 const QUIZ_TYPE='二分搜尋隨堂';
 
 // ══════════════════════════════════════════════════════
@@ -632,7 +635,7 @@ const QUIZ_TYPE='二分搜尋隨堂';
 let arr=[],target=0,mode='binary';
 let bL,bR,bM,linCur;
 let stepCount=0,correctAns=0,wrongAns=0,skippedSteps=0,stepWrong=0;
-let gameOver=false,gameFoundAt=undefined;
+let gameOver=false,gameFoundAt=undefined,gaveUpCur=false;
 let maxSteps=0;
 // v2 fill-in state
 let fiMid=-1,fiDir='',fiBound='',fiStepScores=[];
@@ -731,7 +734,7 @@ function startGame(m,diff=null){
   bL=0;bR=arr.length-1;bM=Math.floor((arr.length-1)/2);
   linCur=0;
   stepCount=0;correctAns=0;wrongAns=0;skippedSteps=0;stepWrong=0;
-  gameOver=false;gameFoundAt=undefined;fiMid=-1;fiDir='';fiBound='';fiStepScores=[];
+  gameOver=false;gameFoundAt=undefined;gaveUpCur=false;fiMid=-1;fiDir='';fiBound='';fiStepScores=[];
   maxSteps=Math.ceil(Math.log2(arr.length));
 
   document.getElementById('gameArea').style.display='block';
@@ -739,6 +742,7 @@ function startGame(m,diff=null){
   document.getElementById('logPanel').style.display='none';
   document.getElementById('choicePanel').style.display='block';
   document.getElementById('stepCtr').style.display='block';
+  document.getElementById('giveUpBtn').style.display='block';
   document.getElementById('logList').innerHTML='';
   document.getElementById('fb').className='fb';
   document.getElementById('resExtra').innerHTML='';
@@ -1457,6 +1461,7 @@ function showFb(ok,txt){const fb=document.getElementById('fb');fb.className='fb 
 function endGame(found,foundIdx){
   gameOver=true;gameFoundAt=found?foundIdx:undefined;
   clearInterval(qTimerInt);
+  document.getElementById('giveUpBtn').style.display='none';
   const qSec=Math.floor((Date.now()-qStartTime)/1000);
   renderAll();
   document.getElementById('choicePanel').style.display='none';
@@ -1470,6 +1475,7 @@ function endGame(found,foundIdx){
   document.getElementById('re').textContent=found?'🎉':'🔍';
   document.getElementById('rt2').className='rt '+(found?'found':'nf');
   document.getElementById('rt2').textContent=found?'找到了！':'找不到！';
+  if(gaveUpCur){document.getElementById('re').textContent='🛑';document.getElementById('rt2').textContent='已放棄！';}
   document.getElementById('rd').innerHTML=found?`<strong>找到了！</strong>共<strong>${stepCount}</strong>步。`:`目標值<strong>${target}</strong>不在陣列中。共<strong>${stepCount}</strong>步確認。`;
   document.getElementById('srow').innerHTML=`<div class="sp">✅ 答對<span>${correctAns}</span></div><div class="sp">❌ 答錯<span>${wrongAns}</span></div><div class="sp">⏭️ 跳過<span>${skippedSteps}</span></div><div class="sp">⏱️<span>${fmt(qSec)}</span></div><div class="sp">🔢 共<span>${stepCount}</span>步</div>`;
 
@@ -1477,7 +1483,8 @@ function endGame(found,foundIdx){
 
   {
     const diff=diffForQ(qCurrent,qTotal);
-    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores],stepErrors:Object.assign({},fiStepErrors)});
+    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores],stepErrors:Object.assign({},fiStepErrors),gaveUp:gaveUpCur});
+    gaveUpCur=false;
     qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
     document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下一題→(${qCurrent+2}/${qTotal})`:'查看成績單 📊';
   }
@@ -1485,6 +1492,16 @@ function endGame(found,foundIdx){
 
 function nextAction(){
   qCurrent++;if(qCurrent>=qTotal){clearInterval(totalTimerInt);showScorecard();}else launchQ();
+}
+
+// ── Give up (testing) ──────────────────────────────────
+function giveUp(){
+  if(gameOver||!quizActive)return;
+  if(!confirm('確定要放棄本題嗎？（將以「未找到」計分並進入結果畫面）'))return;
+  gaveUpCur=true;
+  skippedSteps++;
+  addLog('🛑 手動放棄本題','wl');
+  endGame(false);
 }
 
 // ── Scorecard ──────────────────────────────────────────
@@ -1527,8 +1544,8 @@ function showScorecard(){
   const recapList=document.getElementById('recapList');recapList.innerHTML='';
   qResults.forEach((r,i)=>{
     const card=document.createElement('div');
-    card.className='recap-card'+(r.found&&r.wrong===0?'':r.found?' had-err':' not-found');
-    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認不存在✓</span>'):r.found?'<span class="tag tag-err">找到(有失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(有失誤)</span>':'<span class="tag tag-skip">未完成</span>';
+    card.className='recap-card'+(r.gaveUp?' not-found':r.found&&r.wrong===0?'':r.found?' had-err':' not-found');
+    const tag=r.gaveUp?'<span class="tag tag-skip">🛑 已放棄</span>':r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認不存在✓</span>'):r.found?'<span class="tag tag-err">找到(有失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(有失誤)</span>':'<span class="tag tag-skip">未完成</span>';
     const diffLabel=`<span class="diff-indicator ${r.diff.cls}" style="font-size:12px;padding:2px 8px;">${r.diff.icon}${r.diff.label}</span>`;
 
     // Mini array visual
@@ -1541,7 +1558,9 @@ function showScorecard(){
 
     // Learning hint
     let hint='';
-    if(r.wrong===0&&r.skipped===0){
+    if(r.gaveUp){
+      hint=`<span class="bad">🛑 此題已手動放棄。</span>`;
+    } else if(r.wrong===0&&r.skipped===0){
       if(r.found)hint=`<span class="good">✅ 完美！每一步判斷都正確，找到目標。</span>`;
       else hint=`<span class="good">✅ 完美！正確走完所有步驟，確認目標不存在。（得60/60結果分，與找到目標同分！）</span>`;
     } else if(r.found&&r.wrong>0&&r.skipped===0){
@@ -1578,7 +1597,7 @@ function showScorecard(){
   const tbody=document.getElementById('scTbody');tbody.innerHTML='';
   qResults.forEach((r,i)=>{
     const tr=document.createElement('tr');
-    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認✓</span>'):r.found?'<span class="tag tag-err">找到(失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(失誤)</span>':'<span class="tag tag-skip">未完成</span>';
+    const tag=r.gaveUp?'<span class="tag tag-skip">🛑已放棄</span>':r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">確認✓</span>'):r.found?'<span class="tag tag-err">找到(失誤)</span>':r.skipped===0?'<span class="tag tag-err">未找到(失誤)</span>':'<span class="tag tag-skip">未完成</span>';
     tr.innerHTML=`<td>${i+1}</td><td>${r.diff.icon}${r.diff.label}</td><td>${r.type==='binary'?'⚡二分':'🐢循序'}</td><td>${r.target}</td><td>${tag}</td><td>${r.steps}</td><td style="color:${r.wrong>0?'var(--red)':'var(--green)'}">${r.wrong}</td><td>${fmt(r.sec)}</td>`;
     tbody.appendChild(tr);
   });
