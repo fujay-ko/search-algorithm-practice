@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二�??��? ??填空測�?(體�???v4)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--panel:#1a1d2e;--panel2:#22263a;
+  --accent:#4f8ef7;--accent2:#a78bfa;--green:#34d399;--red:#f87171;
+  --yellow:#fbbf24;--orange:#fb923c;--text:#e8eaf6;--muted:#6b7280;
+  --lc:#4f8ef7;--rc:#a78bfa;--mc:#fbbf24;--oc:#fb923c;--elim:#1e2135;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,.04)1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.04)1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 80px;position:relative;z-index:1;}
+
+header{text-align:center;margin-bottom:22px;}
+.badge{display:inline-block;background:linear-gradient(135deg,#4f8ef720,#a78bfa20);border:1px solid #4f8ef740;border-radius:50px;padding:5px 16px;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:900;background:linear-gradient(135deg,#4f8ef7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:6px;}
+.subtitle{color:var(--muted);font-size:14px;}
+
+
+
+/* Panel */
+.panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;padding:20px;margin-bottom:16px;}
+.pt{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pt::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent);}
+.pt.lo::before{background:var(--orange);}
+
+/* Config */
+.cfgr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+.cfi{display:flex;flex-direction:column;gap:4px;}
+.cfi label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.cfi input[type=number],.cfi select{background:var(--panel2);border:1px solid #ffffff15;border-radius:9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;padding:7px 12px;width:82px;outline:none;transition:border-color .2s;}
+.cfi select{width:auto;}
+.cfi input:focus,.cfi select:focus{border-color:var(--accent);}
+
+
+/* Buttons */
+.btn{border:none;border-radius:11px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;padding:9px 18px;transition:all .18s;}
+.bp{background:linear-gradient(135deg,#4f8ef7,#7c6cf5);color:#fff;box-shadow:0 3px 12px #4f8ef740;}
+.bp:hover{transform:translateY(-2px);}
+.bg2{background:var(--panel2);color:var(--muted);border:1px solid #ffffff10;}
+.bg2:hover{color:var(--text);border-color:#ffffff30;}
+.bo{background:linear-gradient(135deg,#c2410c,#fb923c);color:#fff;}
+.bo:hover{transform:translateY(-2px);}
+.bq{background:linear-gradient(135deg,#059669,#34d399);color:#fff;box-shadow:0 3px 12px #34d39940;}
+.bq:hover{transform:translateY(-2px);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none !important;}
+
+/* Quiz header */
+.qhdr{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:14px;padding:11px 14px;margin-bottom:14px;border:1px solid #34d39930;}
+.qpl{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+.qbb{flex:1;background:#ffffff10;border-radius:50px;height:7px;overflow:hidden;}
+.qbf{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .5s;}
+.qqn{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--green);white-space:nowrap;}
+.wps{display:flex;gap:4px;margin-left:4px;}
+.wp{width:9px;height:9px;border-radius:50%;background:#ffffff15;transition:background .2s;}
+.wp.u{background:var(--red);}
+
+/* ?�?� Timer ?�?� */
+.timer-row{display:flex;gap:10px;margin-bottom:14px;}
+.timer-box{flex:1;background:var(--panel2);border-radius:12px;padding:10px 14px;border:1px solid #ffffff0a;display:flex;align-items:center;gap:10px;}
+.timer-icon{font-size:18px;}
+.timer-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.timer-val{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--text);line-height:1;}
+.timer-val.warn{color:var(--yellow);}
+.timer-val.danger{color:var(--red);animation:pulse-r .6s infinite;}
+@keyframes pulse-r{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Difficulty indicator */
+.diff-indicator{display:inline-flex;align-items:center;gap:5px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;margin-left:auto;}
+.di-E{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+.di-M{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2440;}
+.di-H{background:#f8717120;color:var(--red);border:1px solid #f8717140;}
+
+/* Target */
+.tdisp{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:13px;padding:10px 16px;margin-bottom:14px;border:1px solid #ffffff0f;}
+.tlbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.tval{font-family:'Nunito',sans-serif;font-size:25px;font-weight:900;color:var(--yellow);text-shadow:0 0 18px #fbbf2450;}
+.mpill{font-size:11px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;}
+.mp-l{background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;}
+.mp-b{background:#4f8ef720;color:var(--accent);border:1px solid #4f8ef740;}
+.mp-q{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+
+/* Step cards */
+.si{display:grid;gap:9px;margin-bottom:14px;}
+.sg3{grid-template-columns:repeat(3,1fr);}
+.sg2{grid-template-columns:repeat(2,1fr);}
+.sc{background:var(--panel2);border-radius:13px;padding:11px 13px;border:1px solid #ffffff08;text-align:center;}
+.scl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.scv{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;}
+
+/* Progress bars */
+.lin-prog{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #fb923c20;}
+.lpt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.lpl{font-size:11px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:1px;}
+.lpc{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
+.lpb{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
+.lpbf{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--orange));transition:width .4s;}
+.lwh{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
+.lwh b{color:var(--red);}
+
+.bin-rng{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #4f8ef720;}
+.brt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.brl{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;}
+.brc{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;}
+.brb{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
+.brbf{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .5s;}
+.brh{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
+.brh b{color:var(--accent2);}
+.slb{display:inline-flex;align-items:center;gap:5px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;margin-top:5px;}
+.slb-n{background:#fbbf2420;border:1px solid #fbbf2440;color:var(--yellow);}
+.slb-d{background:#f8717120;border:1px solid #f8717150;color:var(--red);}
+.slb-k{background:#34d39920;border:1px solid #34d39950;color:var(--green);}
+
+/* Array */
+.aw{overflow-x:auto;padding:4px 0 8px;}
+.at{display:flex;gap:0;min-width:fit-content;padding-top:24px;padding-bottom:24px;align-items:center;}
+.cw{display:flex;flex-direction:column;align-items:center;width:52px;flex-shrink:0;}
+.cl{font-size:9px;font-weight:700;color:var(--muted);margin-bottom:2px;height:14px;display:flex;align-items:center;justify-content:center;}
+.cell{width:44px;height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;border:2px solid transparent;transition:all .32s cubic-bezier(.34,1.56,.64,1);background:var(--panel2);color:#8899bb;}
+.cell.active{color:var(--text);border-color:#ffffff15;}
+.cell.cur-l{border-color:var(--oc);background:#fb923c20;color:var(--oc);box-shadow:0 0 16px #fb923c45;transform:scale(1.09);}
+.cell.chk-l{background:#1e1208;color:#4a2a10;border-color:transparent;transform:scale(0.86);}
+@keyframes scan{0%{box-shadow:0 0 0 0 #fb923c60}70%{box-shadow:0 0 0 10px #fb923c00}100%{box-shadow:0 0 0 0 #fb923c00}}
+.cell.scanning{animation:scan .5s ease-out;}
+.cell.lm{border-color:var(--lc);background:#4f8ef720;color:var(--text);box-shadow:0 0 12px #4f8ef740;}
+.cell.rm{border-color:var(--rc);background:#a78bfa20;color:var(--text);box-shadow:0 0 12px #a78bfa40;}
+.cell.mm{border-color:var(--mc);background:#fbbf2420;color:var(--yellow);box-shadow:0 0 16px #fbbf2455;transform:scale(1.1);}
+.cell.found{border-color:var(--green);background:#34d39930;color:var(--green);box-shadow:0 0 20px #34d39975;transform:scale(1.14);}
+.cell.elim{background:var(--elim);color:#1e2850;border-color:transparent;transform:scale(0.86);}
+.ci2{font-size:10px;color:var(--muted);margin-top:3px;font-family:'Nunito',sans-serif;font-weight:700;}
+.cal{height:15px;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:5px;padding:0 3px;min-width:34px;}
+.rbk{font-size:11px;font-weight:800;color:var(--accent);text-align:center;margin-top:4px;font-family:'Nunito',sans-serif;opacity:.7;}
+
+/* Legend */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--muted);}
+.ld{width:10px;height:10px;border-radius:3px;border:2px solid;}
+
+
+/* Choice */
+.cq{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.6;}
+.cq .mv{color:var(--yellow);font-size:16px;}.cq .cv{color:var(--orange);font-size:16px;}
+.cbtns{display:flex;gap:9px;flex-wrap:wrap;}
+.cbtn{flex:1;min-width:110px;padding:11px 12px;border:2px solid transparent;border-radius:13px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:12px;font-weight:800;transition:all .18s;text-align:center;line-height:1.4;}
+.cb-L{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
+.cb-L:hover{background:#4f8ef730;border-color:var(--lc);transform:translateY(-2px);}
+.cb-R{background:#a78bfa15;border-color:#a78bfa40;color:var(--accent2);}
+.cb-R:hover{background:#a78bfa30;border-color:var(--accent2);transform:translateY(-2px);}
+.cb-M{background:#fbbf2415;border-color:#fbbf2440;color:var(--yellow);}
+.cb-M:hover{background:#fbbf2430;border-color:var(--yellow);transform:translateY(-2px);}
+.cb-N{background:#fb923c15;border-color:#fb923c40;color:var(--orange);}
+.cb-N:hover{background:#fb923c30;border-color:var(--orange);transform:translateY(-2px);}
+.cb-F{background:#34d39915;border-color:#34d39940;color:var(--green);}
+.cb-F:hover{background:#34d39930;border-color:var(--green);transform:translateY(-2px);}
+.cbtn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+.cbtn.correct{background:#34d39930;border-color:var(--green);color:var(--green);animation:pg .5s;}
+.cbtn.wrong{background:#f8717130;border-color:var(--red);color:var(--red);animation:sk .4s;}
+.cbtn.locked{opacity:.2;cursor:not-allowed;transform:none;}
+@keyframes pg{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes sk{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* Feedback */
+.fb{border-radius:11px;padding:10px 13px;font-size:12px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;line-height:1.5;}
+.fb.show{display:flex;animation:fi .3s;}
+.fb.correct{background:#34d39920;border:1px solid #34d39960;color:var(--green);}
+.fb.wrong{background:#f8717120;border:1px solid #f8717160;color:#f87171;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* Per-Q result */
+.res-ov{background:var(--panel2);border-radius:18px;padding:24px;text-align:center;border:2px solid var(--green);box-shadow:0 0 36px #34d39925;animation:fi .4s;display:none;}
+.res-ov.show{display:block;}
+.res-ov.nf{border-color:var(--red);box-shadow:0 0 36px #f8717125;}
+.re{font-size:44px;margin-bottom:9px;}
+.rt{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;margin-bottom:7px;}
+.rt.found{color:var(--green);}.rt.nf{color:var(--red);}
+.rd{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;}
+.srow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.sp{background:#ffffff08;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;}
+.sp span{color:var(--yellow);}
+.eff-s{margin:10px 0;}
+.eff-l{font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.eff-bg{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
+.eff-f{height:100%;border-radius:50px;transition:width 1s;background:linear-gradient(90deg,var(--accent),var(--green));}
+.wr-rev{background:#f8717115;border:1px solid #f8717130;border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;color:#f8b0b0;font-weight:600;line-height:1.6;}
+.wr-rev b{color:var(--red);}
+
+
+/* ?�?� SCORECARD ?�?� */
+.scorecard{background:var(--panel);border-radius:20px;padding:28px;border:2px solid var(--green);box-shadow:0 0 48px #34d39930;animation:fi .5s;display:none;}
+.scorecard.show{display:block;}
+.sc-trophy{font-size:60px;margin-bottom:10px;text-align:center;}
+.sc-title{font-family:'Nunito',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px;text-align:center;background:linear-gradient(135deg,#34d399,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sc-stag{display:inline-flex;align-items:center;gap:6px;background:#34d39915;border:1px solid #34d39940;border-radius:50px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;}
+.sc-sub{font-size:12px;color:var(--muted);margin-bottom:20px;text-align:center;}
+.sc-top{display:flex;gap:16px;align-items:center;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
+.sc-ring{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid var(--green);background:linear-gradient(135deg,#34d39915,#4f8ef715);box-shadow:0 0 30px #34d39940;}
+.sc-ring-n{font-family:'Nunito',sans-serif;font-size:38px;font-weight:900;color:var(--green);line-height:1;}
+.sc-ring-s{font-size:11px;color:var(--muted);font-weight:700;}
+.sc-grade{font-family:'Nunito',sans-serif;font-size:56px;font-weight:900;line-height:1;}
+.sc-gl{font-size:13px;font-weight:700;color:var(--muted);}
+.gA{color:var(--green);}.gB{color:var(--accent);}.gC{color:var(--yellow);}.gD{color:var(--red);}
+.sc-pct{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--text);}
+.sc-pct-l{font-size:11px;color:var(--muted);font-weight:700;}
+.sc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:18px;}
+.sc-stat{background:var(--panel2);border-radius:12px;padding:12px;border:1px solid #ffffff08;text-align:center;}
+.sc-sl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.sc-sv{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;}
+
+/* ?�?� Learning recap (per-question analysis) ?�?� */
+.recap-section{margin-bottom:18px;}
+.recap-title{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.recap-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent2);}
+.recap-card{background:var(--panel2);border-radius:12px;padding:14px;margin-bottom:8px;border-left:4px solid var(--green);}
+.recap-card.had-err{border-left-color:var(--yellow);}
+.recap-card.not-found{border-left-color:var(--red);}
+.recap-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.recap-qnum{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
+.recap-time{font-size:11px;color:var(--muted);font-weight:600;}
+.tag{display:inline-block;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:800;}
+.tag-ok{background:#34d39920;color:var(--green);border:1px solid #34d39950;}
+.tag-err{background:#f8717120;color:var(--red);border:1px solid #f8717150;}
+.tag-skip{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2450;}
+.recap-arr{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px;}
+.recap-cell{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:900;border:1px solid transparent;}
+.rc-norm{background:var(--panel);color:#8899bb;}
+.rc-found{background:#34d39930;border-color:var(--green);color:var(--green);}
+.rc-elim{background:var(--elim);color:#2e3455;}
+.recap-hint{font-size:12px;color:#b0b8d4;line-height:1.6;font-weight:600;}
+.recap-hint b{color:var(--text);}
+.recap-hint .good{color:var(--green);}
+.recap-hint .warn{color:var(--yellow);}
+.recap-hint .bad{color:var(--red);}
+
+/* ?�?� Learning suggestion ?�?� */
+.suggestion-box{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;border-radius:14px;padding:16px 20px;margin-bottom:18px;}
+.sug-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.sug-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#b0b8d4;line-height:1.6;margin-bottom:6px;font-weight:600;}
+.sug-item:last-child{margin-bottom:0;}
+.sug-icon{flex-shrink:0;font-size:14px;margin-top:1px;}
+
+/* ?�?� Scorecard table ?�?� */
+.sc-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;}
+.sc-table th{color:var(--muted);font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:6px 8px;border-bottom:1px solid #ffffff10;text-align:left;}
+.sc-table td{padding:8px 8px;border-bottom:1px solid #ffffff08;font-weight:600;}
+.sc-table tr:last-child td{border-bottom:none;}
+
+/* Submit */
+.submit-sec{background:var(--panel2);border-radius:14px;padding:16px;margin-bottom:16px;border:1px solid #34d39930;}
+.submit-st{font-size:13px;font-weight:700;text-align:center;margin-top:10px;min-height:20px;}
+.submit-st.sending{color:var(--yellow);}
+.submit-st.ok{color:var(--green);}
+.submit-st.fail{color:var(--red);}
+
+/* Student modal */
+.smod-bg{position:fixed;inset:0;background:#00000090;z-index:200;display:flex;align-items:center;justify-content:center;animation:fi .2s;}
+.smod{background:var(--panel);border:1px solid #34d39950;border-radius:20px;padding:28px;width:min(420px,90vw);box-shadow:0 8px 40px #00000080;}
+.smod-t{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--green);margin-bottom:6px;}
+.smod-s{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.sfd{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.sfd label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.sfd input{background:var(--panel2);border:1px solid #ffffff15;border-radius:10px;color:var(--text);font-family:'Noto Sans TC','Nunito',sans-serif;font-size:15px;font-weight:700;padding:10px 14px;outline:none;transition:border-color .2s;}
+.sfd input:focus{border-color:var(--green);}
+.sfd input.err{border-color:var(--red);}
+.serr{font-size:11px;color:var(--red);font-weight:700;margin-top:-10px;margin-bottom:8px;display:none;}
+.serr.show{display:block;}
+
+/* Log */
+.log-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:3px;}
+.log-list::-webkit-scrollbar{width:3px;}
+.log-list::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:3px;}
+.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
+.le.sl{border-color:var(--accent);}
+.le.ll{border-color:var(--orange);}
+.le.cl{border-color:var(--green);}
+.le.wl{border-color:var(--red);}
+.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--accent);}
+.lsn.ln{background:var(--orange);}
+.ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
+
+#stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
+
+@media(max-width:600px){
+  .sc-stats{grid-template-columns:repeat(2,1fr);}
+  .sc-top{gap:10px;}
+  /* Mobile: shrink array cells to reduce horizontal scroll */
+  .cw{width:38px;}
+  .cell{width:32px;height:40px;font-size:13px;border-radius:8px;}
+  .ci2{font-size:9px;}
+  .cal{min-width:24px;font-size:8px;}
+  .cl{font-size:8px;}
+  /* Mobile: larger touch targets for fill-in inputs */
+  .iinp2{font-size:18px;padding:9px 10px;width:68px;}
+  .cfbtn2{width:100%;padding:12px;}
+}
+@media(max-width:400px){
+  .cw{width:30px;}
+  .cell{width:26px;height:34px;font-size:11px;border-radius:6px;}
+}
+
+/* ?�?� v2 fill-in ?�?� */
+.fiw{background:var(--panel2);border:1px solid #ffffff10;border-radius:14px;padding:16px 18px;margin-top:4px;}
+.fistep{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.fistep.active{color:var(--accent);}
+.fiinfo{font-size:14px;font-weight:700;color:#b0b8d4;margin-bottom:12px;line-height:1.8;}
+.fiinfo .mv{color:var(--yellow);font-size:17px;font-family:'Nunito',sans-serif;font-weight:900;}
+.fi-div{border:none;border-top:1px solid #ffffff0a;margin:12px 0;}
+.irow2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.ilbl2{font-size:13px;font-weight:700;color:var(--text);}
+.iinp2{background:var(--bg);border:2px solid #ffffff25;border-radius:9px;color:var(--text);
+  font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;padding:7px 14px;width:76px;
+  outline:none;text-align:center;transition:border-color .2s;}
+.iinp2:focus{border-color:var(--yellow);}
+.iinp2.ok2{border-color:var(--green);background:#34d39915;color:var(--green);}
+.iinp2.err2{border-color:var(--red);background:#f8717115;color:var(--red);}
+.ihint2{font-size:12px;color:var(--muted);font-weight:600;}
+.drow2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.db2{flex:1;min-width:90px;padding:10px 10px;border:2px solid transparent;border-radius:12px;
+  cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:12px;font-weight:800;
+  transition:all .18s;text-align:center;line-height:1.4;}
+.db2:disabled{opacity:.3;cursor:not-allowed;}
+.db2-l{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
+.db2-l:hover,.db2-l.sel{background:#4f8ef730;border-color:var(--lc);}
+.db2-f{background:#34d39915;border-color:#34d39940;color:var(--green);}
+.db2-f:hover,.db2-f.sel{background:#34d39930;border-color:var(--green);}
+.db2-r{background:#a78bfa15;border-color:#a78bfa40;color:var(--accent2);}
+.db2-r:hover,.db2-r.sel{background:#a78bfa30;border-color:var(--accent2);}
+.db2-bl{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
+.db2-bl:hover,.db2-bl.sel{background:#4f8ef730;border-color:var(--lc);}
+.db2-br{background:#a78bfa15;border-color:#a78bfa40;color:var(--rc);}
+.db2-br:hover,.db2-br.sel{background:#a78bfa30;border-color:var(--rc);}
+.cfbtn2{background:linear-gradient(135deg,#4f8ef7,#7c6cf5);color:#fff;border:none;
+  border-radius:11px;padding:10px 22px;font-family:'Nunito',sans-serif;font-size:13px;
+  font-weight:800;cursor:pointer;transition:all .18s;margin-top:4px;}
+.cfbtn2:hover{transform:translateY(-2px);}
+.cfbtn2:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+.chk-ok2{color:var(--green);font-size:11px;font-weight:700;margin-left:6px;}
+.cell.preview-l{border-color:var(--lc);opacity:.6;box-shadow:0 0 8px var(--lc)40;}
+.cell.preview-r{border-color:var(--rc);opacity:.6;box-shadow:0 0 8px var(--rc)40;}
+.cell.preview-m{border-color:var(--mc);opacity:.6;box-shadow:0 0 8px var(--mc)40;}
+
+/* Teach hint after correct */
+.teach-hint{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;
+  border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;font-weight:600;
+  color:#b0b8d4;line-height:1.7;display:none;animation:fi .3s;}
+.teach-hint.show{display:block;}
+.teach-hint b{color:var(--yellow);}
+.teach-hint .good{color:var(--green);}
+
+/* Error analysis panel
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="badge">�??測�?(體�???</div>
+  <h1>?? 二�??��?法測�?體�???</h1>
+  <p class="subtitle">填空測�? ??請填寫�??��??��?作�?</p>
+</header>
+
+
+
+
+
+
+
+
+
+<!-- Config -->
+<div class="panel" id="cfgPanel">
+  <div class="pt" id="cfgPt">測�?設�?</div>
+  <!-- Quiz config -->
+  <div class="cfgr" id="quizCfg">
+    <div class="cfi"><label>題數</label>
+      <select id="qTot"><option value="3">3�?/option><option value="5" selected>5�?/option><option value="8">8�?/option><option value="10">10�?/option></select>
+    </div>
+    <div class="cfi"><label>每步?�多�???/label>
+      <select id="qMW"><option value="1">1�?/option><option value="2">2�?/option><option value="3" selected>3�?/option></select>
+    </div>
+    <button class="btn bq" onclick="startQuiz()">?? ?��?測�?</button>
+  </div>
+</div>
+
+<!-- Game area -->
+<div id="gameArea" style="display:none">
+
+  <!-- Quiz progress -->
+  <div class="qhdr" id="qHdr" style="display:none">
+    <div class="qpl">?�度</div>
+    <div class="qbb"><div class="qbf" id="qBF" style="width:0%"></div></div>
+    <div class="qqn" id="qQN">1/5</div>
+    <div class="wps" id="wPills"></div>
+  </div>
+
+  <!-- Timer row (quiz only) -->
+  <div class="timer-row" id="timerRow" style="display:none">
+    <div class="timer-box">
+      <div class="timer-icon">?��?</div>
+      <div>
+        <div class="timer-lbl">?��??��?</div>
+        <div class="timer-val" id="qTimer">0:00</div>
+      </div>
+    </div>
+    <div class="timer-box">
+      <div class="timer-icon">??</div>
+      <div>
+        <div class="timer-lbl">總�???/div>
+        <div class="timer-val" id="totalTimer">0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target -->
+  <div class="tdisp">
+    <div class="tlbl">?�� ?��?</div>
+    <div class="tval" id="tDisp">??/div>
+    <div class="diff-indicator" id="diffInd" style="display:none"></div>
+    <div class="mpill" id="mPill"></div>
+  </div>
+
+  <!-- Binary step cards -->
+  <div class="si sg3" id="bSI">
+    <div class="sc"><div class="scl" style="color:var(--lc)">Left</div><div class="scv" id="lVal" style="color:var(--lc)">??/div></div>
+    <div class="sc"><div class="scl" style="color:var(--mc)">Mid（�?對中�?/div><div class="scv" id="mVal" style="color:var(--mc)">??/div></div>
+    <div class="sc"><div class="scl" style="color:var(--rc)">Right</div><div class="scv" id="rVal" style="color:var(--rc)">??/div></div>
+  </div>
+  <!-- Binary range -->
+  <div class="bin-rng" id="binRng">
+    <div class="brt"><div class="brl">?�� ?��?範�?</div><div class="brc"><span id="rngCnt" style="color:var(--accent)">??/span> ?�可??/div></div>
+    <div class="brb"><div class="brbf" id="rngBar" style="width:100%"></div></div>
+    <div class="brh" id="binHint"></div>
+    <div id="slBadge"></div>
+  </div>
+
+  <!-- Linear step cards -->
+  <div class="si sg2" id="lSI" style="display:none">
+    <div class="sc"><div class="scl" style="color:var(--oc)">?��?位置</div><div class="scv" id="curPos" style="color:var(--oc)">??/div></div>
+    <div class="sc"><div class="scl" style="color:var(--muted)">已檢??/div><div class="scv" id="chkCnt" style="color:var(--text)">0</div></div>
+  </div>
+  <!-- Linear progress -->
+  <div class="lin-prog" id="linProg" style="display:none">
+    <div class="lpt"><div class="lpl">?? ?��??�度</div><div class="lpc"><span id="lpCnt">0</span>/<span id="lpTot">??/span> ??/div></div>
+    <div class="lpb"><div class="lpbf" id="lpBar" style="width:0%"></div></div>
+    <div class="lwh" id="lwh"></div>
+  </div>
+
+  <!-- Array -->
+  <div class="panel">
+    <div class="pt" id="arrPt">???</div>
+    <div class="aw"><div class="at" id="arrTrack"></div></div>
+    <div id="rbk" class="rbk"></div>
+    <div class="legend" id="legB">
+      <div class="li"><div class="ld" style="border-color:var(--lc);background:#4f8ef720"></div>Left（�??��?</div>
+      <div class="li"><div class="ld" style="border-color:var(--mc);background:#fbbf2420"></div>Mid（�??��?</div>
+      <div class="li"><div class="ld" style="border-color:var(--rc);background:#a78bfa20"></div>Right（紫?��?</div>
+      <div class="li"><div class="ld" style="border-color:var(--green);background:#34d39930"></div>?�到�?/div>
+      <div class="li"><div class="ld" style="border-color:transparent;background:var(--elim)"></div>已�???/div>
+    </div>
+    <div class="legend" id="legL" style="display:none">
+      <div class="li"><div class="ld" style="border-color:var(--oc);background:#fb923c20"></div>?��?比�?</div>
+      <div class="li"><div class="ld" style="border-color:var(--green);background:#34d39930"></div>?�到�?/div>
+      <div class="li"><div class="ld" style="border-color:transparent;background:#1e1208"></div>已跳??/div>
+      <div class="li"><div class="ld" style="border-color:#ffffff15;background:var(--panel2)"></div>?�檢??/div>
+    </div>
+  </div>
+
+  <!-- Choice -->
+  <div class="panel" id="choicePanel">
+    <div class="pt" id="choicePt">你�?決�?</div>
+    <div class="cq" id="cq"></div>
+    <div class="cbtns" id="cbtns"></div>
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <!-- Per-Q result -->
+  <div class="res-ov" id="resOv">
+    <div class="re" id="re"></div>
+    <div class="rt" id="rt2"></div>
+    <div class="rd" id="rd"></div>
+    <div class="srow" id="srow"></div>
+    <div class="eff-s" id="effS" style="display:none">
+      <div class="eff-l">?��?評�?</div>
+      <div class="eff-bg"><div class="eff-f" id="effBar" style="width:0%"></div></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px;" id="effLbl"></div>
+    </div>
+    <div id="wrRev"></div>
+    <div id="resExtra"></div>
+    <button class="btn bp" id="nextBtn" onclick="nextAction()" style="margin-top:12px">?��?一�??��</button>
+  </div>
+
+  <!-- Log -->
+  <div class="panel" id="logPanel" style="display:none">
+    <div class="pt" id="logPt">?��?紀??/div>
+    <div class="log-list" id="logList"></div>
+  </div>
+</div>
+
+<!-- SCORECARD -->
+<div class="scorecard" id="scorecard">
+  <div class="sc-trophy" id="scT"></div>
+  <div class="sc-title">測�??�績??/div>
+  <div style="text-align:center;margin-bottom:8px"><div class="sc-stag" id="scStag">?�� ??/div></div>
+  <div class="sc-sub" id="scSub"></div>
+
+  <div class="sc-top">
+    <div style="text-align:center">
+      <div class="sc-ring"><div class="sc-ring-n" id="scN"></div><div class="sc-ring-s" id="scD"></div></div>
+    </div>
+    <div style="text-align:center">
+      <div class="sc-grade" id="scGr"></div>
+      <div class="sc-gl" id="scGL"></div>
+    </div>
+    <div style="text-align:center">
+      <div class="sc-pct" id="scPct"></div>
+      <div class="sc-pct-l">?��???/div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;" id="scPctNote"></div>
+    </div>
+  </div>
+
+  <div class="sc-stats">
+    <div class="sc-stat"><div class="sc-sl">總�???/div><div class="sc-sv" id="scTime" style="color:var(--accent)">??/div></div>
+    <div class="sc-stat"><div class="sc-sl">總步�?/div><div class="sc-sv" id="scSt" style="color:var(--accent2)">??/div></div>
+    <div class="sc-stat"><div class="sc-sl">答錯次數</div><div class="sc-sv" id="scWr" style="color:var(--red)">??/div></div>
+    <div class="sc-stat"><div class="sc-sl">跳�?步�?</div><div class="sc-sv" id="scSk" style="color:var(--yellow)">??/div></div>
+  </div>
+
+  <!-- Per-question recap -->
+  <div class="recap-section">
+    <div class="recap-title">每�??�顧</div>
+    <div id="recapList"></div>
+  </div>
+
+  <!-- Learning suggestions -->
+  <div class="suggestion-box" id="sugBox" style="display:none">
+    <div class="sug-title">?? 學�?建議</div>
+    <div id="sugList"></div>
+  </div>
+
+  <!-- Summary table -->
+  <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">?�績總表</div>
+  <table class="sc-table">
+    <thead><tr><th>題�?</th><th>??��</th><th>?��?�?/th><th>?��?</th><th>結�?</th><th>步�?</th><th>答錯</th><th>?��?</th></tr></thead>
+    <tbody id="scTbody"></tbody>
+  </table>
+
+  <!-- Submit -->
+  <div class="submit-sec">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">?�� ?�出?�績給老師</div>
+    <button class="btn bq" style="width:100%" id="submitBtn" onclick="submitGS()">?�出?�績 ??/button>
+    <div class="submit-st" id="submitSt"></div>
+  </div>
+
+  <button class="btn bq" onclick="startQuiz()" style="margin-right:8px">?? ?�測一�?/button>
+</div>
+
+<!-- Student modal -->
+<div class="smod-bg" id="sModal" style="display:none">
+  <div class="smod">
+    <div class="smod-t">?? 測�??��???/div>
+    <div class="smod-s">請填寫以下�??��?完�?後�?績�??��??�出給老師??/div>
+    <div class="sfd"><label>?��?</label><input type="text" id="inClass" placeholder="例�?�?03" maxlength="10" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('inSeat').focus()"></div>
+    <div class="sfd"><label>座�?</label><input type="number" id="inSeat" placeholder="例�?�?2" min="1" max="60" onkeydown="if(event.key==='Enter')document.getElementById('inName').focus()"></div>
+    <div class="sfd"><label>姓�?</label><input type="text" id="inName" placeholder="請輸?��??? maxlength="20" autocomplete="off" onkeydown="if(event.key==='Enter')confirmStudent()"></div>
+    <div class="serr" id="sErr">請填寫�??��?位�?</div>
+    <button class="btn bq" style="width:100%;margin-top:4px;padding:12px;" onclick="confirmStudent()">確�?，�?始測�???</button>
+  </div>
+</div>
+
+<div id="stepCtr">�?<span id="stepNum" style="font-size:16px">0</span> �?/div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbwUkaLjIDZubkCD79VFf2vEEFaC9mMjUh-lfv_f081392f8YrDJOOFeJvWBrmtdviVw/exec';
+const QUIZ_TYPE='二�??��??��?';
+
+// Google 表單設定 - 填入你的表單 ID 與各欄位 entry ID
+const GFORM = {
+  FORM_ID:       '填入你�?表單ID',
+  entry_class:   'entry.填入?��??�ID',
+  entry_seat:    'entry.填入座�??�ID',
+  entry_name:    'entry.填入姓�??�ID',
+  entry_grade:   'entry.填入等第?�ID',
+  entry_pct:     'entry.填入?��??��?ID',
+  entry_perfect: 'entry.填入完�?題數?�ID',
+  entry_steps:   'entry.填入總步驟�?ID',
+  entry_wrong:   'entry.填入答錯?�ID',
+  entry_skip:    'entry.填入跳�??�ID',
+  entry_time:    'entry.填入總�??��??�ID',
+  entry_detail:  'entry.填入題目?�細?�ID',
+};
+
+// ?�?� Helpers ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function clearAllTimers(){clearInterval(qTimerInt);clearInterval(totalTimerInt);qTimerInt=null;totalTimerInt=null;}
+
+// ?�?� State ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+let arr=[],target=0,mode='binary';
+let bL,bR,bM,linCur;
+let stepCount=0,correctAns=0,wrongAns=0,skippedSteps=0,stepWrong=0;
+let gameOver=false,gameFoundAt=undefined;
+let maxSteps=0;
+// v2 fill-in state
+let fiMid=-1,fiDir='',fiBound='',fiStepScores=[];
+let fiStepErrors={'確�?L/R':0,'計�?mid':0,'?�斷?��?':0,'?��???:0,'填索�?:0};
+// v3: per-step timing and error tracking
+let stepTimes={};        // {stepName: seconds}
+let stepErrors={};       // {stepName: errorCount} across whole practice session
+let curQSteps=[];        // steps for current question
+let curStepStart=0;      // timestamp when current step started
+let previewL=-1,previewR=-1,previewM=-1; // live preview while typing
+let fiHideLR=false;  // hide Left/Right colours (step 0)
+let fiHideM=false;   // hide Mid colour (step 1)
+
+// Student
+let sClass='',sSeat='',sName='';
+
+// Quiz
+let qTotal=5,qMaxWrong=3;
+let qCurrent=0,qResults=[],qTotSteps=0,qWrongAll=0,qSkipAll=0;
+
+// Timer
+let qTimerSec=0,totalTimerSec=0;
+let qTimerInt=null,totalTimerInt=null;
+let qStartTime=0;
+
+// ?�?� Generate array ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function genArr(size,forceNF=false){
+  const set=new Set();
+  while(set.size<size)set.add(Math.floor(Math.random()*80)+5);
+  arr=Array.from(set).sort((a,b)=>a-b);
+  if(forceNF){let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);target=arr.includes(t)?arr[arr.length-1]+3:t;}
+  else target=Math.random()<0.8?arr[Math.floor(Math.random()*arr.length)]:(() => {let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);return t;})();
+}
+
+// ?�?� Quiz difficulty levels ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+// Returns {size, forceNotFound} based on question index
+function diffForQ(i,total){
+  const pct=(i+1)/total;
+  function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+  if(pct<=0.4){const s=rnd(5,8);  return {size:s,nf:false,label:'簡單('+s+'??',cls:'di-E',icon:'?��',desc:'?��?練�?'};}
+  if(pct<=0.8){const s=rnd(9,13); return {size:s,nf:false,label:'中�?('+s+'??',cls:'di-M',icon:'?��',desc:'?��??�戰'};}
+  const s=rnd(14,17); return {size:s,nf:true,label:'?�難('+s+'??',cls:'di-H',icon:'?��',desc:'?�目標�?存在'};
+}
+
+
+
+// ?�?� Quiz ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function startQuiz(){
+  document.getElementById('sModal').style.display='flex';
+  document.getElementById('sErr').className='serr';
+  ['inClass','inSeat','inName'].forEach(id=>{const _e=document.getElementById(id);if(_e)_e.classList.remove('err');});
+}
+
+function confirmStudent(){
+  const c=document.getElementById('inClass').value.trim();
+  const s=document.getElementById('inSeat').value.trim();
+  const n=document.getElementById('inName').value.trim();
+  let err=false;
+  ['inClass','inSeat','inName'].forEach(id=>document.getElementById(id).classList.remove('err'));
+  if(!c){document.getElementById('inClass').classList.add('err');err=true;}
+  if(!s||isNaN(parseInt(s))||parseInt(s)<1){document.getElementById('inSeat').classList.add('err');err=true;}
+  if(!n||n.length<1){document.getElementById('inName').classList.add('err');err=true;}
+  if(err){document.getElementById('sErr').className='serr show';document.getElementById('sErr').textContent='請正確填寫�??��?位�?座�??�為?��???;return;}
+  sClass=c;sSeat=parseInt(s);sName=n;
+  document.getElementById('sModal').style.display='none';
+  qTotal=parseInt(document.getElementById('qTot').value)||5;
+  qMaxWrong=parseInt(document.getElementById('qMW').value)||3;
+  qCurrent=0;qResults=[];qTotSteps=0;qWrongAll=0;qSkipAll=0;
+  document.getElementById('scorecard').className='scorecard';
+  // Start total timer (always clear first to avoid stacking)
+  totalTimerSec=0;
+  clearAllTimers();
+  totalTimerInt=setInterval(()=>{totalTimerSec++;document.getElementById('totalTimer').textContent=fmt(totalTimerSec);},1000);
+  launchQ();
+}
+
+function launchQ(){
+  const diff=diffForQ(qCurrent,qTotal);
+  const type='binary';
+  genArr(diff.size,diff.nf);
+  mode=type;
+  updateModeUI(diff);
+  startGame(type,diff);
+}
+
+function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
+
+// ?�?� Start game session ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function startGame(m,diff=null){
+  mode=m;
+  bL=0;bR=arr.length-1;bM=Math.floor((arr.length-1)/2);
+  linCur=0;
+  stepCount=0;correctAns=0;wrongAns=0;skippedSteps=0;stepWrong=0;
+  gameOver=false;gameFoundAt=undefined;fiMid=-1;fiDir='';fiBound='';fiStepScores=[];
+  maxSteps=Math.ceil(Math.log2(arr.length));
+
+  document.getElementById('gameArea').style.display='block';
+  document.getElementById('resOv').style.display='none';
+  document.getElementById('logPanel').style.display='none';
+  document.getElementById('choicePanel').style.display='block';
+  document.getElementById('stepCtr').style.display='block';
+  document.getElementById('logList').innerHTML='';
+  document.getElementById('fb').className='fb';
+  document.getElementById('resExtra').innerHTML='';
+  document.getElementById('effS').style.display='none';
+  document.getElementById('wrRev').innerHTML='';
+
+  // Quiz header & timer
+  document.getElementById('qHdr').style.display='flex';
+  document.getElementById('timerRow').style.display='flex';
+  document.getElementById('qQN').textContent=`${qCurrent+1}/${qTotal}`;
+  document.getElementById('qBF').style.width=`${(qCurrent/qTotal)*100}%`;
+  updateWPills(0);
+  document.getElementById('nextBtn').textContent='下一題開始';
+  // Per-Q timer (clear first to prevent stacking)
+  qTimerSec=0;qStartTime=Date.now();
+  clearInterval(qTimerInt);qTimerInt=null;
+  qTimerInt=setInterval(()=>{
+    qTimerSec=Math.floor((Date.now()-qStartTime)/1000);
+    const el=document.getElementById('qTimer');
+    el.textContent=fmt(qTimerSec);
+    el.className='timer-val'+(qTimerSec>60?' warn':qTimerSec>120?' danger':'');
+  },1000);
+  // Difficulty indicator
+  if(diff){
+    const di=document.getElementById('diffInd');
+    di.style.display='inline-flex';
+    di.className='diff-indicator '+diff.cls;
+    di.textContent=diff.icon+' '+diff.label;
+    di.title=diff.desc||'';
+  }
+  } else {
+    document.getElementById('qHdr').style.display='none';
+    document.getElementById('timerRow').style.display='none';
+    document.getElementById('diffInd').style.display='none';
+    document.getElementById('nextBtn').textContent='?��?一�??��';
+  }
+
+  updateModeUI(diff);
+  addLog(`?��?二�??��?，長�?${arr.length}，目標�?<b>${target}</b>?�`,'sl');
+  renderAll();renderQ();
+}
+
+// ?�?� UI helpers ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function updateModeUI(diff=null){
+  const m=mode;
+  document.getElementById('bSI').style.display=m==='binary'?'grid':'none';
+  document.getElementById('binRng').style.display=m==='binary'?'block':'none';
+  document.getElementById('lSI').style.display=m==='linear'?'grid':'none';
+  document.getElementById('linProg').style.display=m==='linear'?'block':'none';
+  document.getElementById('legB').style.display=m==='binary'?'flex':'none';
+  document.getElementById('legL').style.display=m==='linear'?'flex':'none';
+  ['arrPt','choicePt','logPt'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='pt'+(m==='linear'?' lo':'');});
+  document.getElementById('stepNum').style.color=m==='linear'?'var(--orange)':'var(--accent)';
+  const pill=document.getElementById('mPill');
+  pill.className='mpill mp-q';pill.textContent=`?? �?{qCurrent+1}題`;
+}
+
+function updateWPills(n){
+  const c=document.getElementById('wPills');c.innerHTML='';
+  for(let i=0;i<qMaxWrong;i++){const d=document.createElement('div');d.className='wp'+(i<n?' u':'');c.appendChild(d);}
+}
+
+function updateLinProg(){
+  const pct=Math.round((linCur/arr.length)*100);
+  document.getElementById('lpCnt').textContent=linCur;
+  document.getElementById('lpTot').textContent=arr.length;
+  document.getElementById('lpBar').style.width=pct+'%';
+  const wh=document.getElementById('lwh');
+  if(linCur===0)wh.innerHTML=`<b>?�壞�?�?/b>：目標在?�後�?不�?????要�?�?<b>${arr.length}�?/b>`;
+  else wh.innerHTML=`已�???{linCur}?��??�剩<b>${arr.length-linCur}</b>?�`;
+}
+
+function updateBinRange(){
+  const rs=bR-bL+1,pct=Math.round((rs/arr.length)*100);
+  document.getElementById('rngCnt').textContent=fiHideLR?'?':rs;
+  document.getElementById('rngBar').style.width=pct+'%';
+  document.getElementById('rngCnt').style.color=pct>50?'var(--accent)':pct>20?'var(--yellow)':'var(--green)';
+  const rem=Math.ceil(Math.log2(rs+1));
+  document.getElementById('binHint').textContent='';
+  const left=maxSteps-stepCount;
+  const badge=document.getElementById('slBadge');
+  if(stepCount===0)badge.innerHTML=`<span class="slb slb-n">???�戰：�?佳步??{maxSteps}�?/span>`;
+  else if(left<=1)badge.innerHTML=`<span class="slb slb-d">??快到?�佳步?��?！�???{left}�?/span>`;
+  else badge.innerHTML=`<span class="slb slb-k">??已用${stepCount}步�??��?{maxSteps}�?/span>`;
+}
+
+// ?�?� Render array ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function renderAll(){
+  document.getElementById('tDisp').textContent=target;
+  document.getElementById('stepNum').textContent=stepCount;
+  document.getElementById('lVal').textContent='';
+  document.getElementById('mVal').textContent='';
+  document.getElementById('rVal').textContent='';
+  if(!gameOver)updateBinRange();
+  const track=document.getElementById('arrTrack');track.innerHTML='';
+  for(let i=0;i<arr.length;i++){
+    const w=el('div','cw'),tl=el('div','cl'),cell=el('div','cell'),idx=el('div','ci2'),al=el('div','cal');
+    idx.textContent='';
+    const lb=[];
+    if(!fiHideLR){
+      if(i===bL&&!gameOver) lb.push('<span style="color:var(--lc);font-size:9px">?�L</span>');
+      if(i===bR&&!gameOver) lb.push('<span style="color:var(--rc);font-size:9px">?�R</span>');
+    }
+    tl.innerHTML=lb.join(' ');
+    if(gameOver){
+      cell.classList.add(gameFoundAt===i?'found':'elim');
+    } else if(fiHideLR){
+      cell.classList.add('active');
+    } else if(i<bL||i>bR){
+      cell.classList.add('elim');
+    } else if(i===bM&&!fiHideM){
+      cell.classList.add('mm');
+    } else if(i===bL){
+      cell.classList.add('lm');
+    } else if(i===bR){
+      cell.classList.add('rm');
+    } else {
+      cell.classList.add('active');
+    }
+    if(!fiHideM&&!gameOver&&i===bM){al.style.background='#fbbf2420';al.style.color='var(--mc)';al.textContent='mid';}
+    cell.textContent=arr[i];
+    w.appendChild(tl);w.appendChild(cell);w.appendChild(idx);w.appendChild(al);track.appendChild(w);
+  }
+  const rbk=document.getElementById('rbk');
+  rbk.textContent='';
+}
+function el(tag,cls){const e=document.createElement(tag);e.className=cls;return e;}
+
+// ?�?� Render question ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function renderQ(){
+  if(gameOver)return;
+  document.getElementById('fb').className='fb';
+  const q=document.getElementById('cq'),bc=document.getElementById('cbtns');bc.innerHTML='';
+  q.innerHTML = '?��? = <span class="mv">'+target+'</span>';
+  bc.innerHTML = '';
+  fiMid=-1; fiDir=''; fiBound=''; fiStepScores=[]; fiStepErrors={'確�?L/R':0,'計�?mid':0,'?�斷?��?':0,'?��???:0,'填索�?:0}; stepTimes={}; curQSteps=[]; curStepStart=Date.now();previewL=-1;previewR=-1;previewM=-1;fiHideLR=true;fiHideM=true;
+  renderFiS0();
+}
+
+// ?��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��??��???// Four-step fill-in for binary search
+
+function getFiWrap(){
+  const bc=document.getElementById('cbtns');
+  const w=document.getElementById('fiWrap');
+  if(!w){
+    w=document.createElement('div');
+    w.className='fiw';
+    w.id='fiWrap';
+    bc.appendChild(w);
+  }
+  return w;
+}
+
+function addFiStep(w,num,text,active){
+  const d=document.createElement('div');
+  d.className='fistep'+(active?' active':'');
+  d.id='fiStep'+num;
+  d.textContent=text;
+  w.appendChild(d);
+}
+
+function markFiStepDone(num,summary){
+  const el=document.getElementById('fiStep'+num);
+  if(el){
+    el.classList.remove('active');
+    el.innerHTML=summary+' <span class="chk-ok2">??/span>';
+  }
+}
+
+function addFiDivider(w){
+  const hr=document.createElement('hr');
+  hr.className='fi-div';
+  w.appendChild(hr);
+}
+
+// Live preview: update array display as student types
+function updatePreview(){
+  const inpL=document.getElementById('fi0inpL');
+  const inpR=document.getElementById('fi0inpR');
+  const inpM=document.getElementById('fi1inp');
+  previewL=inpL?parseInt(inpL.value):-1;
+  previewR=inpR?parseInt(inpR.value):-1;
+  previewM=inpM?parseInt(inpM.value):-1;
+  renderAllPreview();
+}
+
+function renderAllPreview(){
+  // Re-render just the array cells with preview markers
+  const track=document.getElementById('arrTrack');
+  if(!track)return;
+  const cells=track.querySelectorAll('.cw');
+  cells.forEach(function(cw,i){
+    const tl=cw.querySelector('.cl');
+    const cell=cw.querySelector('.cell');
+    if(!tl||!cell)return;
+
+    const ptl=[];
+    // Restore confirmed ?�L ?�R labels
+    if(!fiHideLR&&!gameOver){
+      if(i===bL) ptl.push('<span style="color:var(--lc);font-size:9px">?�L</span>');
+      if(i===bR) ptl.push('<span style="color:var(--rc);font-size:9px">?�R</span>');
+    }
+    // Remove preview classes
+    cell.classList.remove('preview-l','preview-r','preview-m');
+    // Add preview highlight if valid index matches
+    if(!gameOver){
+      if(!isNaN(previewL)&&previewL>=0&&previewL<arr.length&&i===previewL){
+        cell.classList.add('preview-l');
+        ptl.push('<span style="color:var(--lc);font-size:9px;opacity:.6">?�L?</span>');
+      }
+      if(!isNaN(previewR)&&previewR>=0&&previewR<arr.length&&i===previewR){
+        cell.classList.add('preview-r');
+        ptl.push('<span style="color:var(--rc);font-size:9px;opacity:.6">?�R?</span>');
+      }
+      if(!isNaN(previewM)&&previewM>=0&&previewM<arr.length&&i===previewM){
+        cell.classList.add('preview-m');
+      }
+    }
+    tl.innerHTML=ptl.join(' ');
+  });
+}
+
+
+// ?�?� Step timing helpers ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function startStepTimer(){
+  curStepStart=Date.now();
+}
+
+function endStepTimer(stepName){
+  const sec=Math.round((Date.now()-curStepStart)/1000);
+  stepTimes[stepName]=sec;
+  return sec;
+}
+
+function recordStep(stepName,wrong,ans,hint){
+  const sec=stepTimes[stepName]||0;
+  curQSteps.push({name:stepName,time:sec,wrong:wrong,ans:ans,hint:hint});
+  // Accumulate errors
+  if(!stepErrors[stepName]) stepErrors[stepName]=0;
+  stepErrors[stepName]+=wrong;
+}
+
+function showTeachHint(text){
+  const existing=document.getElementById('teachHint');
+  if(existing) existing.remove();
+  const div=document.createElement('div');
+  div.className='teach-hint show';
+  div.id='teachHint';
+  div.innerHTML='?�� '+text;
+  document.getElementById('fiWrap').appendChild(div);
+}
+
+function removeTeachHint(){
+  const el=document.getElementById('teachHint');
+  if(el) el.remove();
+}
+
+// Step 0: confirm Left and Right
+function renderFiS0(){
+  fiHideLR=true; fiHideM=true;
+  renderAll();
+  startStepTimer(); removeTeachHint();
+  const w=getFiWrap();
+  w.innerHTML='';
+  addFiStep(w,0,'第�?步�?確�??��???Left ??Right 索�?',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.textContent='填入?��? Left ??Right ?�索引值�?';
+  w.appendChild(info);
+
+  // Left input row
+  const row1=document.createElement('div'); row1.className='irow2';
+  const lbl1=document.createElement('span'); lbl1.className='ilbl2';
+  lbl1.innerHTML='Left = ';
+  const inp1=document.createElement('input');
+  inp1.className='iinp2'; inp1.id='fi0inpL'; inp1.type='number'; inp1.placeholder='?';
+  inp1.setAttribute('min',0); inp1.setAttribute('max',arr.length-1);
+  inp1.addEventListener('input',updatePreview);
+  row1.appendChild(lbl1); row1.appendChild(inp1);
+  w.appendChild(row1);
+
+  // Right input row
+  const row2=document.createElement('div'); row2.className='irow2';
+  const lbl2=document.createElement('span'); lbl2.className='ilbl2';
+  lbl2.innerHTML='Right = ';
+  const inp2=document.createElement('input');
+  inp2.className='iinp2'; inp2.id='fi0inpR'; inp2.type='number'; inp2.placeholder='?';
+  inp2.setAttribute('min',0); inp2.setAttribute('max',arr.length-1);
+  inp2.addEventListener('input',updatePreview);
+  inp2.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS0();});
+  row2.appendChild(lbl2); row2.appendChild(inp2);
+  w.appendChild(row2);
+
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確�? ??;
+  btn.addEventListener('click',cfmFiS0);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi0inpL');if(i)i.focus();},100);
+}
+
+function cfmFiS0(){
+  const inpL=document.getElementById('fi0inpL');
+  const inpR=document.getElementById('fi0inpR');
+  const valL=parseInt(inpL?inpL.value:'');
+  const valR=parseInt(inpR?inpR.value:'');
+  if(isNaN(valL)||isNaN(valR)){
+    showFb(false,'??請填??Left ??Right ?�索引�?');
+    return;
+  }
+  const errL=valL!==bL;
+  const errR=valR!==bR;
+  if(!errL&&!errR){
+    correctAns++;
+    fiStepScores.push(Math.max(0,4-stepWrong));
+    if(inpL)inpL.classList.add('ok2');
+    if(inpR)inpR.classList.add('ok2');
+    if(fiStepErrors)fiStepErrors['確�?L/R']=(fiStepErrors['確�?L/R']||0)+stepWrong;
+    endStepTimer('確�?L/R'); recordStep('確�?L/R',stepWrong,'Left='+bL+',Right='+bR,'Left?��?左�??�索引�?Right?��??��??�索引�?);
+    showFb(true,'??�?���?);
+    addLog('確�? Left/Right（正確�?','sl');
+    previewL=-1; previewR=-1;
+    fiHideLR=false; renderAll();
+    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS1();},800);
+  } else {
+    wrongAns++; stepWrong++;
+    updateWPills(stepWrong);
+    const msg='??答錯了�?�?+stepWrong+'/'+qMaxWrong+'�?;
+    if(errL){if(inpL)inpL.classList.add('err2');}
+    if(errR){if(inpR)inpR.classList.add('err2');}
+    showFb(false,msg);
+    addLog('答錯（Left/Right確�?�?,'wl');
+    if(stepWrong>=qMaxWrong){
+      setTimeout(function(){
+        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
+        addLog('答錯上�?，繼�?,'wl');
+        fiHideLR=false; renderAll();
+        showFb(false,'?�� ?�示：Left = '+bL+'，Right = '+bR+'?�繼續�?一步�?);
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS1();},1200);
+      },1000);
+    } else {
+      setTimeout(function(){
+        if(inpL){inpL.classList.remove('err2');inpL.value='';}
+        if(inpR){inpR.classList.remove('err2');inpR.value='';}
+        document.getElementById('fb').className='fb';
+      },1400);
+    }
+  }
+}
+
+function cfmFiS1(){
+  const inp=document.getElementById('fi1inp');
+  const val=parseInt(inp?inp.value:'');
+  const correct=Math.floor((bL+bR)/2);
+  stepCount++; document.getElementById('stepNum').textContent=stepCount;
+  if(isNaN(val)){
+    showFb(false,'??請填?�數字�?');
+    stepCount--; document.getElementById('stepNum').textContent=stepCount;
+    return;
+  }
+  if(val===correct){
+    correctAns++;
+    fiStepScores.push(Math.max(0,4-stepWrong));
+    fiMid=val;
+    if(inp)inp.classList.add('ok2');
+    if(fiStepErrors)fiStepErrors['計�?mid']=(fiStepErrors['計�?mid']||0)+stepWrong;
+    endStepTimer('計�?mid'); recordStep('計�?mid',stepWrong,'mid='+correct,'mid=??Left+Right)/2?��?每次?��??�正中�???);
+    showFb(true,'??�?���?);
+    addLog('�?+stepCount+'步�?mid �?��','sl');
+    previewM=-1;
+    fiHideM=false; renderAll();
+    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS2();},800);
+  } else {
+    wrongAns++; stepWrong++;
+    if(inp)inp.classList.add('err2');
+    updateWPills(stepWrong);
+    showFb(false,'??mid 算錯，�??�試試�?�?+stepWrong+'/'+qMaxWrong+'�?);
+    addLog('答錯（mid）�?填�?'+val,'wl');
+    if(stepWrong>=qMaxWrong){
+      setTimeout(function(){
+        skippedSteps++; fiMid=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
+        addLog('答錯上�?，繼�?,'wl');
+        fiHideM=false; renderAll();
+        showFb(false,'?�� ?�示：mid = ??'+bL+'+'+bR+')/2??= '+correct+'?�繼續�?一步�?);
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS2();},1200);
+      },1000);
+    } else {
+      stepCount--; document.getElementById('stepNum').textContent=stepCount;
+      setTimeout(function(){
+        if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}
+        document.getElementById('fb').className='fb';
+      },1400);
+    }
+  }
+}
+
+
+// Step 1: fill mid
+function renderFiS1(){
+  fiHideM=true;
+  renderAll();
+  startStepTimer(); removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(0,'第�?步�?確�? Left / Right');
+  addFiDivider(w);
+  addFiStep(w,1,'第�?步�?計�? mid ?�索�?,true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML='mid = ?';
+  w.appendChild(info);
+  const irow=document.createElement('div'); irow.className='irow2';
+  const lbl=document.createElement('span'); lbl.className='ilbl2'; lbl.textContent='mid = ';
+  const inp=document.createElement('input');
+  inp.className='iinp2'; inp.id='fi1inp'; inp.type='number'; inp.placeholder='?';
+  inp.setAttribute('min',bL); inp.setAttribute('max',bR);
+  inp.addEventListener('input',updatePreview);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS1();});
+  const hint=document.createElement('span'); hint.className='ihint2'; hint.textContent='';
+  irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
+  w.appendChild(irow);
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確�? ??;
+  btn.addEventListener('click',cfmFiS1);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi1inp');if(i)i.focus();},100);
+}
+
+// Step 2: direction
+function renderFiS2(){
+  startStepTimer(); removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(1,'第�?步�?mid = '+fiMid+'，arr['+fiMid+'] = '+arr[fiMid]);
+  addFiDivider(w);
+  addFiStep(w,2,'第�?步�??�斷?��?',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML='arr['+fiMid+'] = <span class="mv">'+arr[fiMid]+'</span>?�?��? = <span class="mv">'+target+'</span>';
+  w.appendChild(info);
+  const drow=document.createElement('div'); drow.className='drow2';
+  const bl=document.createElement('button'); bl.className='db2 db2-l';
+  bl.innerHTML='⬅�? 往左找';
+  bl.addEventListener('click',function(){cfmFiS2('left');});
+  const bf=document.createElement('button'); bf.className='db2 db2-f';
+  bf.innerHTML='???�到�?;
+  bf.addEventListener('click',function(){cfmFiS2('found');});
+  const br=document.createElement('button'); br.className='db2 db2-r';
+  br.innerHTML='?��? 往?�找';
+  br.addEventListener('click',function(){cfmFiS2('right');});
+  drow.appendChild(bl); drow.appendChild(bf); drow.appendChild(br);
+  w.appendChild(drow);
+}
+
+function cfmFiS2(dir){
+  const midV=arr[fiMid];
+  const correct=midV===target?'found':(target<midV?'left':'right');
+  stepCount++; document.getElementById('stepNum').textContent=stepCount;
+  const drow=document.getElementById('fiWrap').querySelector('.drow2');
+  if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
+  if(dir===correct){
+    correctAns++; fiDir=dir;
+    fiStepScores.push(Math.max(0,4-stepWrong));
+    if(dir==='found'){
+      showFb(true,'??�?��！找?��?�?);
+      addLog('�?+stepCount+'步�??�到?��?','cl');
+      setTimeout(function(){endGame(true,fiMid);},700);
+      return;
+    }
+    const _dirHint=dir==='left'?'arr[mid] > ?��?，�?以目標在左�??��???<b>Right 移到 mid-1</b>，縮小右?��?:'arr[mid] < ?��?，�?以目標在?��??��???<b>Left 移到 mid+1</b>，縮小左?��?;
+    const msg=dir==='left'?'??�?��！arr[mid] > ?��?，�?左找??:'??�?��！arr[mid] < ?��?，�??�找??;
+    if(fiStepErrors)fiStepErrors['?�斷?��?']=(fiStepErrors['?�斷?��?']||0)+stepWrong;
+    endStepTimer('?�斷?��?'); recordStep('?�斷?��?',stepWrong,dir==='left'?'往�?:'往??,_dirHint);
+    showFb(true,msg);
+    addLog('�?+stepCount+'步�??��?='+(dir==='left'?'�?:'??),'sl');
+    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS3();},800);
+  } else {
+    wrongAns++; stepWrong++;
+    updateWPills(stepWrong);
+    let exp='';
+    if(correct==='found') exp='arr['+fiMid+']='+midV+' 等於?��?，�??�「找?��??��?';
+    else if(correct==='left') exp='arr['+fiMid+']='+midV+' > ?��?'+target+'，�?往左找�?;
+    else exp='arr['+fiMid+']='+midV+' < ?��?'+target+'，�?往?�找�?;
+    showFb(false,'???��?答錯了�?�?+stepWrong+'/'+qMaxWrong+'�?);
+    addLog('答錯（方?��?','wl');
+    if(stepWrong>=qMaxWrong){
+      setTimeout(function(){
+        skippedSteps++; fiDir=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
+        addLog('答錯上�?，繼�?,'wl');
+        if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
+        const dirHint=correct==='found'?'?�到了�?':'往'+(correct==='left'?'�?:'??)+'?��?;
+        showFb(false,'?�� ?�示�?+dirHint+'繼�?下�?步�?);
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS3();},1200);
+      },1000);
+    } else {
+      stepCount--; document.getElementById('stepNum').textContent=stepCount;
+      if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});
+      setTimeout(function(){document.getElementById('fb').className='fb';},1400);
+    }
+  }
+}
+
+// Step 3: which boundary
+function renderFiS3(){
+  startStepTimer(); removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(2,'第�?步�?'+(fiDir==='left'?'往左找':'往?�找'));
+  addFiDivider(w);
+  addFiStep(w,3,'第�?步�?要改?�個�??��?',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.textContent='往'+(fiDir==='left'?'�?:'??)+'?��?要�??�個�??�移?��?�?;
+  w.appendChild(info);
+  const drow=document.createElement('div'); drow.className='drow2';
+  const bl=document.createElement('button'); bl.className='db2 db2-bl';
+  bl.innerHTML='??Left';
+  bl.addEventListener('click',function(){cfmFiS3('left');});
+  const br=document.createElement('button'); br.className='db2 db2-br';
+  br.innerHTML='??Right';
+  br.addEventListener('click',function(){cfmFiS3('right');});
+  drow.appendChild(bl); drow.appendChild(br);
+  w.appendChild(drow);
+}
+
+function cfmFiS3(bound){
+  const correct=fiDir==='left'?'right':'left';
+  stepCount++; document.getElementById('stepNum').textContent=stepCount;
+  const drows=document.getElementById('fiWrap').querySelectorAll('.drow2');
+  const lastDrow=drows[drows.length-1];
+  if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
+  if(bound===correct){
+    correctAns++; fiBound=bound;
+    fiStepScores.push(Math.max(0,4-stepWrong));
+    const bname=bound==='right'?'Right':'Left';
+    const _bHint=fiDir==='left'?'往左找要縮小右?��?Right = mid - 1，這樣下次?��?尋�??�就?�剩左�??��?:'往?�找要縮小左?��?Left = mid + 1，這樣下次?��?尋�??�就?�剩?��??��?;
+    if(fiStepErrors)fiStepErrors['?��???]=(fiStepErrors['?��???]||0)+stepWrong;
+    endStepTimer('?��???); recordStep('?��???,stepWrong,(fiBound==='right'?'?�Right':'?�Left'),_bHint);
+    showFb(true,'??�?��！�?'+(fiDir==='left'?'�?:'??)+'?��?移�? '+bname+'??);
+    addLog('�?+stepCount+'步�???+bname,'sl');
+    setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS4();},800);
+  } else {
+    wrongAns++; stepWrong++;
+    updateWPills(stepWrong);
+    const correctName=correct==='right'?'Right':'Left';
+    showFb(false,'???��?答錯了�?�?+stepWrong+'/'+qMaxWrong+'�?);
+    addLog('答錯（�??�選?��?','wl');
+    if(stepWrong>=qMaxWrong){
+      setTimeout(function(){
+        skippedSteps++; fiBound=correct; fiStepScores.push(Math.max(0,4-qMaxWrong));
+        addLog('答錯上�?，繼�?,'wl');
+        const bndHint=correct==='right'?'?�改 Right（右?��???:'?�改 Left（左?��???;
+        showFb(false,'?�� ?�示：�?'+(fiDir==='left'?'�?:'??)+'?��?'+bndHint+'繼�?下�?步�?);
+        setTimeout(function(){document.getElementById('fb').className='fb'; renderFiS4();},1200);
+      },1000);
+    } else {
+      stepCount--; document.getElementById('stepNum').textContent=stepCount;
+      if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});
+      setTimeout(function(){document.getElementById('fb').className='fb';},1400);
+    }
+  }
+}
+
+// Step 4: fill new index
+function renderFiS4(){
+  startStepTimer(); removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(3,'第�?步�???'+(fiBound==='right'?'Right':'Left'));
+  addFiDivider(w);
+  addFiStep(w,4,'第�?步�?填入?��?索�???,true);
+  const correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
+  const formula='';
+  const bcolor=fiBound==='right'?'var(--rc)':'var(--lc)';
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML=(fiBound==='right'?'Right':'Left')+' = ___';
+  w.appendChild(info);
+  const irow=document.createElement('div'); irow.className='irow2';
+  const lbl=document.createElement('span'); lbl.className='ilbl2';
+  lbl.innerHTML='?��? <b style="color:'+bcolor+';">'+(fiBound==='right'?'Right':'Left')+'</b> = ';
+  const inp=document.createElement('input');
+  inp.className='iinp2'; inp.id='fi4inp'; inp.type='number'; inp.placeholder='?';
+  inp.setAttribute('min',0); inp.setAttribute('max',arr.length-1);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS4();});
+  const hint=document.createElement('span'); hint.className='ihint2';
+  hint.textContent='';
+  irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
+  w.appendChild(irow);
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確�? ??;
+  btn.addEventListener('click',cfmFiS4);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi4inp');if(i)i.focus();},100);
+}
+
+function cfmFiS4(){
+  const inp=document.getElementById('fi4inp');
+  const val=parseInt(inp?inp.value:'');
+  const correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
+  stepCount++; document.getElementById('stepNum').textContent=stepCount;
+  if(isNaN(val)){
+    showFb(false,'??請填?�數字�?');
+    stepCount--; document.getElementById('stepNum').textContent=stepCount;
+    return;
+  }
+  if(val===correctIdx){
+    correctAns++;
+    fiStepScores.push(Math.max(0,4-stepWrong));
+    if(inp)inp.classList.add('ok2');
+    const _idxHint=fiBound==='right'?'Right = mid - 1 = '+fiMid+' - 1 = '+correctIdx+'，�?尋�??�縮小到左�??��?�?:'Left = mid + 1 = '+fiMid+' + 1 = '+correctIdx+'，�?尋�??�縮小到?��??��?�?;
+    if(fiStepErrors)fiStepErrors['填索�?]=(fiStepErrors['填索�?]||0)+stepWrong;
+    endStepTimer('填索�?); recordStep('填索�?,stepWrong,(fiBound==='right'?'Right':'Left')+'='+correctIdx,_idxHint);
+    const msg='??�?���?;
+    showFb(true,msg);
+    addLog('�?+stepCount+'步�?索�?�?��','sl');
+    setTimeout(function(){applyFiBin();},800);
+  } else {
+    wrongAns++; stepWrong++;
+    if(inp)inp.classList.add('err2');
+    updateWPills(stepWrong);
+    const formula2=fiBound==='right'?'Right = mid-1 = '+fiMid+'-1 = '+correctIdx:'Left = mid+1 = '+fiMid+'+1 = '+correctIdx;
+    showFb(false,'??索�?答錯了�?�?+stepWrong+'/'+qMaxWrong+'�?);
+    addLog('答錯（索引�?','wl');
+    if(stepWrong>=qMaxWrong){
+      setTimeout(function(){
+        skippedSteps++; fiStepScores.push(Math.max(0,4-qMaxWrong));
+        addLog('答錯上�?，繼�?,'wl');
+        const idxHint=fiBound==='right'?'Right = mid-1 = '+fiMid+'-1 = '+correctIdx:'Left = mid+1 = '+fiMid+'+1 = '+correctIdx;
+        showFb(false,'?�� ?�示�?+idxHint+'??);
+        setTimeout(function(){applyFiBin();},1200);
+      },1000);
+    } else {
+      stepCount--; document.getElementById('stepNum').textContent=stepCount;
+      setTimeout(function(){
+        if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}
+        document.getElementById('fb').className='fb';
+      },1400);
+    }
+  }
+}
+
+function applyFiBin(){
+  const savedDir=fiDir;
+  const savedMid=fiMid;
+  stepWrong=0;
+  fiMid=-1; fiDir=''; fiBound='';
+  if(savedDir==='left'){
+    bR=savedMid-1;
+  } else {
+    bL=savedMid+1;
+  }
+  if(bL>bR){endGame(false);return;}
+  bM=Math.floor((bL+bR)/2);
+  renderAll();
+  renderQ();
+}
+
+function mkBtn(cls,html,fn){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;return b;}
+
+
+// ?�?� End game ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function endGame(found,foundIdx){
+  gameOver=true;gameFoundAt=found?foundIdx:undefined;
+  clearInterval(qTimerInt); qTimerInt=null;
+  const qSec=Math.floor((Date.now()-qStartTime)/1000);
+  renderAll();
+  document.getElementById('choicePanel').style.display='none';
+  document.getElementById('logPanel').style.display='block';
+  document.getElementById('binRng').style.display='none';
+  document.getElementById('linProg').style.display='none';
+
+  const ov=document.getElementById('resOv');
+  ov.style.display='block';
+  ov.className='res-ov show'+(found?'':' nf');
+  document.getElementById('re').textContent=found?'??':'??';
+  document.getElementById('rt2').className='rt '+(found?'found':'nf');
+  document.getElementById('rt2').textContent=found?'?�到了�?':'?��??��?';
+  document.getElementById('rd').innerHTML=found?`<strong>?�到了�?</strong>??strong>${stepCount}</strong>步。`:`?��???strong>${target}</strong>不在???中。共<strong>${stepCount}</strong>步確認。`;
+  document.getElementById('srow').innerHTML=`<div class="sp">??答�?<span>${correctAns}</span></div><div class="sp">??答錯<span>${wrongAns}</span></div><div class="sp">?��? 跳�?<span>${skippedSteps}</span></div><div class="sp">?��?<span>${fmt(qSec)}</span></div><div class="sp">?�� ??span>${stepCount}</span>�?/div>`;
+
+  addLog(found?`?�第${stepCount}步找??{target}?�[${foundIdx}]！`:`?��?尋�??��?${target}不�??�。`,'cl');
+
+    const diff=diffForQ(qCurrent,qTotal);
+    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,stepScores:[...fiStepScores],stepErrors:Object.assign({},fiStepErrors)});
+    qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
+    document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下�?題�?(${qCurrent+2}/${qTotal})`:'?��??�績????';
+}
+
+function nextAction(){
+  clearAllTimers();
+  qCurrent++;if(qCurrent>=qTotal){showScorecard();}else launchQ();
+}
+
+// ?�?� Scorecard ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function showScorecard(){
+  document.getElementById('gameArea').style.display='none';
+  const sc=document.getElementById('scorecard');sc.className='scorecard show';
+  const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
+  const found=qResults.filter(function(r){return r.found;}).length;
+  // Plan 2: binary=4 steps?25pts; linear=result(60%)+acc(40%)
+  // Scoring: 5 steps ? 4pts each = 20pts/question
+  const perQArr=qResults.map(function(r){
+    const ss=r.stepScores||[];
+    return ss.reduce(function(a,s){return a+s;},0);
+  });
+  const pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0));
+
+  let grade,gc,trophy,lbl;
+  if(pct>=90){grade='A';gc='gA';trophy='??';lbl='?��?�?;}
+  else if(pct>=75){grade='B';gc='gB';trophy='??';lbl='?�好，繼續�?油�?';}
+  else if(pct>=60){grade='C';gc='gC';trophy='??';lbl='?�格，�??�進步空�?';}
+  else{grade='D';gc='gD';trophy='??';lbl='?�要�??�練�?;}
+
+  document.getElementById('scT').textContent=trophy;
+  document.getElementById('scStag').textContent=`?�� ${sClass} ${sSeat}??${sName}`;
+  document.getElementById('scSub').textContent=`${qTotal}題測驗`;
+  document.getElementById('scN').textContent=perfect;
+  document.getElementById('scD').textContent=`/${qTotal} ?�失誤`;
+  document.getElementById('scGr').className='sc-grade '+gc;
+  document.getElementById('scGr').textContent=grade;
+  document.getElementById('scGL').textContent=lbl;
+  document.getElementById('scPct').textContent=pct+'??;
+  document.getElementById('scPctNote').textContent='計�?：�?�??��???�?20??題�?，�?答錯1次扣1?��?5題總?��?�?00??;
+  document.getElementById('scTime').textContent=fmt(totalTimerSec);
+  document.getElementById('scSt').textContent=qTotSteps;
+  document.getElementById('scWr').textContent=qWrongAll;
+  document.getElementById('scSk').textContent=qSkipAll;
+
+  // ?�?� Per-question recap ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+  const recapList=document.getElementById('recapList');recapList.innerHTML='';
+  qResults.forEach((r,i)=>{
+    const card=document.createElement('div');
+    card.className='recap-card'+(r.found&&r.wrong===0?'':r.found?' had-err':' not-found');
+    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完�???/span>':'<span class="tag tag-ok">確�?不�??��?</span>'):r.found?'<span class="tag tag-err">?�到(?�失�?</span>':r.skipped===0?'<span class="tag tag-err">?�找???�失�?</span>':'<span class="tag tag-skip">?��???/span>';
+    const diffLabel=`<span class="diff-indicator ${r.diff.cls}" style="font-size:10px;padding:2px 8px;">${r.diff.icon}${r.diff.label}</span>`;
+
+    // Mini array visual
+    const arrHtml=r.arr.map((v,j)=>{
+      let cls='rc-norm';
+      if(r.found&&j===r.foundAt)cls='rc-found';
+      else if(!r.found||(r.type==='binary'&&(j<0||j>=r.arr.length)))cls='rc-elim';
+      return `<div class="recap-cell ${cls}" title="[${j}]=${v}">${v}</div>`;
+    }).join('');
+
+    // Learning hint
+    let hint='';
+    if(r.wrong===0&&r.skipped===0){
+      if(r.found)hint=`<span class="good">??完�?！�?一步判?�都�?��，找?�目標�?/span>`;
+      else hint=`<span class="good">??完�?！正確走完�??�步驟�?確�??��?不�??�。�?�?0/60結�??��??�找?�目標�??��?�?/span>`;
+    } else if(r.found&&r.wrong>0&&r.skipped===0){
+      hint=`<span class="warn">?��? ?�到了�?但�??��?${r.wrong}次�?/span>${r.type==='binary'?'<br>建議複�?：�?�?mid ?�目標�?大�?，�?決�?往左�??��??��?:'<br>建議複�?：�?細�?對當?�格子�??��??��??��?}`;
+    } else if(!r.found&&r.wrong>0&&r.skipped===0){
+      hint=`<span class="warn">?��? ?��??��???{r.wrong}次�?但�?終正確確認目標�?存在?��??�跳?��?�?0/60結�??��?</span>`;
+    } else if(r.skipped>0){
+      hint=`<span class="bad">????{r.skipped}步被強制跳�?（�??��??��???/span><br>?��?步�?沒�?完整作�?，�??��??��??�建議�?練�??��??�戰�?/span>`;
+    }
+
+    card.innerHTML=`<div class="recap-card-top">${diffLabel}<span class="recap-qnum">�?{i+1}題�?${r.type==='binary'?'?��???:'?��循�?'}）目標�?${r.target}</span>${tag}<span class="recap-time">?��? ${fmt(r.sec)} | ${r.steps}�?| ??{r.wrong}�?/span></div><div class="recap-arr">${arrHtml}</div><div class="recap-hint">${hint}</div>`;
+    recapList.appendChild(card);
+  });
+
+  // ?�?� Learning suggestions ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+  const binaryWrongs=qResults.filter(r=>r.type==='binary'&&r.wrong>0).length;
+  const linearWrongs=qResults.filter(r=>r.type==='linear'&&r.wrong>0).length;
+  const notFound=qResults.filter(r=>!r.found).length;
+  const sugs=[];
+  if(binaryWrongs>=2)sugs.push({icon:'??,txt:'二�??��??��??�斷常出?��?記�??�目標�? mid 小�?往左�??��?�?mid 大�?往?�」�?});
+  if(linearWrongs>=2)sugs.push({icon:'?��',txt:'循�??��?比�?常出?��?每格?��??�「這個值�??�目標�?？」�?等於就找?��?不�?就繼續�?後�?});
+  if(notFound>=2)sugs.push({icon:'??',txt:'?��?題未?�到?��??�當?��?範�?縮�??�零，就�?��?��?不�??��??�是�?��結�?�?});
+  if(totalTimerSec>qTotal*60)sugs.push({icon:'?��?',txt:`總�???${fmt(totalTimerSec)}，速度?�以?�快一些。�?練�?每�??�在60秒內完�??�`});
+  if(pct>=90)sugs.push({icon:'??',txt:'表現?��?！可以試試更大�????，�??�戰?��?步數模�???});
+
+  const sugBox=document.getElementById('sugBox');
+  const sugList=document.getElementById('sugList');sugList.innerHTML='';
+  if(sugs.length>0){
+    sugBox.style.display='block';
+    sugs.forEach(s=>{const d=document.createElement('div');d.className='sug-item';d.innerHTML=`<span class="sug-icon">${s.icon}</span><span>${s.txt}</span>`;sugList.appendChild(d);});
+  } else sugBox.style.display='none';
+
+  // ?�?� Summary table ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+  const tbody=document.getElementById('scTbody');tbody.innerHTML='';
+  qResults.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    const tag=r.wrong===0&&r.skipped===0?(r.found?'<span class="tag tag-ok">完�???/span>':'<span class="tag tag-ok">確�???/span>'):r.found?'<span class="tag tag-err">?�到(失誤)</span>':r.skipped===0?'<span class="tag tag-err">?�找??失誤)</span>':'<span class="tag tag-skip">?��???/span>';
+    tr.innerHTML=`<td>${i+1}</td><td>${r.diff.icon}${r.diff.label}</td><td>${r.type==='binary'?'?��???:'?��循�?'}</td><td>${r.target}</td><td>${tag}</td><td>${r.steps}</td><td style="color:${r.wrong>0?'var(--red)':'var(--green)'}">${r.wrong}</td><td>${fmt(r.sec)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Reset submit
+  const sb=document.getElementById('submitBtn');sb.disabled=false;sb.textContent='?�出?�績 ??;
+  document.getElementById('submitSt').textContent='';document.getElementById('submitSt').className='submit-st';
+
+  sc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ?�?� Submit to Google Sheet ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function submitGS(){
+  const btn=document.getElementById('submitBtn');
+  const st=document.getElementById('submitSt');
+  if(!btn||!st) return;
+  if(GAS_URL==='填入你�?GAS網�?'){
+    st.className='submit-st fail';
+    st.textContent='?��? ?�師尚未設�? GAS 網�?，�??�知?�師??;
+    return;
+  }
+  btn.disabled=true;
+  st.className='submit-st sending';
+  st.textContent='???�送中...';
+
+  const perQArr2=qResults.map(function(r){
+    const ss=r.stepScores||[];
+    return ss.reduce(function(a,s){return a+s;},0);
+  });
+  const pct=Math.round(perQArr2.reduce(function(a,s){return a+s;},0));
+  const perfect=qResults.filter(function(r){return r.wrong===0&&r.skipped===0;}).length;
+
+  const stepErrTotals=[0,0,0,0,0];
+  qResults.forEach(function(r){
+    if(r.stepErrors){
+      stepNames.forEach(function(n,i){
+        stepErrTotals[i]+=(r.stepErrors[n]||0);
+      });
+    }
+  });
+  const stepErrStr=stepNames.map(function(n,i){return n+':'+stepErrTotals[i]+'�?;}).join('??);
+
+  const detail=qResults.map(function(r,i){
+    const ss=r.stepScores||[];
+    const qScore=ss.reduce(function(a,s){return a+s;},0);
+    return '�?+(i+1)+'�?'+(r.diff?r.diff.label:'')+')?��?'+r.target+' '+(r.found?'?�到':'?�找??)+' '+qScore+'/20????+r.wrong+'�?;
+  }).join(' | ');
+
+  const payload=JSON.stringify({
+    class:sClass, seat:sSeat, name:sName,
+    type:QUIZ_TYPE, pct:pct,
+    perfect:perfect+'/'+qTotal,
+    steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
+    time:totalTimerSec, detail:detail,
+    stepErrors:stepErrStr
+  });
+
+  function doFetch(retries){
+    fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:payload})
+    .then(function(){
+      st.className='submit-st ok';
+      st.textContent='???�績已送出�?;
+      btn.textContent='已送出 ??;
+    })
+    .catch(function(){
+      if(retries>0){
+        st.textContent='???�出中�??�試�?+(4-retries)+'�?..';
+        setTimeout(function(){doFetch(retries-1);},2000);
+      } else {
+        st.className='submit-st fail';
+        st.textContent='???�出失�?，�?複製下方?��?交給?�師�?;
+        const grade=pct>=90?'A':pct>=75?'B':pct>=60?'C':'D';
+        const copyText='?��?績�??��?+sClass+' '+sSeat+'??'+sName+
+          ' | 測�?�?+QUIZ_TYPE+' | ?�數�?+pct+'??'+grade+')'+
+          ' | ?�步?�誤�?+stepErrStr+
+          ' | ?�細�?+detail;
+        const ta=document.createElement('textarea');
+        ta.value=copyText;
+        ta.style.cssText='width:100%;margin-top:8px;padding:8px;font-size:12px;border-radius:8px;border:1px solid #ffffff20;background:#1a1d2e;color:#e8eaf6;resize:none;cursor:pointer;';
+        ta.rows=4; ta.readOnly=true;
+        const tapHint=document.createElement('div');
+        tapHint.style.cssText='font-size:11px;color:var(--muted);margin-top:4px;font-weight:600;';
+        tapHint.textContent='?? 點�??��??��??�可?��?複製';
+        ta.onclick=function(){
+          const self=this;
+          if(navigator.clipboard){
+            navigator.clipboard.writeText(self.value).then(function(){
+              const orig=self.style.borderColor;
+              self.style.borderColor='var(--green)';
+              setTimeout(function(){self.style.borderColor=orig;},600);
+            }).catch(function(){self.select();});
+          } else {
+            self.select();
+          }
+        };
+        st.appendChild(ta);
+        st.appendChild(tapHint);
+        btn.disabled=false;
+        btn.textContent='?? ?�次?�試';
+        btn.onclick=function(){
+          st.innerHTML=''; st.className='submit-st sending';
+          st.textContent='???�送中...'; btn.disabled=true;
+          btn.textContent='?�出?�績 ??; btn.onclick=submitGS;
+          doFetch(3);
+        };
+      }
+    });
+  }
+  doFetch(3);
+}
+
+
+// ?�?� Log ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+function addLog(text,cls){
+  document.getElementById('logPanel').style.display='block';
+  const list=document.getElementById('logList');
+  const e=document.createElement('div');e.className=`le ${cls}`;
+  const n=document.createElement('div');n.className='lsn'+(cls==='ll'?' ln':'');n.textContent=list.children.length+1;
+  const t=document.createElement('div');t.className='ltx';t.innerHTML=text;
+  e.appendChild(n);e.appendChild(t);list.appendChild(e);list.scrollTop=list.scrollHeight;
+}
+
+// ?�?� Init ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+window.onload=function(){
+  document.getElementById('sModal').style.display='flex';
+  document.getElementById('cfgPt').textContent='測�?設�?';
+};
+</script>
+</body>
+</html>

@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>循序搜尋 — 練習</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -16,10 +13,6 @@
   --elim:#1e2135;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-.home-nav{margin:0 0 6px;}
-.home-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:800;color:var(--muted);text-decoration:none;padding:6px 14px;border:1px solid #ffffff15;border-radius:50px;transition:all .18s;}
-.home-link:hover{color:var(--text);border-color:#ffffff30;}
-.home-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 body{font-family:'Noto Sans TC','Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,.04)1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.04)1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 .wrap{max-width:900px;margin:0 auto;padding:28px 18px 80px;position:relative;z-index:1;}
@@ -36,12 +29,12 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .cb strong{color:var(--yellow);}
 
 .panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;padding:20px;margin-bottom:16px;}
-.pt{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pt{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
 .pt::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--orange);}
 
 .cfgr{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
 .cfi{display:flex;flex-direction:column;gap:4px;}
-.cfi label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.cfi label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
 .cfi input[type=number]{background:var(--panel2);border:1px solid #ffffff15;border-radius:9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;padding:7px 12px;width:82px;outline:none;transition:border-color .2s;}
 .cfi input:focus{border-color:var(--accent);}
 
@@ -60,27 +53,27 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .tdisp{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:13px;padding:10px 16px;margin-bottom:14px;border:1px solid #ffffff0f;}
 .tlbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
 .tval{font-family:'Nunito',sans-serif;font-size:25px;font-weight:900;color:var(--yellow);text-shadow:0 0 18px #fbbf2450;}
-.mpill{font-size:12px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;}
+.mpill{font-size:11px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;background:#fb923c20;color:var(--orange);border:1px solid #fb923c40;}
 
 .si{display:grid;gap:9px;margin-bottom:14px;}
 .sg2{grid-template-columns:repeat(2,1fr);}
 .sc{background:var(--panel2);border-radius:13px;padding:11px 13px;border:1px solid #ffffff08;text-align:center;}
-.scl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.scl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
 .scv{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;}
 
 .lin-prog{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #fb923c20;}
 .lpt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.lpl{font-size:12px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:1px;}
+.lpl{font-size:11px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:1px;}
 .lpc{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
 .lpb{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
 .lpbf{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--orange));transition:width .4s;}
-.lwh{font-size:12px;color:var(--muted);margin-top:5px;font-weight:600;}
+.lwh{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
 .lwh b{color:var(--red);}
 
 .aw{overflow-x:auto;padding:4px 0 8px;}
 .at{display:flex;gap:0;min-width:fit-content;padding-top:24px;padding-bottom:24px;align-items:center;}
 .cw{display:flex;flex-direction:column;align-items:center;width:52px;flex-shrink:0;}
-.cl{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:2px;height:14px;display:flex;align-items:center;justify-content:center;}
+.cl{font-size:9px;font-weight:700;color:var(--muted);margin-bottom:2px;height:14px;display:flex;align-items:center;justify-content:center;}
 .cell{width:44px;height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;border:2px solid transparent;transition:all .32s cubic-bezier(.34,1.56,.64,1);background:var(--panel2);color:#8899bb;}
 .cell.active{color:var(--text);border-color:#ffffff15;}
 .cell.cur-l{border-color:var(--orange);background:#fb923c20;color:var(--orange);box-shadow:0 0 16px #fb923c45;transform:scale(1.09);}
@@ -90,12 +83,12 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .cell.scanning{animation:scan .5s ease-out;}
 .cell.found{border-color:var(--green);background:#34d39930;color:var(--green);box-shadow:0 0 20px #34d39975;transform:scale(1.14);}
 .cell.elim{background:var(--elim);color:#1e2850;border-color:transparent;transform:scale(0.86);}
-.ci2{font-size:12px;color:var(--muted);margin-top:3px;font-family:'Nunito',sans-serif;font-weight:700;}
-.cal{height:15px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:5px;padding:0 3px;min-width:34px;}
+.ci2{font-size:10px;color:var(--muted);margin-top:3px;font-family:'Nunito',sans-serif;font-weight:700;}
+.cal{height:15px;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:5px;padding:0 3px;min-width:34px;}
 .cal.done{color:var(--orange);background:#fb923c15;}
 
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;}
-.li{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--muted);}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--muted);}
 .ld{width:10px;height:10px;border-radius:3px;border:2px solid;}
 
 .pred-sec{background:var(--panel2);border:1px solid #8b5cf630;border-radius:12px;padding:12px 14px;margin-bottom:12px;display:none;animation:fi .3s;}
@@ -140,7 +133,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .rt.found{color:var(--green);}.rt.nf{color:var(--red);}
 .rd{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;}
 .srow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
-.sp{background:#ffffff08;border-radius:50px;padding:4px 12px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;}
+.sp{background:#ffffff08;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;}
 .sp span{color:var(--yellow);}
 .wr-rev{background:#f8717115;border:1px solid #f8717130;border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;color:#f8b0b0;font-weight:600;line-height:1.6;}
 .wr-rev b{color:var(--red);}
@@ -154,18 +147,18 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
 .stats-item{background:var(--panel2);border-radius:11px;padding:10px;text-align:center;border:1px solid #ffffff08;}
 .stats-n{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--text);}
-.stats-l{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-.stats-date{font-size:12px;color:var(--muted);margin-top:8px;font-weight:600;text-align:center;}
+.stats-l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.stats-date{font-size:10px;color:var(--muted);margin-top:8px;font-weight:600;text-align:center;}
 @media(max-width:500px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 
 .log-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:3px;}
 .log-list::-webkit-scrollbar{width:3px;}
 .log-list::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:3px;}
-.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:12px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
+.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
 .le.ll{border-color:var(--orange);}
 .le.cl{border-color:var(--green);}
 .le.wl{border-color:var(--red);}
-.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--orange);}
+.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--orange);}
 .ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
 
 #stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
@@ -175,8 +168,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
 </head>
 <body>
 <div class="wrap">
-
-<nav class="home-nav"><a class="home-link" href="../index.html" aria-label="回首頁">← 回首頁</a></nav>
 
 <header>
   <div class="badge">循序搜尋 練習</div>
@@ -241,7 +232,7 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div class="cq" id="cq"></div>
     <div class="hint-box" id="hintBox"></div>
     <div class="cbtns" id="cbtns"></div>
-    <div class="fb" id="fb" role="status" aria-live="polite"></div>
+    <div class="fb" id="fb"></div>
   </div>
 
   <div class="res-ov" id="resOv">
@@ -252,7 +243,6 @@ h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:90
     <div class="pred-res" id="predRes"></div>
     <div id="wrRev"></div>
     <button class="btn bp" id="nextBtn" onclick="nextAction()" style="margin-top:12px">再來一題 🎲</button>
-    <button class="btn bg2" id="redoBtn" onclick="replayWrong()" style="margin-top:12px;margin-left:8px;display:none">🔁 重練錯題</button>
   </div>
 
   <div class="panel" id="logPanel" style="display:none">
@@ -279,7 +269,7 @@ let arr=[],target=0,linCur=0;
 let stepCount=0,correctAns=0,wrongAns=0,stepWrong=0;
 let gameOver=false,gameFoundAt=undefined,isWorstCase=false;
 let checkOrder=[];
-let demoMode=false,demoTimer=null,demoBusy=false;
+let demoMode=false,demoTimer=null;
 const DEMO_MS=1200;
 let predicted=null;
 
@@ -305,19 +295,7 @@ function newProblem(type){
   if(demoMode)stopDemo();
   isWorstCase=(type==='worst');
   predicted=null;checkOrder=[];
-  const size=Math.max(6,Math.min(16,parseInt(document.getElementById('arrSize').value)||10));
-  const inpEl=document.getElementById('targetInput');
-  const custom=parseInt(inpEl.value);
-  if(type&&!isNaN(custom)){
-    // 「找不存在的數」/「最壞情況」按鈕優先：忽略自訂目標，保證目標不在陣列中
-    inpEl.value='';
-    genArr(size,true);
-    if(type==='worst')target=arr[arr.length-1]+1;
-    isWorstCase=true; // 目標不存在＝最壞情況，會顯示對應說明
-    startGame();
-    addLog('已忽略自訂目標 <b>'+custom+'</b>（「'+(type==='worst'?'最壞情況':'找不存在的數')+'」按鈕優先），改用陣列中不存在的目標。','wl');
-    return;
-  }
+  const size=Math.max(6,Math.min(17,parseInt(document.getElementById('arrSize').value)||10));
   genArr(size,!!type);
   if(type==='worst')target=arr[arr.length-1]+1;
   startGame();
@@ -342,7 +320,6 @@ function startGame(){
   document.getElementById('stepNum').style.color='var(--orange)';
 
   addLog(`開始循序搜尋，陣列有 ${arr.length} 格，目標值 <b>${target}</b>。從 [0] 開始逐一比對。`,'ll');
-  document.addEventListener('keydown',onKey);
   renderAll();renderQ();showPrediction();
 }
 
@@ -361,13 +338,13 @@ function renderAll(){
     const w=el('div','cw'),tl=el('div','cl'),cell=el('div','cell'),idx=el('div','ci2'),cal=el('div','cal');
     idx.textContent=i;
     if(gameOver){
-      if(gameFoundAt===i){cell.classList.add('found');tl.innerHTML='<span style="color:var(--green);font-size:12px">✓ 找到</span>';}
+      if(gameFoundAt===i){cell.classList.add('found');tl.innerHTML='<span style="color:var(--green);font-size:9px">✓ 找到</span>';}
       else if(i<(gameFoundAt??stepCount)){cell.classList.add('chk-l');}
       else {cell.classList.add('elim');}
       if(checkOrder[i]){cal.textContent='第'+checkOrder[i]+'次';cal.classList.add('done');}
     }else{
       if(i<linCur){cell.classList.add('chk-l');}
-      else if(i===linCur){cell.classList.add('cur-l');cell.classList.add('scanning');tl.innerHTML='<span style="color:var(--orange);font-size:12px">▼ 檢查中</span>';}
+      else if(i===linCur){cell.classList.add('cur-l');cell.classList.add('scanning');tl.innerHTML='<span style="color:var(--orange);font-size:9px">▼ 檢查中</span>';}
       else {cell.classList.add('active');}
     }
     cell.textContent=arr[i];
@@ -387,27 +364,25 @@ function updateLinProg(){
 
 function renderQ(){
   if(gameOver)return;
-  stepWrong=0;
   document.getElementById('fb').className='fb';
   document.getElementById('hintBox').className='hint-box';
   const q=document.getElementById('cq'),bc=document.getElementById('cbtns');bc.innerHTML='';
   q.innerHTML=`目前檢查 [<b>${linCur}</b>]，值是 <span class="cv">${arr[linCur]}</span>，目標是 <span class="tv">${target}</span>。<br>這個值符合目標嗎？`;
-  bc.appendChild(mkBtn('cbtn cb-F','✅ [1] 找到了！<br><small>'+arr[linCur]+' = '+target+'</small>','found'));
-  bc.appendChild(mkBtn('cbtn cb-N','➡️ [2] 繼續往後<br><small>'+arr[linCur]+' ≠ '+target+'</small>','next'));
+  bc.appendChild(mkBtn('cbtn cb-F','✅ 找到了！<br><small>'+arr[linCur]+' = '+target+'</small>',()=>linChoice('found')));
+  bc.appendChild(mkBtn('cbtn cb-N','➡️ 繼續往後<br><small>'+arr[linCur]+' ≠ '+target+'</small>',()=>linChoice('next')));
 }
 
 function el(tag,cls){const e=document.createElement(tag);e.className=cls;return e;}
-function mkBtn(cls,html,action){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.dataset.action=action;b.onclick=()=>linChoice(action);return b;}
+function mkBtn(cls,html,fn){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;return b;}
 
 // ══════════════════════════════════════════════════════════
 // Choices & Logic
 // ══════════════════════════════════════════════════════════
 function linChoice(ch){
-  if(demoMode&&!demoBusy)return;
   const correct=arr[linCur]===target?'found':'next';
   const btns=document.getElementById('cbtns').querySelectorAll('.cbtn');
-  const idx=Array.from(btns).findIndex(b=>b.dataset.action===ch);
-  proc(ch,correct,btns,idx,
+  const map={found:0,next:1};
+  proc(ch,correct,btns,map,
     ()=>{
       checkOrder[linCur]=stepCount;
       if(ch==='found'){
@@ -418,7 +393,7 @@ function linChoice(ch){
         showFb(true,`正確！${arr[linCur]} ≠ ${target}，檢查下一格 [${linCur+1}]`);
         addLog(`第${stepCount}步：[${linCur}] = ${arr[linCur]} ≠ ${target}，繼續往後`,'ll');
         setTimeout(()=>{
-          linCur++;
+          linCur++;stepWrong=0;
           if(linCur>=arr.length){endGame(false);return;}
           renderAll();renderQ();
           if(demoMode)demoTimer=setTimeout(doDemoStep,DEMO_MS);
@@ -427,6 +402,7 @@ function linChoice(ch){
     },
     ()=>{
       showFb(false,`再想想！目標是 ${target}，[${linCur}] 的值是 ${arr[linCur]}，它們一樣嗎？`);
+      addLog(`第${stepWrong+1}次答錯`,'wl');
       document.getElementById('hintBox').className='hint-box';
       if(stepWrong>=2){
         setTimeout(()=>{
@@ -442,17 +418,15 @@ function linChoice(ch){
         btns.forEach(b=>{b.disabled=false;b.classList.remove('wrong','correct','suggest');});
         document.getElementById('fb').className='fb';
         stepCount--;document.getElementById('stepNum').textContent=stepCount;
-        addLog(`第${stepCount+1}步答錯`,'wl');
       },1200);
     }
   );
 }
 
-function proc(ch,correct,btns,idx,onOk,onErr){
+function proc(ch,correct,btns,map,onOk,onErr){
   btns.forEach(b=>b.disabled=true);stepCount++;document.getElementById('stepNum').textContent=stepCount;
-  if(idx<0) return;
-  if(ch===correct){correctAns++;btns[idx].classList.add('correct');onOk();}
-  else{wrongAns++;stepWrong++;btns[idx].classList.add('wrong');onErr();}
+  if(ch===correct){correctAns++;btns[map[ch]].classList.add('correct');onOk();}
+  else{wrongAns++;stepWrong++;btns[map[ch]].classList.add('wrong');onErr();}
 }
 
 function suggestAnswer(){
@@ -468,17 +442,10 @@ function suggestAnswer(){
 
 function showFb(ok,txt){const fb=document.getElementById('fb');fb.className='fb '+(ok?'correct':'wrong')+' show';fb.innerHTML=(ok?'✅ ':'❌ ')+'<div>'+txt+'</div>';}
 
-function onKey(e){
-  if(gameOver||demoMode)return;
-  if(e.key==='1')linChoice('found');
-  else if(e.key==='2')linChoice('next');
-}
-
 // ══════════════════════════════════════════════════════════
 // End Game
 // ══════════════════════════════════════════════════════════
 function endGame(found,foundIdx){
-  document.removeEventListener('keydown',onKey);
   gameOver=true;gameFoundAt=found?foundIdx:undefined;
   if(demoMode)stopDemo();
   renderAll();
@@ -505,40 +472,9 @@ function endGame(found,foundIdx){
   updateStatsUI();
 
   addLog(found?`🐢 第${stepCount}步：找到 ${target} 在 [${foundIdx}]！`:`🐢 搜尋結束，${target} 不存在。`,'cl');
-  captureWrong();
-  updateRedoBtn();
 }
 
 function nextAction(){newProblem();}
-
-// ══════════════════════════════════════════════════════════
-// 錯題重練：答錯的題目快照 {arr,target} 存入 localStorage，可隨時重練同一題。
-// ══════════════════════════════════════════════════════════
-const WRONG_KEY='linear_wrong';
-function loadWrong(){try{const q=JSON.parse(localStorage.getItem(WRONG_KEY)||'[]');return Array.isArray(q)?q:[];}catch(e){return [];}}
-function saveWrong(q){try{localStorage.setItem(WRONG_KEY,JSON.stringify(q.slice(-20)));}catch(e){}}
-function captureWrong(){
-  if(!(wrongAns>0))return;
-  const snap={arr:[...arr],target:target};
-  const q=loadWrong(),last=q[q.length-1];
-  if(!last||JSON.stringify(last)!==JSON.stringify(snap)){q.push(snap);saveWrong(q);}
-}
-function updateRedoBtn(){
-  const b=document.getElementById('redoBtn');if(!b)return;
-  const n=loadWrong().length;
-  b.style.display=n?'inline-block':'none';
-  b.textContent=`🔁 重練錯題（${n}）`;
-}
-function replayWrong(){
-  const q=loadWrong();
-  if(!q.length)return;
-  const item=q.shift();saveWrong(q);
-  arr=[...item.arr];target=item.target;
-  isWorstCase=!arr.includes(target);predicted=null;checkOrder=[];
-  startGame();
-  updateRedoBtn();
-  addLog(`🔁 重練錯題：目標 <b>${target}</b>（還剩 ${q.length} 題）。`,'wl');
-}
 
 // ══════════════════════════════════════════════════════════
 // Demo
@@ -568,10 +504,8 @@ function stopDemo(){
 
 function doDemoStep(){
   if(!demoMode||gameOver){stopDemo();return;}
-  demoBusy=true;
   const correct=arr[linCur]===target?'found':'next';
   linChoice(correct);
-  demoBusy=false;
 }
 
 // ══════════════════════════════════════════════════════════
@@ -581,7 +515,7 @@ function showPrediction(){
   const sec=document.getElementById('predSec');
   if(gameOver){sec.className='pred-sec';return;}
   const n=arr.length;
-  const opts=[];for(let i=1;i<=4;i++)opts.push(Math.max(1,Math.ceil(n*i/4)));
+  const opts=[Math.ceil(n*0.25),Math.ceil(n*0.5),Math.ceil(n*0.75),n];
   const labels=opts.map(v=>v+'次');
   const c=document.getElementById('predOpts');c.innerHTML='';
   opts.forEach((v,i)=>{

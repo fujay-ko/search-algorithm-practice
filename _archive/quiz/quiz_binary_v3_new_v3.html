@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二分搜尋法 — 正式測驗</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--panel:#1a1d2e;--panel2:#22263a;
+  --accent:#4f8ef7;--accent2:#a78bfa;--green:#34d399;--red:#f87171;
+  --yellow:#fbbf24;--orange:#fb923c;--text:#e8eaf6;--muted:#6b7280;
+  --lc:#4f8ef7;--rc:#a78bfa;--mc:#fbbf24;--oc:#fb923c;--elim:#1e2135;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,.04)1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.04)1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 80px;position:relative;z-index:1;}
+
+header{text-align:center;margin-bottom:22px;}
+.badge{display:inline-block;background:linear-gradient(135deg,#4f8ef720,#a78bfa20);border:1px solid #4f8ef740;border-radius:50px;padding:5px 16px;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+h1{font-family:'Nunito',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:900;background:linear-gradient(135deg,#4f8ef7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:6px;}
+.subtitle{color:var(--muted);font-size:14px;}
+
+/* Mode bar */
+/* Concept */
+/* Panel */
+.panel{background:var(--panel);border:1px solid #ffffff0d;border-radius:18px;padding:20px;margin-bottom:16px;}
+.pt{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.pt::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent);}
+
+
+
+
+/* Buttons */
+.btn{border:none;border-radius:11px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:13px;font-weight:800;padding:9px 18px;transition:all .18s;}
+.bp{background:linear-gradient(135deg,#4f8ef7,#7c6cf5);color:#fff;box-shadow:0 3px 12px #4f8ef740;}
+.bp:hover{transform:translateY(-2px);}
+.bq{background:linear-gradient(135deg,#059669,#34d399);color:#fff;box-shadow:0 3px 12px #34d39940;}
+.bq:hover{transform:translateY(-2px);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none !important;}
+
+/* Quiz header */
+.qhdr{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:14px;padding:11px 14px;margin-bottom:14px;border:1px solid #34d39930;}
+.qpl{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+.qbb{flex:1;background:#ffffff10;border-radius:50px;height:7px;overflow:hidden;}
+.qbf{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .5s;}
+.qqn{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--green);white-space:nowrap;}
+.wps{display:flex;gap:4px;margin-left:4px;}
+.wp{width:9px;height:9px;border-radius:50%;background:#ffffff15;transition:background .2s;}
+.wp.u{background:var(--red);}
+
+/* ── Timer ── */
+.timer-row{display:flex;gap:10px;margin-bottom:14px;}
+.timer-box{flex:1;background:var(--panel2);border-radius:12px;padding:10px 14px;border:1px solid #ffffff0a;display:flex;align-items:center;gap:10px;}
+.timer-icon{font-size:18px;}
+.timer-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.timer-val{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--text);line-height:1;}
+.timer-val.warn{color:var(--yellow);}
+.timer-val.danger{color:var(--red);animation:pulse-r .6s infinite;}
+@keyframes pulse-r{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Difficulty indicator */
+.diff-indicator{display:inline-flex;align-items:center;gap:5px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;margin-left:auto;}
+.di-E{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+.di-M{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2440;}
+.di-H{background:#f8717120;color:var(--red);border:1px solid #f8717140;}
+
+/* Target */
+.tdisp{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:13px;padding:10px 16px;margin-bottom:14px;border:1px solid #ffffff0f;}
+.tlbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.tval{font-family:'Nunito',sans-serif;font-size:25px;font-weight:900;color:var(--yellow);text-shadow:0 0 18px #fbbf2450;}
+.mpill{font-size:11px;font-weight:800;padding:3px 11px;border-radius:50px;margin-left:auto;}
+.mp-q{background:#34d39920;color:var(--green);border:1px solid #34d39940;}
+
+/* Step cards */
+.si{display:grid;gap:9px;margin-bottom:14px;}
+.sg3{grid-template-columns:repeat(3,1fr);}
+.sc{background:var(--panel2);border-radius:13px;padding:11px 13px;border:1px solid #ffffff08;text-align:center;}
+.scl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.scv{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;}
+
+/* Progress bars */
+.bin-rng{background:var(--panel2);border-radius:12px;padding:10px 14px;margin-bottom:14px;border:1px solid #4f8ef720;}
+.brt{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.brl{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;}
+.brc{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;}
+.brb{background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
+.brbf{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .5s;}
+.brh{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
+.brh b{color:var(--accent2);}
+.slb{display:inline-flex;align-items:center;gap:5px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;margin-top:5px;}
+.slb-n{background:#fbbf2420;border:1px solid #fbbf2440;color:var(--yellow);}
+.slb-d{background:#f8717120;border:1px solid #f8717150;color:var(--red);}
+.slb-k{background:#34d39920;border:1px solid #34d39950;color:var(--green);}
+
+/* Array */
+.aw{overflow-x:auto;padding:4px 0 8px;}
+.at{display:flex;gap:0;min-width:fit-content;padding-top:24px;padding-bottom:24px;align-items:center;}
+.cw{display:flex;flex-direction:column;align-items:center;width:52px;flex-shrink:0;}
+.cl{font-size:9px;font-weight:700;color:var(--muted);margin-bottom:2px;height:14px;display:flex;align-items:center;justify-content:center;}
+.cell{width:44px;height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;border:2px solid transparent;transition:all .32s cubic-bezier(.34,1.56,.64,1);background:var(--panel2);color:#8899bb;}
+.cell.active{color:var(--text);border-color:#ffffff15;}
+.cell.lm{border-color:var(--lc);background:#4f8ef720;color:var(--text);box-shadow:0 0 12px #4f8ef740;}
+.cell.rm{border-color:var(--rc);background:#a78bfa20;color:var(--text);box-shadow:0 0 12px #a78bfa40;}
+.cell.mm{border-color:var(--mc);background:#fbbf2420;color:var(--yellow);box-shadow:0 0 16px #fbbf2455;transform:scale(1.1);}
+.cell.found{border-color:var(--green);background:#34d39930;color:var(--green);box-shadow:0 0 20px #34d39975;transform:scale(1.14);}
+.cell.elim{background:var(--elim);color:#1e2850;border-color:transparent;transform:scale(0.86);}
+.cal{height:15px;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:5px;padding:0 3px;min-width:34px;}
+.rbk{font-size:11px;font-weight:800;color:var(--accent);text-align:center;margin-top:4px;font-family:'Nunito',sans-serif;opacity:.7;}
+
+/* Legend */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--muted);}
+.ld{width:10px;height:10px;border-radius:3px;border:2px solid;}
+
+/* Choice */
+.cq{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.6;}
+.cq .mv{color:var(--yellow);font-size:16px;}.cq .cv{color:var(--orange);font-size:16px;}
+.cbtns{display:flex;gap:9px;flex-wrap:wrap;}
+.cbtn{flex:1;min-width:110px;padding:11px 12px;border:2px solid transparent;border-radius:13px;cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:12px;font-weight:800;transition:all .18s;text-align:center;line-height:1.4;}
+.cbtn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+.cbtn.correct{background:#34d39930;border-color:var(--green);color:var(--green);animation:pg .5s;}
+.cbtn.wrong{background:#f8717130;border-color:var(--red);color:var(--red);animation:sk .4s;}
+.cbtn.locked{opacity:.2;cursor:not-allowed;transform:none;}
+@keyframes pg{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes sk{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* Feedback */
+.fb{border-radius:11px;padding:10px 13px;font-size:12px;font-weight:700;margin-top:10px;display:none;align-items:center;gap:8px;line-height:1.5;}
+.fb.show{display:flex;animation:fi .3s;}
+.fb.correct{background:#34d39920;border:1px solid #34d39960;color:var(--green);}
+.fb.wrong{background:#f8717120;border:1px solid #f8717160;color:#f87171;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* Per-Q result */
+.res-ov{background:var(--panel2);border-radius:18px;padding:24px;text-align:center;border:2px solid var(--green);box-shadow:0 0 36px #34d39925;animation:fi .4s;display:none;}
+.res-ov.show{display:block;}
+.res-ov.nf{border-color:var(--red);box-shadow:0 0 36px #f8717125;}
+.re{font-size:44px;margin-bottom:9px;}
+.rt{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;margin-bottom:7px;}
+.rt.found{color:var(--green);}.rt.nf{color:var(--red);}
+.rd{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;}
+.srow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.sp{background:#ffffff08;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;}
+.sp span{color:var(--yellow);}
+
+/* ── SCORECARD ── */
+.scorecard{background:var(--panel);border-radius:20px;padding:28px;border:2px solid var(--green);box-shadow:0 0 48px #34d39930;animation:fi .5s;display:none;}
+.scorecard.show{display:block;}
+.sc-trophy{font-size:60px;margin-bottom:10px;text-align:center;}
+.sc-title{font-family:'Nunito',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px;text-align:center;background:linear-gradient(135deg,#34d399,#4f8ef7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sc-stag{display:inline-flex;align-items:center;gap:6px;background:#34d39915;border:1px solid #34d39940;border-radius:50px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;}
+.sc-sub{font-size:12px;color:var(--muted);margin-bottom:20px;text-align:center;}
+.sc-top{display:flex;gap:16px;align-items:center;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
+.sc-ring{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid var(--green);background:linear-gradient(135deg,#34d39915,#4f8ef715);box-shadow:0 0 30px #34d39940;}
+.sc-ring-n{font-family:'Nunito',sans-serif;font-size:38px;font-weight:900;color:var(--green);line-height:1;}
+.sc-ring-s{font-size:11px;color:var(--muted);font-weight:700;}
+.sc-grade{font-family:'Nunito',sans-serif;font-size:56px;font-weight:900;line-height:1;}
+.sc-gl{font-size:13px;font-weight:700;color:var(--muted);}
+.gA{color:var(--green);}.gB{color:var(--accent);}.gC{color:var(--yellow);}.gD{color:var(--red);}
+.sc-pct{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--text);}
+.sc-pct-l{font-size:11px;color:var(--muted);font-weight:700;}
+.sc-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:18px;}
+.sc-stat{background:var(--panel2);border-radius:12px;padding:12px;border:1px solid #ffffff08;text-align:center;}
+.sc-sl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.sc-sv{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;}
+
+/* ── Learning recap (per-question analysis) ── */
+.recap-section{margin-bottom:18px;}
+.recap-title{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.recap-title::before{content:'';display:inline-block;width:3px;height:13px;border-radius:2px;background:var(--accent2);}
+.recap-card{background:var(--panel2);border-radius:12px;padding:14px;margin-bottom:8px;border-left:4px solid var(--green);}
+.recap-card.had-err{border-left-color:var(--yellow);}
+.recap-card.not-found{border-left-color:var(--red);}
+.recap-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.recap-qnum{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--text);}
+.recap-time{font-size:11px;color:var(--muted);font-weight:600;}
+.tag{display:inline-block;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:800;}
+.tag-ok{background:#34d39920;color:var(--green);border:1px solid #34d39950;}
+.tag-err{background:#f8717120;color:var(--red);border:1px solid #f8717150;}
+.tag-skip{background:#fbbf2420;color:var(--yellow);border:1px solid #fbbf2450;}
+.recap-arr{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px;}
+.recap-cell{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:900;border:1px solid transparent;}
+.rc-norm{background:var(--panel);color:#8899bb;}
+.rc-found{background:#34d39930;border-color:var(--green);color:var(--green);}
+.rc-elim{background:var(--elim);color:#2e3455;}
+.recap-hint{font-size:12px;color:#b0b8d4;line-height:1.6;font-weight:600;}
+.recap-hint b{color:var(--text);}
+.recap-hint .good{color:var(--green);}
+.recap-hint .warn{color:var(--yellow);}
+.recap-hint .bad{color:var(--red);}
+
+/* ── Learning suggestion ── */
+.suggestion-box{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;border-radius:14px;padding:16px 20px;margin-bottom:18px;}
+.sug-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.sug-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#b0b8d4;line-height:1.6;margin-bottom:6px;font-weight:600;}
+.sug-item:last-child{margin-bottom:0;}
+.sug-icon{flex-shrink:0;font-size:14px;margin-top:1px;}
+
+/* ── Scorecard table ── */
+.sc-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;}
+.sc-table th{color:var(--muted);font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:6px 8px;border-bottom:1px solid #ffffff10;text-align:left;}
+.sc-table td{padding:8px 8px;border-bottom:1px solid #ffffff08;font-weight:600;}
+.sc-table tr:last-child td{border-bottom:none;}
+
+/* Submit */
+.submit-sec{background:var(--panel2);border-radius:14px;padding:16px;margin-bottom:16px;border:1px solid #34d39930;}
+.submit-st{font-size:13px;font-weight:700;text-align:center;margin-top:10px;min-height:20px;}
+.submit-st.sending{color:var(--yellow);}
+.submit-st.ok{color:var(--green);}
+.submit-st.fail{color:var(--red);}
+
+/* Student modal */
+.smod-bg{position:fixed;inset:0;background:#00000090;z-index:200;display:flex;align-items:center;justify-content:center;animation:fi .2s;}
+.smod{background:var(--panel);border:1px solid #34d39950;border-radius:20px;padding:28px;width:min(420px,90vw);box-shadow:0 8px 40px #00000080;}
+.smod-t{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--green);margin-bottom:6px;}
+.smod-s{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.sfd{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.sfd label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.sfd input{background:var(--panel2);border:1px solid #ffffff15;border-radius:10px;color:var(--text);font-family:'Noto Sans TC','Nunito',sans-serif;font-size:15px;font-weight:700;padding:10px 14px;outline:none;transition:border-color .2s;}
+.sfd input:focus{border-color:var(--green);}
+.sfd input.err{border-color:var(--red);}
+.serr{font-size:11px;color:var(--red);font-weight:700;margin-top:-10px;margin-bottom:8px;display:none;}
+.serr.show{display:block;}
+
+/* Log */
+.log-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:3px;}
+.log-list::-webkit-scrollbar{width:3px;}
+.log-list::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:3px;}
+.le{background:var(--panel2);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:600;display:flex;align-items:flex-start;gap:8px;border-left:3px solid transparent;animation:fi .3s;}
+.le.sl{border-color:var(--accent);}
+.le.ll{border-color:var(--orange);}
+.le.cl{border-color:var(--green);}
+.le.wl{border-color:var(--red);}
+.lsn{color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;margin-top:1px;background:var(--accent);}
+.lsn.ln{background:var(--orange);}
+.ltx{color:#b0b8d4;line-height:1.5;}.ltx b{color:var(--text);}
+
+#stepCtr{display:none;position:fixed;bottom:16px;right:16px;background:var(--panel);border:1px solid #ffffff10;border-radius:50px;padding:8px 15px;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--muted);z-index:100;box-shadow:0 4px 20px #00000060;}
+
+@media(max-width:600px){
+  .sc-stats{grid-template-columns:repeat(2,1fr);}
+  .sc-top{gap:10px;}
+}
+
+/* ── v2 fill-in ── */
+.fiw{background:var(--panel2);border:1px solid #ffffff10;border-radius:14px;padding:16px 18px;margin-top:4px;}
+.fistep{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.fistep.active{color:var(--accent);}
+.fiinfo{font-size:14px;font-weight:700;color:#b0b8d4;margin-bottom:12px;line-height:1.8;}
+.fiinfo .mv{color:var(--yellow);font-size:17px;font-family:'Nunito',sans-serif;font-weight:900;}
+.fi-div{border:none;border-top:1px solid #ffffff0a;margin:12px 0;}
+.irow2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.ilbl2{font-size:13px;font-weight:700;color:var(--text);}
+.iinp2{background:var(--bg);border:2px solid #ffffff25;border-radius:9px;color:var(--text);
+  font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;padding:7px 14px;width:76px;
+  outline:none;text-align:center;transition:border-color .2s;}
+.iinp2:focus{border-color:var(--yellow);}
+.iinp2.ok2{border-color:var(--green);background:#34d39915;color:var(--green);}
+.iinp2.err2{border-color:var(--red);background:#f8717115;color:var(--red);}
+.ihint2{font-size:12px;color:var(--muted);font-weight:600;}
+.drow2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.db2{flex:1;min-width:90px;padding:10px 10px;border:2px solid transparent;border-radius:12px;
+  cursor:pointer;font-family:'Nunito','Noto Sans TC',sans-serif;font-size:12px;font-weight:800;
+  transition:all .18s;text-align:center;line-height:1.4;}
+.db2:disabled{opacity:.3;cursor:not-allowed;}
+.db2-l{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
+.db2-l:hover{background:#4f8ef730;border-color:var(--lc);}
+.db2-f{background:#34d39915;border-color:#34d39940;color:var(--green);}
+.db2-f:hover{background:#34d39930;border-color:var(--green);}
+.db2-r{background:#a78bfa15;border-color:#a78bfa40;color:var(--accent2);}
+.db2-r:hover{background:#a78bfa30;border-color:var(--accent2);}
+.db2-bl{background:#4f8ef715;border-color:#4f8ef740;color:var(--lc);}
+.db2-bl:hover{background:#4f8ef730;border-color:var(--lc);}
+.db2-br{background:#a78bfa15;border-color:#a78bfa40;color:var(--rc);}
+.db2-br:hover{background:#a78bfa30;border-color:var(--rc);}
+.cfbtn2{background:linear-gradient(135deg,#4f8ef7,#7c6cf5);color:#fff;border:none;
+  border-radius:11px;padding:10px 22px;font-family:'Nunito',sans-serif;font-size:13px;
+  font-weight:800;cursor:pointer;transition:all .18s;margin-top:4px;}
+.cfbtn2:hover{transform:translateY(-2px);}
+.cfbtn2:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+.chk-ok2{color:var(--green);font-size:11px;font-weight:700;margin-left:6px;}
+.cell.preview-l{border-color:var(--lc);opacity:.6;box-shadow:0 0 8px var(--lc)40;}
+.cell.preview-r{border-color:var(--rc);opacity:.6;box-shadow:0 0 8px var(--rc)40;}
+.cell.preview-m{border-color:var(--mc);opacity:.6;box-shadow:0 0 8px var(--mc)40;}
+/* Teach hint after correct */
+.teach-hint{background:linear-gradient(135deg,#1a2340,#1e1a35);border:1px solid #4f8ef730;
+  border-radius:11px;padding:11px 14px;margin-top:10px;font-size:12px;font-weight:600;
+  color:#b0b8d4;line-height:1.7;display:none;animation:fi .3s;}
+.teach-hint.show{display:block;}
+.teach-hint b{color:var(--yellow);}
+.teach-hint .good{color:var(--green);}
+
+.cl-lc{color:var(--lc)}.cl-mc{color:var(--mc)}.cl-rc{color:var(--rc)}
+.cl-accent{color:var(--accent)}.cl-accent2{color:var(--accent2)}
+.cl-red{color:var(--red)}.cl-yellow{color:var(--yellow)}.cl-green{color:var(--green)}.cl-muted{color:var(--muted)}
+.t-center{text-align:center}.w-full{width:100%}
+.mt-12{margin-top:12px}.mr-8{margin-right:8px}.mb-8{margin-bottom:8px}.mt-4{margin-top:4px}
+.fs-11{font-size:11px}.fs-16{font-size:16px}.fw-700{font-weight:700}.fw-800{font-weight:800}
+.ls-2{letter-spacing:2px}.tt-upper{text-transform:uppercase}
+.ld-lc{border-color:var(--lc);background:#4f8ef720}.ld-mc{border-color:var(--mc);background:#fbbf2420}.ld-rc{border-color:var(--rc);background:#a78bfa20}.ld-found{border-color:var(--green);background:#34d39930}.ld-elim{border-color:transparent;background:var(--elim)}
+.sc-hd{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sc-subtxt{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+#gameArea,#qHdr,#timerRow,#diffInd,#logPanel,#sugBox,#sModal{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="badge">正式測驗</div>
+  <h1>📝 二分搜尋法測驗</h1>
+  <p class="subtitle">填空測驗 — 請填寫資料後開始作答</p>
+</header>
+
+
+
+
+
+
+
+
+
+<!-- Game area -->
+<div id="gameArea" style="display:none">
+
+  <!-- Quiz progress -->
+  <div class="qhdr" id="qHdr" style="display:none">
+    <div class="qpl">進度</div>
+    <div class="qbb"><div class="qbf" id="qBF" style="width:0%"></div></div>
+    <div class="qqn" id="qQN">1/5</div>
+    <div class="wps" id="wPills"></div>
+  </div>
+
+  <!-- Timer row (quiz only) -->
+  <div class="timer-row" id="timerRow" style="display:none">
+    <div class="timer-box">
+      <div class="timer-icon">⏱️</div>
+      <div>
+        <div class="timer-lbl">本題時間</div>
+        <div class="timer-val" id="qTimer">0:00</div>
+      </div>
+    </div>
+    <div class="timer-box">
+      <div class="timer-icon">🕐</div>
+      <div>
+        <div class="timer-lbl">總時間</div>
+        <div class="timer-val" id="totalTimer">0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target -->
+  <div class="tdisp">
+    <div class="tlbl">🎯 目標</div>
+    <div class="tval" id="tDisp">—</div>
+    <div class="diff-indicator" id="diffInd" style="display:none"></div>
+    <div class="mpill" id="mPill"></div>
+  </div>
+
+  <!-- Binary step cards -->
+  <div class="si sg3" id="bSI">
+    <div class="sc"><div class="scl cl-lc">Left</div><div class="scv cl-lc" id="lVal">—</div></div>
+    <div class="sc"><div class="scl cl-mc">Mid（比對中）</div><div class="scv cl-mc" id="mVal">—</div></div>
+    <div class="sc"><div class="scl cl-rc">Right</div><div class="scv cl-rc" id="rVal">—</div></div>
+  </div>
+  <!-- Binary range -->
+  <div class="bin-rng" id="binRng">
+    <div class="brt"><div class="brl">🔭 剩餘範圍</div><div class="brc"><span id="rngCnt" class="cl-accent">—</span> 格可能</div></div>
+    <div class="brb"><div class="brbf" id="rngBar" style="width:100%"></div></div>
+    <div class="brh" id="binHint"></div>
+    <div id="slBadge"></div>
+  </div>
+
+  <!-- Array -->
+  <div class="panel">
+    <div class="pt" id="arrPt">陣列</div>
+    <div class="aw"><div class="at" id="arrTrack"></div></div>
+    <div id="rbk" class="rbk"></div>
+    <div class="legend" id="legB">
+      <div class="li"><div class="ld ld-lc"></div>Left（藍色）</div>
+      <div class="li"><div class="ld ld-mc"></div>Mid（黃色）</div>
+      <div class="li"><div class="ld ld-rc"></div>Right（紫色）</div>
+      <div class="li"><div class="ld ld-found"></div>找到！</div>
+      <div class="li"><div class="ld ld-elim"></div>已排除</div>
+    </div>
+  </div>
+
+  <!-- Choice -->
+  <div class="panel" id="choicePanel">
+    <div class="pt" id="choicePt">你的決定</div>
+    <div class="cq" id="cq"></div>
+    <div class="cbtns" id="cbtns"></div>
+    <div class="fb" id="fb"></div>
+    <div id="forfeitRow" style="display:none;margin-top:14px;text-align:right;">
+      <button class="btn" id="forfeitBtn" onclick="forfeitQ()" style="background:linear-gradient(135deg,#7f1d1d,#991b1b);color:#fca5a5;border:1px solid #f8717150;font-size:12px;padding:7px 16px;">放棄此題，得0分 →</button>
+    </div>
+  </div>
+
+  <!-- Per-Q result -->
+  <div class="res-ov" id="resOv">
+    <div class="re" id="re"></div>
+    <div class="rt" id="rt2"></div>
+    <div class="rd" id="rd"></div>
+    <div class="srow" id="srow"></div>
+    <button class="btn bp mt-12" id="nextBtn" onclick="nextAction()">再來一題 🎲</button>
+  </div>
+
+  <!-- Log -->
+  <div class="panel" id="logPanel" style="display:none">
+    <div class="pt" id="logPt">搜尋紀錄</div>
+    <div class="log-list" id="logList"></div>
+  </div>
+</div>
+
+<!-- SCORECARD -->
+<div class="scorecard" id="scorecard">
+  <div class="sc-trophy" id="scT"></div>
+  <div class="sc-title">測驗成績單</div>
+  <div class="t-center mb-8"><div class="sc-stag" id="scStag">👤 —</div></div>
+  <div class="sc-sub" id="scSub"></div>
+
+  <div class="sc-top">
+    <div class="t-center">
+      <div class="sc-ring"><div class="sc-ring-n" id="scN"></div><div class="sc-ring-s" id="scD"></div></div>
+    </div>
+    <div class="t-center">
+      <div class="sc-grade" id="scGr"></div>
+      <div class="sc-gl" id="scGL"></div>
+    </div>
+    <div class="t-center">
+      <div class="sc-pct" id="scPct"></div>
+      <div class="sc-pct-l">百分數</div>
+      <div class="fs-11 cl-muted mt-4" id="scPctNote"></div>
+    </div>
+  </div>
+
+  <div class="sc-stats">
+    <div class="sc-stat"><div class="sc-sl">總時間</div><div class="sc-sv cl-accent" id="scTime">—</div></div>
+    <div class="sc-stat"><div class="sc-sl">總步驟</div><div class="sc-sv cl-accent2" id="scSt">—</div></div>
+    <div class="sc-stat"><div class="sc-sl">答錯次數</div><div class="sc-sv cl-red" id="scWr">—</div></div>
+    <div class="sc-stat"><div class="sc-sl">跳過步驟</div><div class="sc-sv cl-yellow" id="scSk">—</div></div>
+  </div>
+
+  <!-- Per-question recap -->
+  <div class="recap-section">
+    <div class="recap-title">每題回顧</div>
+    <div id="recapList"></div>
+  </div>
+
+  <!-- Learning suggestions -->
+  <div class="suggestion-box" id="sugBox" style="display:none">
+    <div class="sug-title">📚 學習建議</div>
+    <div id="sugList"></div>
+  </div>
+
+  <!-- Summary table -->
+  <div class="sc-hd">成績總表</div>
+  <table class="sc-table">
+    <thead><tr><th>題號</th><th>難度</th><th>搜尋法</th><th>目標</th><th>結果</th><th>步驟</th><th>答錯</th><th>得分</th><th>時間</th></tr></thead>
+    <tbody id="scTbody"></tbody>
+  </table>
+
+  <!-- Submit -->
+  <div class="submit-sec">
+    <div class="sc-subtxt">📤 送出成績給老師</div>
+    <button class="btn bq w-full" id="submitBtn" onclick="submitGS()">送出成績 →</button>
+    <div class="submit-st" id="submitSt"></div>
+  </div>
+
+  <button class="btn bq mr-8" onclick="startQuiz()">🔄 再測一次</button>
+</div>
+
+<!-- Student modal -->
+<div class="smod-bg" id="sModal" style="display:none">
+  <div class="smod">
+    <div class="smod-t">📝 測驗開始前</div>
+    <div class="smod-s">請填寫以下資料，完成後成績將自動送出給老師。</div>
+    <div class="sfd"><label>班級</label><input type="text" id="inClass" placeholder="例如：803" maxlength="10"></div>
+    <div class="sfd"><label>座號</label><input type="number" id="inSeat" placeholder="例如：12" min="1" max="60"></div>
+    <div class="sfd"><label>姓名</label><input type="text" id="inName" placeholder="請輸入姓名" maxlength="20"></div>
+    <div class="serr" id="sErr">請填寫所有欄位！</div>
+    <button class="btn bq w-full mt-4" style="padding:12px;" onclick="confirmStudent()">確認，開始測驗 🚀</button>
+  </div>
+</div>
+
+<div id="stepCtr">第 <span class="fs-16" id="stepNum">0</span> 步</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbw0cGOKLBzZj7fMMT3hwvy97RGWqAsCzCzGLvauIUmdR_yR1yPhwYeP7-It15A78YE/exec';
+const QUIZ_TYPE='二分搜尋正式測驗';
+
+// ── State ──────────────────────────────────────────────
+let arr=[],target=0,mode='binary';
+let bL,bR,bM;
+let stepCount=0,correctAns=0,wrongAns=0,skippedSteps=0,stepWrong=0;
+let gameOver=false,gameFoundAt=undefined;
+let maxSteps=0;
+// v2 fill-in state
+let fiMid=-1,fiDir='',fiBound='';
+let fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0};
+const quizMode=true;
+let fiS0Wrong=0,fiS1Wrong=0,fiS2Wrong=0,fiS3Wrong=0,fiS4Wrong=0;
+let previewL=-1,previewR=-1,previewM=-1; // live preview while typing
+let fiHideLR=false;  // hide Left/Right colours (step 0)
+let fiHideM=false;   // hide Mid colour (step 1)
+
+// Student
+let sClass='',sSeat='',sName='';
+
+// Quiz
+let qTotal=5,qMaxWrong=3,qSearchType='binary';
+let qCurrent=0,qResults=[],qTotSteps=0,qWrongAll=0,qSkipAll=0;
+
+// Timer
+let qTimerSec=0,totalTimerSec=0;
+let qTimerInt=null,totalTimerInt=null;
+let qStartTime=0;
+
+// ── Generate array ─────────────────────────────────────
+function genArr(size,forceNF=false){
+  const set=new Set();
+  while(set.size<size)set.add(Math.floor(Math.random()*80)+5);
+  arr=Array.from(set).sort((a,b)=>a-b);
+  if(forceNF){let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);target=arr.includes(t)?arr[arr.length-1]+3:t;}
+  else target=Math.random()<0.8?arr[Math.floor(Math.random()*arr.length)]:(()=>{let t,tr=0;do{t=Math.floor(Math.random()*80)+5;tr++;}while(arr.includes(t)&&tr<200);return t;})();
+}
+
+// ── Quiz difficulty levels ─────────────────────────────
+// Returns {size, forceNotFound} based on question index
+function diffForQ(i,total){
+  const pct=(i+1)/total;
+  function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+  if(pct<=0.4){const s=rnd(5,8);  return {size:s,nf:false,label:'簡單('+s+'格)',cls:'di-E',icon:'🟢'};}
+  if(pct<=0.8){const s=rnd(9,13); return {size:s,nf:false,label:'中等('+s+'格)',cls:'di-M',icon:'🟡'};}
+  const s=rnd(14,17); return {size:s,nf:true,label:'困難('+s+'格)',cls:'di-H',icon:'🔴'};
+}
+
+// ── Quiz ───────────────────────────────────────────────
+function startQuiz(){
+  document.getElementById('sModal').style.display='flex';
+  document.getElementById('sErr').className='serr';
+  ['inClass','inSeat','inName'].forEach(id=>{const _e=document.getElementById(id);if(_e)_e.classList.remove('err');});
+}
+
+function confirmStudent(){
+  const c=document.getElementById('inClass').value.trim();
+  const s=document.getElementById('inSeat').value.trim();
+  const n=document.getElementById('inName').value.trim();
+  let err=false;
+  if(!c){document.getElementById('inClass').classList.add('err');err=true;}
+  if(!s){document.getElementById('inSeat').classList.add('err');err=true;}
+  if(!n){document.getElementById('inName').classList.add('err');err=true;}
+  if(err){document.getElementById('sErr').className='serr show';return;}
+  sClass=c;sSeat=s;sName=n;
+  document.getElementById('sModal').style.display='none';
+  qTotal=5;qMaxWrong=3;qSearchType='binary';
+  qCurrent=0;qResults=[];qTotSteps=0;qWrongAll=0;qSkipAll=0;
+  document.getElementById('scorecard').className='scorecard';
+  // Start total timer
+  totalTimerSec=0;
+  clearInterval(totalTimerInt);
+  totalTimerInt=setInterval(()=>{totalTimerSec++;document.getElementById('totalTimer').textContent=fmt(totalTimerSec);},1000);
+  launchQ();
+}
+
+function launchQ(){
+  const diff=diffForQ(qCurrent,qTotal);
+  const type=qSearchType;
+  genArr(diff.size,diff.nf);
+  mode=type;
+  updateModeUI(diff);
+  startGame(type,diff);
+}
+
+function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
+
+// ── Start game session ─────────────────────────────────
+function startGame(m,diff=null){
+  mode=m;
+  bL=0;bR=arr.length-1;bM=Math.floor((arr.length-1)/2);
+  stepCount=0;correctAns=0;wrongAns=0;skippedSteps=0;stepWrong=0;fiS0Wrong=0;fiS1Wrong=0;fiS2Wrong=0;fiS3Wrong=0;fiS4Wrong=0;
+  gameOver=false;gameFoundAt=undefined;fiMid=-1;fiDir='';fiBound='';
+  maxSteps=Math.ceil(Math.log2(arr.length));
+
+  document.getElementById('gameArea').style.display='block';
+  document.getElementById('resOv').style.display='none';
+  document.getElementById('logPanel').style.display='none';
+  document.getElementById('choicePanel').style.display='block';
+  document.getElementById('stepCtr').style.display='block';
+  document.getElementById('logList').innerHTML='';
+  clearFb();
+
+  // Quiz header & timer
+  if(quizMode){
+    document.getElementById('qHdr').style.display='flex';
+    document.getElementById('timerRow').style.display='flex';
+    document.getElementById('qQN').textContent=`${qCurrent+1}/${qTotal}`;
+    document.getElementById('qBF').style.width=`${(qCurrent/qTotal)*100}%`;
+    updateWPills(0);
+    document.getElementById('nextBtn').textContent='下一題 →';
+    document.getElementById('forfeitRow').style.display='block';
+    // Per-Q timer
+    qTimerSec=0;qStartTime=Date.now();
+    clearInterval(qTimerInt);
+    qTimerInt=setInterval(()=>{
+      qTimerSec=Math.floor((Date.now()-qStartTime)/1000);
+      const el=document.getElementById('qTimer');
+      el.textContent=fmt(qTimerSec);
+      el.className='timer-val'+(qTimerSec>60?' warn':qTimerSec>120?' danger':'');
+    },1000);
+    // Difficulty indicator
+    if(diff){
+      const di=document.getElementById('diffInd');
+      di.style.display='inline-flex';
+      di.className='diff-indicator '+diff.cls;
+      di.textContent=diff.icon+' '+diff.label;
+    }
+  }
+
+  updateModeUI(diff);
+
+  addLog(`開始二分搜尋，長度 ${arr.length}，目標值 <b>${target}</b>。`,'sl');
+  renderAll();renderQ();
+}
+
+// ── UI helpers ─────────────────────────────────────────
+function updateModeUI(diff=null){
+  const m=mode;
+  document.getElementById('bSI').style.display='grid';
+  document.getElementById('binRng').style.display='block';
+  document.getElementById('legB').style.display='flex';
+  const pill=document.getElementById('mPill');
+  pill.className='mpill mp-q';pill.textContent=`📝 第${qCurrent+1}題`;
+}
+
+function updateWPills(n){
+  const c=document.getElementById('wPills');c.innerHTML='';
+  for(let i=0;i<qMaxWrong;i++){const d=document.createElement('div');d.className='wp'+(i<n?' u':'');c.appendChild(d);}
+}
+
+function updateBinRange(){
+  const rs=bR-bL+1,pct=Math.round((rs/arr.length)*100);
+  document.getElementById('rngCnt').textContent=fiHideLR?'?':rs;
+  document.getElementById('rngBar').style.width=pct+'%';
+  document.getElementById('rngCnt').style.color=pct>50?'var(--accent)':pct>20?'var(--yellow)':'var(--green)';
+  document.getElementById('binHint').textContent='';
+  const left=maxSteps-stepCount;
+  const badge=document.getElementById('slBadge');
+  if(stepCount===0)badge.innerHTML=`<span class="slb slb-n">⚡ 挑戰：最佳步數${maxSteps}步</span>`;
+  else if(left<=1)badge.innerHTML=`<span class="slb slb-d">⚡ 快到最佳步數了！還剩${left}步</span>`;
+  else badge.innerHTML=`<span class="slb slb-k">✅ 已用${stepCount}步，最佳${maxSteps}步</span>`;
+}
+
+// ── Render array ───────────────────────────────────────
+function renderAll(){
+  document.getElementById('tDisp').textContent=target;
+  document.getElementById('stepNum').textContent=stepCount;
+  document.getElementById('lVal').textContent='';
+  document.getElementById('mVal').textContent='';
+  document.getElementById('rVal').textContent='';
+  if(!gameOver)updateBinRange();
+  const track=document.getElementById('arrTrack');track.innerHTML='';
+  for(let i=0;i<arr.length;i++){
+    const w=el('div','cw'),tl=el('div','cl'),cell=el('div','cell'),al=el('div','cal');
+    const lb=[];
+    if(!fiHideLR){
+      if(i===bL&&!gameOver) lb.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
+      if(i===bR&&!gameOver) lb.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
+    }
+    tl.innerHTML=lb.join(' ');
+    if(gameOver){
+      cell.classList.add(gameFoundAt===i?'found':'elim');
+    } else if(fiHideLR){
+      cell.classList.add('active');
+    } else if(i<bL||i>bR){
+      cell.classList.add('elim');
+    } else if(i===bM&&!fiHideM){
+      cell.classList.add('mm');
+    } else if(i===bL){
+      cell.classList.add('lm');
+    } else if(i===bR){
+      cell.classList.add('rm');
+    } else {
+      cell.classList.add('active');
+    }
+    if(!fiHideM&&!gameOver&&i===bM){al.style.background='#fbbf2420';al.style.color='var(--mc)';al.textContent='mid';}
+    cell.textContent=arr[i];
+    w.appendChild(tl);w.appendChild(cell);w.appendChild(al);track.appendChild(w);
+  }
+  const rbk=document.getElementById('rbk');
+  rbk.textContent='';
+}
+function el(tag,cls){const e=document.createElement(tag);e.className=cls;return e;}
+
+// ── Render question ────────────────────────────────────
+function renderQ(){
+  if(gameOver)return;
+  clearFb();
+  const q=document.getElementById('cq'),bc=document.getElementById('cbtns');bc.innerHTML='';
+  q.innerHTML = '目標 = <span class="mv">'+target+'</span>';
+  fiMid=-1; fiDir=''; fiBound=''; fiStepErrors={'確認L/R':0,'計算mid':0,'判斷方向':0,'選邊界':0,'填索引':0}; previewL=-1;previewR=-1;previewM=-1;fiHideLR=true;fiHideM=true;
+  renderFiS0();
+}
+
+
+
+function getFiWrap(){
+  const bc=document.getElementById('cbtns');
+  let w=document.getElementById('fiWrap');
+  if(!w){
+    w=document.createElement('div');
+    w.className='fiw';
+    w.id='fiWrap';
+    bc.appendChild(w);
+  }
+  return w;
+}
+
+function addFiStep(w,num,text,active){
+  const d=document.createElement('div');
+  d.className='fistep'+(active?' active':'');
+  d.id='fiStep'+num;
+  d.textContent=text;
+  w.appendChild(d);
+}
+
+function markFiStepDone(num,summary){
+  const el=document.getElementById('fiStep'+num);
+  if(el){
+    el.classList.remove('active');
+    el.innerHTML=summary+' <span class="chk-ok2">✓</span>';
+  }
+}
+
+function addFiDivider(w){
+  const hr=document.createElement('hr');
+  hr.className='fi-div';
+  w.appendChild(hr);
+}
+
+// Live preview: update array display as student types
+function updatePreview(){
+  const inpL=document.getElementById('fi0inpL');
+  const inpR=document.getElementById('fi0inpR');
+  const inpM=document.getElementById('fi1inp');
+  previewL=inpL?parseInt(inpL.value):-1;
+  previewR=inpR?parseInt(inpR.value):-1;
+  previewM=inpM?parseInt(inpM.value):-1;
+  renderAllPreview();
+}
+
+function renderAllPreview(){
+  // Re-render just the array cells with preview markers
+  const track=document.getElementById('arrTrack');
+  if(!track)return;
+  const cells=track.querySelectorAll('.cw');
+  cells.forEach(function(cw,i){
+    const tl=cw.querySelector('.cl');
+    const cell=cw.querySelector('.cell');
+    if(!tl||!cell)return;
+
+    const ptl=[];
+    // Restore confirmed ▼L ▼R labels
+    if(!fiHideLR&&!gameOver){
+      if(i===bL) ptl.push('<span style="color:var(--lc);font-size:9px">▼L</span>');
+      if(i===bR) ptl.push('<span style="color:var(--rc);font-size:9px">▼R</span>');
+    }
+    // Remove preview classes
+    cell.classList.remove('preview-l','preview-r','preview-m');
+    // Add preview highlight if valid index matches
+    if(!gameOver){
+      if(!isNaN(previewL)&&previewL>=0&&previewL<arr.length&&i===previewL){
+        cell.classList.add('preview-l');
+        ptl.push('<span style="color:var(--lc);font-size:9px;opacity:.6">▼L?</span>');
+      }
+      if(!isNaN(previewR)&&previewR>=0&&previewR<arr.length&&i===previewR){
+        cell.classList.add('preview-r');
+        ptl.push('<span style="color:var(--rc);font-size:9px;opacity:.6">▼R?</span>');
+      }
+      if(!isNaN(previewM)&&previewM>=0&&previewM<arr.length&&i===previewM){
+        cell.classList.add('preview-m');
+      }
+    }
+    tl.innerHTML=ptl.join(' ');
+  });
+}
+
+
+
+
+function showTeachHint(text){
+  const existing=document.getElementById('teachHint');
+  if(existing) existing.remove();
+  const div=document.createElement('div');
+  div.className='teach-hint show';
+  div.id='teachHint';
+  div.innerHTML='💡 '+text;
+  document.getElementById('fiWrap').appendChild(div);
+}
+
+function removeTeachHint(){
+  const el=document.getElementById('teachHint');
+  if(el) el.remove();
+}
+
+// Step 0: confirm Left and Right
+function renderFiS0(){
+  fiHideLR=true; fiHideM=true;
+  renderAll();
+  removeTeachHint();
+  const w=getFiWrap();
+  w.innerHTML='';
+  addFiStep(w,0,'第一步：確認目前的 Left 和 Right 索引',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.textContent='填入目前 Left 和 Right 的索引值：';
+  w.appendChild(info);
+
+  // Left input row
+  const row1=document.createElement('div'); row1.className='irow2';
+  const lbl1=document.createElement('span'); lbl1.className='ilbl2';
+  lbl1.innerHTML='Left = ';
+  const inp1=document.createElement('input');
+  inp1.className='iinp2'; inp1.id='fi0inpL'; inp1.type='number'; inp1.placeholder='?';
+  inp1.setAttribute('min',0); inp1.setAttribute('max',arr.length-1);
+  inp1.addEventListener('input',updatePreview);
+  row1.appendChild(lbl1); row1.appendChild(inp1);
+  w.appendChild(row1);
+
+  // Right input row
+  const row2=document.createElement('div'); row2.className='irow2';
+  const lbl2=document.createElement('span'); lbl2.className='ilbl2';
+  lbl2.innerHTML='Right = ';
+  const inp2=document.createElement('input');
+  inp2.className='iinp2'; inp2.id='fi0inpR'; inp2.type='number'; inp2.placeholder='?';
+  inp2.setAttribute('min',0); inp2.setAttribute('max',arr.length-1);
+  inp2.addEventListener('input',updatePreview);
+  inp2.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS0();});
+  row2.appendChild(lbl2); row2.appendChild(inp2);
+  w.appendChild(row2);
+
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確認 ✓';
+  btn.addEventListener('click',cfmFiS0);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi0inpL');if(i)i.focus();},100);
+}
+
+function handleFiErrorTail(fiVar, skip, reset, noDec, preReset) {
+  if (fiVar >= qMaxWrong) {
+    setTimeout(function() {
+      skippedSteps++;
+      addLog('答錯上限，繼續','wl');
+      if (skip) skip();
+    }, 1000);
+  } else {
+    if (!noDec) decStep();
+    if (preReset) preReset();
+    setTimeout(function() {
+      if (reset) reset();
+      document.getElementById('fb').className = 'fb';
+    }, 1400);
+  }
+}
+
+function cfmFiS0(){
+  const inpL=document.getElementById('fi0inpL');
+  const inpR=document.getElementById('fi0inpR');
+  const valL=parseInt(inpL?inpL.value:'');
+  const valR=parseInt(inpR?inpR.value:'');
+  if(isNaN(valL)||isNaN(valR)){
+    showFb(false,'❌ 請填入 Left 和 Right 的索引！'); return;
+  }
+  const errL=valL!==bL, errR=valR!==bR;
+  if(!errL&&!errR){
+    correctAns++;
+    if(inpL)inpL.classList.add('ok2');
+    if(inpR)inpR.classList.add('ok2');
+    fiStepErrors['確認L/R']=(fiStepErrors['確認L/R']||0)+fiS0Wrong;
+    previewL=-1; previewR=-1;
+    fiHideLR=false; renderAll();
+    stepOK('✅ 正確！','確認 Left/Right（正確）',renderFiS1);
+  } else {
+    wrongAns++; stepWrong++; fiS0Wrong++;
+    updateWPills(stepWrong);
+    if(errL&&inpL)inpL.classList.add('err2');
+    if(errR&&inpR)inpR.classList.add('err2');
+    showFb(false,'❌ 答錯了！（'+fiS0Wrong+'/'+qMaxWrong+'）');
+    addLog('答錯（Left/Right確認）','wl');
+    handleFiErrorTail(fiS0Wrong,
+      function(){fiHideLR=false; renderAll(); clearFb(); renderFiS1();},
+      function(){if(inpL){inpL.classList.remove('err2');inpL.value='';} if(inpR){inpR.classList.remove('err2');inpR.value='';}},
+      true
+    );
+  }
+}
+
+function cfmFiS1(){
+  const inp=document.getElementById('fi1inp');
+  const val=parseInt(inp?inp.value:'');
+  const correct=Math.floor((bL+bR)/2);
+  incStep();
+  if(isNaN(val)){
+    showFb(false,'❌ 請填入數字！');
+    decStep(); return;
+  }
+  if(val===correct){
+    correctAns++;
+    fiMid=val;
+    if(inp)inp.classList.add('ok2');
+    fiStepErrors['計算mid']=(fiStepErrors['計算mid']||0)+fiS1Wrong;
+    previewM=-1;
+    fiHideM=false; renderAll();
+    stepOK('✅ 正確！','第'+stepCount+'步：mid 正確',renderFiS2);
+  } else {
+    wrongAns++; stepWrong++; fiS1Wrong++;
+    if(inp)inp.classList.add('err2');
+    updateWPills(stepWrong);
+    showFb(false,'❌ mid 算錯，請再試試！（'+fiS1Wrong+'/'+qMaxWrong+'）');
+    addLog('答錯（mid）：填了'+val,'wl');
+    handleFiErrorTail(fiS1Wrong,
+      function(){fiMid=correct; fiHideM=false; renderAll(); clearFb(); renderFiS2();},
+      function(){if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}}
+    );
+  }
+}
+
+
+// Step 1: fill mid
+function renderFiS1(){
+  fiHideM=true;
+  renderAll();
+  removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(0,'第一步：確認 Left / Right');
+  addFiDivider(w);
+  addFiStep(w,1,'第二步：計算 mid 的索引',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML='mid = ?';
+  w.appendChild(info);
+  const irow=document.createElement('div'); irow.className='irow2';
+  const lbl=document.createElement('span'); lbl.className='ilbl2'; lbl.textContent='mid = ';
+  const inp=document.createElement('input');
+  inp.className='iinp2'; inp.id='fi1inp'; inp.type='number'; inp.placeholder='?';
+  inp.setAttribute('min',bL); inp.setAttribute('max',bR);
+  inp.addEventListener('input',updatePreview);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS1();});
+  const hint=document.createElement('span'); hint.className='ihint2'; hint.textContent='';
+  irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
+  w.appendChild(irow);
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確認 ✓';
+  btn.addEventListener('click',cfmFiS1);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi1inp');if(i)i.focus();},100);
+}
+
+// Step 2: direction
+function renderFiS2(){
+  removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(1,'第二步：mid = '+fiMid+'，arr['+fiMid+'] = '+arr[fiMid]);
+  addFiDivider(w);
+  addFiStep(w,2,'第三步：判斷方向',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML='arr['+fiMid+'] = <span class="mv">'+arr[fiMid]+'</span>　目標 = <span class="mv">'+target+'</span>';
+  w.appendChild(info);
+  const drow=document.createElement('div'); drow.className='drow2';
+  const bl=document.createElement('button'); bl.className='db2 db2-l';
+  bl.innerHTML='⬅️ 往左找';
+  bl.addEventListener('click',function(){cfmFiS2('left');});
+  const bf=document.createElement('button'); bf.className='db2 db2-f';
+  bf.innerHTML='✅ 找到了';
+  bf.addEventListener('click',function(){cfmFiS2('found');});
+  const br=document.createElement('button'); br.className='db2 db2-r';
+  br.innerHTML='➡️ 往右找';
+  br.addEventListener('click',function(){cfmFiS2('right');});
+  drow.appendChild(bl); drow.appendChild(bf); drow.appendChild(br);
+  w.appendChild(drow);
+}
+
+function cfmFiS2(dir){
+  const midV=arr[fiMid];
+  const correct=midV===target?'found':(target<midV?'left':'right');
+  incStep();
+  const drow=document.getElementById('fiWrap').querySelector('.drow2');
+  if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
+  if(dir===correct){
+    correctAns++; fiDir=dir;
+    if(dir==='found'){
+      showFb(true,'✅ 正確！找到了！');
+      addLog('第'+stepCount+'步：找到目標','cl');
+      setTimeout(function(){endGame(true,fiMid);},700);
+      return;
+    }
+    const _dirHint=dir==='left'?'arr[mid] > 目標，所以目標在左半邊，把 <b>Right 移到 mid-1</b>，縮小右界。':'arr[mid] < 目標，所以目標在右半邊，把 <b>Left 移到 mid+1</b>，縮小左界。';
+    const msg=dir==='left'?'✅ 正確！arr[mid] > 目標，往左找。':'✅ 正確！arr[mid] < 目標，往右找。';
+    fiStepErrors['判斷方向']=(fiStepErrors['判斷方向']||0)+fiS2Wrong;
+    stepOK(msg,'第'+stepCount+'步：方向='+(dir==='left'?'左':'右'),renderFiS3);
+  } else {
+    wrongAns++; stepWrong++; fiS2Wrong++;
+    updateWPills(stepWrong);
+    showFb(false,'❌ 方向答錯了！（'+fiS2Wrong+'/'+qMaxWrong+'）');
+    addLog('答錯（方向）','wl');
+    handleFiErrorTail(fiS2Wrong,
+      function(){fiDir=correct; if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;}); clearFb(); renderFiS3();},
+      null, false,
+      function(){if(drow)drow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});}
+    );
+  }
+}
+
+// Step 3: which boundary
+function renderFiS3(){
+  removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(2,'第三步：'+(fiDir==='left'?'往左找':'往右找'));
+  addFiDivider(w);
+  addFiStep(w,3,'第四步：要改哪個邊界？',true);
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.textContent='往'+(fiDir==='left'?'左':'右')+'找，要把哪個邊界移過來？';
+  w.appendChild(info);
+  const drow=document.createElement('div'); drow.className='drow2';
+  const bl=document.createElement('button'); bl.className='db2 db2-bl';
+  bl.innerHTML='改 Left';
+  bl.addEventListener('click',function(){cfmFiS3('left');});
+  const br=document.createElement('button'); br.className='db2 db2-br';
+  br.innerHTML='改 Right';
+  br.addEventListener('click',function(){cfmFiS3('right');});
+  drow.appendChild(bl); drow.appendChild(br);
+  w.appendChild(drow);
+}
+
+function cfmFiS3(bound){
+  const correct=fiDir==='left'?'right':'left';
+  incStep();
+  const drows=document.getElementById('fiWrap').querySelectorAll('.drow2');
+  const lastDrow=drows[drows.length-1];
+  if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=true;});
+  if(bound===correct){
+    correctAns++; fiBound=bound;
+    const bname=bound==='right'?'Right':'Left';
+    fiStepErrors['選邊界']=(fiStepErrors['選邊界']||0)+fiS3Wrong;
+    stepOK('✅ 正確！往'+(fiDir==='left'?'左':'右')+'找，移動 '+bname+'。','第'+stepCount+'步：改'+bname,renderFiS4);
+  } else {
+    wrongAns++; stepWrong++; fiS3Wrong++;
+    updateWPills(stepWrong);
+    showFb(false,'❌ 邊界答錯了！（'+fiS3Wrong+'/'+qMaxWrong+'）');
+    addLog('答錯（邊界選擇）','wl');
+    handleFiErrorTail(fiS3Wrong,
+      function(){fiBound=correct; clearFb(); renderFiS4();},
+      null, false,
+      function(){if(lastDrow)lastDrow.querySelectorAll('.db2').forEach(function(b){b.disabled=false;});}
+    );
+  }
+}
+
+// Step 4: fill new index
+function renderFiS4(){
+  removeTeachHint();
+  const w=getFiWrap();
+  markFiStepDone(3,'第四步：改 '+(fiBound==='right'?'Right':'Left'));
+  addFiDivider(w);
+  addFiStep(w,4,'第五步：填入新的索引值',true);
+  const correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
+  const bcolor=fiBound==='right'?'var(--rc)':'var(--lc)';
+  const info=document.createElement('div'); info.className='fiinfo';
+  info.innerHTML=(fiBound==='right'?'Right':'Left')+' = ___';
+  w.appendChild(info);
+  const irow=document.createElement('div'); irow.className='irow2';
+  const lbl=document.createElement('span'); lbl.className='ilbl2';
+  lbl.innerHTML='新的 <b style="color:'+bcolor+';">'+(fiBound==='right'?'Right':'Left')+'</b> = ';
+  const inp=document.createElement('input');
+  inp.className='iinp2'; inp.id='fi4inp'; inp.type='number'; inp.placeholder='?';
+  inp.setAttribute('min',0); inp.setAttribute('max',arr.length-1);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')cfmFiS4();});
+  const hint=document.createElement('span'); hint.className='ihint2';
+  hint.textContent='';
+  irow.appendChild(lbl); irow.appendChild(inp); irow.appendChild(hint);
+  w.appendChild(irow);
+  const btn=document.createElement('button');
+  btn.className='cfbtn2'; btn.textContent='確認 ✓';
+  btn.addEventListener('click',cfmFiS4);
+  w.appendChild(btn);
+  setTimeout(function(){const i=document.getElementById('fi4inp');if(i)i.focus();},100);
+}
+
+function cfmFiS4(){
+  const inp=document.getElementById('fi4inp');
+  const val=parseInt(inp?inp.value:'');
+  const correctIdx=fiBound==='right'?fiMid-1:fiMid+1;
+  incStep();
+  if(isNaN(val)){
+    showFb(false,'❌ 請填入數字！');
+    decStep();
+    return;
+  }
+  if(val===correctIdx){
+    correctAns++;
+    if(inp)inp.classList.add('ok2');
+    fiStepErrors['填索引']=(fiStepErrors['填索引']||0)+fiS4Wrong;
+    stepOK('✅ 正確！','第'+stepCount+'步：索引正確',applyFiBin);
+  } else {
+    wrongAns++; stepWrong++; fiS4Wrong++;
+    if(inp)inp.classList.add('err2');
+    updateWPills(stepWrong);
+    showFb(false,'❌ 索引答錯了！（'+fiS4Wrong+'/'+qMaxWrong+'）');
+    addLog('答錯（索引）','wl');
+    handleFiErrorTail(fiS4Wrong,
+      function(){applyFiBin();},
+      function(){if(inp){inp.classList.remove('err2');inp.value='';inp.focus();}}
+    );
+  }
+}
+
+function applyFiBin(){
+  const savedDir=fiDir;
+  const savedMid=fiMid;
+  stepWrong=0;fiS0Wrong=0;fiS1Wrong=0;fiS2Wrong=0;fiS3Wrong=0;fiS4Wrong=0;
+  fiMid=-1; fiDir=''; fiBound='';
+  if(savedDir==='left'){
+    bR=savedMid-1;
+  } else {
+    bL=savedMid+1;
+  }
+  if(bL>bR){endGame(false);return;}
+  bM=Math.floor((bL+bR)/2);
+  renderAll();
+  renderQ();
+}
+
+function clearFb(){document.getElementById('fb').className='fb';}
+function stepOK(msg,logMsg,nextFn){showFb(true,msg);addLog(logMsg,'sl');setTimeout(function(){clearFb();nextFn();},800);}
+function incStep(){stepCount++;document.getElementById('stepNum').textContent=stepCount;}
+function decStep(){stepCount--;document.getElementById('stepNum').textContent=stepCount;}
+function showFb(ok,txt){const fb=document.getElementById('fb');fb.className='fb '+(ok?'correct':'wrong')+' show';fb.innerHTML=(ok?'✅ ':'❌ ')+`<div>${txt}</div>`;}
+
+// ── End game ────────────────────────────────────────────
+function endGame(found,foundIdx){
+  gameOver=true;gameFoundAt=found?foundIdx:undefined;
+  clearInterval(qTimerInt);
+  const qSec=quizMode?Math.floor((Date.now()-qStartTime)/1000):0;
+  renderAll();
+  document.getElementById('choicePanel').style.display='none';
+  document.getElementById('forfeitRow').style.display='none';
+  document.getElementById('logPanel').style.display='block';
+  document.getElementById('binRng').style.display='none';
+
+  const ov=document.getElementById('resOv');
+  ov.style.display='block';
+  ov.className='res-ov show'+(found?'':' nf');
+  document.getElementById('re').textContent=found?'🎉':'🔍';
+  document.getElementById('rt2').className='rt '+(found?'found':'nf');
+  document.getElementById('rt2').textContent=found?'找到了！':'找不到！';
+  document.getElementById('rd').innerHTML=found?`<strong>找到了！</strong>共<strong>${stepCount}</strong>步。`:`目標值<strong>${target}</strong>不在陣列中。共<strong>${stepCount}</strong>步確認。`;
+  document.getElementById('srow').innerHTML=`<div class="sp">✅ 答對<span>${correctAns}</span></div><div class="sp">❌ 答錯<span>${wrongAns}</span></div><div class="sp">⏭️ 跳過<span>${skippedSteps}</span></div><div class="sp">⏱️<span>${fmt(qSec)}</span></div><div class="sp">🔢 共<span>${stepCount}</span>步</div>`;
+
+  addLog(`⚡第${stepCount}步找到${target}在[${foundIdx}]！`,'cl');
+
+  if(quizMode){
+    const diff=diffForQ(qCurrent,qTotal);
+    const qScore=Math.max(0,20-(wrongAns*2));
+    qResults.push({type:mode,target,found,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:foundIdx,diff,qScore,stepErrors:Object.assign({},fiStepErrors)});
+    qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
+    document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下一題→(${qCurrent+2}/${qTotal})`:'查看成績單 📊';
+  }
+}
+
+// ── Forfeit question ───────────────────────────────────
+function forfeitQ(){
+  if(gameOver||!quizMode) return;
+  clearInterval(qTimerInt);
+  const qSec=Math.floor((Date.now()-qStartTime)/1000);
+  const diff=diffForQ(qCurrent,qTotal);
+  // Record with 0 stepScores = 0 pts, mark as forfeited
+  qResults.push({type:mode,target,found:false,steps:stepCount,wrong:wrongAns,skipped:skippedSteps,sec:qSec,arr:[...arr],foundAt:undefined,diff,qScore:0,forfeited:true});
+  qTotSteps+=stepCount;qWrongAll+=wrongAns;qSkipAll+=skippedSteps;
+  gameOver=true;
+  document.getElementById('forfeitRow').style.display='none';
+  document.getElementById('choicePanel').style.display='none';
+
+  const ov=document.getElementById('resOv');
+  ov.style.display='block';
+  ov.className='res-ov show nf';
+  document.getElementById('re').textContent='🏳️';
+  document.getElementById('rt2').className='rt nf';
+  document.getElementById('rt2').textContent='放棄此題';
+  document.getElementById('rd').innerHTML=`本題得 <strong>0 分</strong>，直接跳下一題。`;
+  document.getElementById('srow').innerHTML=`<div class="sp">⏱️<span>${fmt(qSec)}</span></div><div class="sp">🔢 已走<span>${stepCount}</span>步</div>`;
+  document.getElementById('nextBtn').textContent=qCurrent+1<qTotal?`下一題→(${qCurrent+2}/${qTotal})`:'查看成績單 📊';
+  ov.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function nextAction(){
+  qCurrent++;if(qCurrent>=qTotal){clearInterval(totalTimerInt);showScorecard();}else launchQ();
+}
+
+function resultTag(r,brief){
+  if(r.forfeited) return '<span class="tag tag-skip">🏳️'+(brief?'放棄':' 放棄（0分）')+'</span>';
+  if(r.wrong===0&&r.skipped===0) return r.found?'<span class="tag tag-ok">完美✓</span>':'<span class="tag tag-ok">'+(brief?'確認✓':'確認不存在✓')+'</span>';
+  if(r.found) return '<span class="tag tag-err">找到(有失誤)</span>';
+  return r.skipped===0?'<span class="tag tag-err">未找到(有失誤)</span>':'<span class="tag tag-skip">未完成</span>';
+}
+
+// ── Scorecard ──────────────────────────────────────────
+function showScorecard(){
+  clearInterval(qTimerInt);
+  document.getElementById('gameArea').style.display='none';
+  const sc=document.getElementById('scorecard');sc.className='scorecard show';
+  const perfect=qResults.filter(function(r){return !r.forfeited&&r.wrong===0&&r.skipped===0;}).length;
+  const found=qResults.filter(function(r){return r.found;}).length;
+  // Scoring: 20pts/question - 1pt per wrong answer, min 0
+  const perQArr=qResults.map(function(r){ return r.qScore||0; });
+  const pct=Math.round(perQArr.reduce(function(a,s){return a+s;},0));
+
+  let grade,gc,trophy,lbl;
+  if(pct>=90){grade='A';gc='gA';trophy='🏆';lbl='優秀！';}
+  else if(pct>=75){grade='B';gc='gB';trophy='🥈';lbl='良好，繼續加油！';}
+  else if(pct>=60){grade='C';gc='gC';trophy='🥉';lbl='及格，還有進步空間';}
+  else{grade='D';gc='gD';trophy='📖';lbl='需要多加練習';}
+
+  document.getElementById('scT').textContent=trophy;
+  document.getElementById('scStag').textContent=`👤 ${sClass} ${sSeat}號 ${sName}`;
+  document.getElementById('scSub').textContent=`${qTotal}題測驗`;
+  document.getElementById('scN').textContent=perfect;
+  document.getElementById('scD').textContent=`/${qTotal} 無失誤`;
+  document.getElementById('scGr').className='sc-grade '+gc;
+  document.getElementById('scGr').textContent=grade;
+  document.getElementById('scGL').textContent=lbl;
+  document.getElementById('scPct').textContent=pct+'分';
+  document.getElementById('scPctNote').textContent='計分：每題 20 分，每答錯一次扣 2 分，最低 0 分，5 題總分最高 100 分';
+  document.getElementById('scTime').textContent=fmt(totalTimerSec);
+  document.getElementById('scSt').textContent=qTotSteps;
+  document.getElementById('scWr').textContent=qWrongAll;
+  document.getElementById('scSk').textContent=qSkipAll;
+
+  // ── Per-question recap ──────────────────────────────
+  const recapList=document.getElementById('recapList');recapList.innerHTML='';
+  qResults.forEach((r,i)=>{
+    const card=document.createElement('div');
+    card.className='recap-card'+(r.forfeited?' not-found':r.found&&r.wrong===0?'':r.found?' had-err':' not-found');
+    const tag=resultTag(r,false);
+    const diffLabel=`<span class="diff-indicator ${r.diff.cls}" style="font-size:10px;padding:2px 8px;">${r.diff.icon}${r.diff.label}</span>`;
+
+    // Mini array visual
+    const arrHtml=r.arr.map((v,j)=>{
+      let cls='rc-norm';
+      if(r.found&&j===r.foundAt)cls='rc-found';
+      else if(!r.found)cls='rc-elim';
+      return `<div class="recap-cell ${cls}" title="[${j}]=${v}">${v}</div>`;
+    }).join('');
+
+    // Learning hint
+    let hint='';
+    if(r.forfeited){
+      hint=`<span class="bad">🏳️ 此題主動放棄，得 0 分。可以利用練習模式多熟悉這類題目！</span>`;
+    } else if(r.wrong===0&&r.skipped===0){
+      if(r.found)hint=`<span class="good">✅ 完美！每一步判斷都正確，找到目標。</span>`;
+      else hint=`<span class="good">✅ 完美！正確走完所有步驟，確認目標不存在。</span>`;
+    } else if(r.found&&r.wrong>0&&r.skipped===0){
+      hint=`<span class="warn">⚠️ 找到了，但答錯了${r.wrong}次。</span><br>建議複習：比較 mid 與目標的大小，再決定往左還是往右。`;
+    } else if(!r.found&&r.wrong>0&&r.skipped===0){
+      hint=`<span class="warn">⚠️ 過程有答錯${r.wrong}次，但最終正確確認目標不存在。</span>`;
+    } else if(r.skipped>0){
+      hint=`<span class="bad">❌ 有${r.skipped}步被強制跳過（答錯上限）。建議多練習再來挑戰！</span>`;
+    }
+
+    const qScore=r.qScore||0;
+    card.innerHTML=`<div class="recap-card-top">${diffLabel}<span class="recap-qnum">第${i+1}題（⚡二分）目標：${r.target}</span>${tag}<span class="recap-time">⏱️ ${fmt(r.sec)} | ${r.steps}步 | 錯${r.wrong}次 | ${qScore}/20分</span></div><div class="recap-arr">${arrHtml}</div><div class="recap-hint">${hint}</div>`;
+    recapList.appendChild(card);
+  });
+
+  // ── Learning suggestions ────────────────────────────
+  const notFound=qResults.filter(r=>!r.found).length;
+  const sugs=[];
+  if(notFound>=2)sugs.push({icon:'🔍',txt:'有多題未找到目標。當搜尋範圍縮小到零，就代表目標不存在，這是正確結果！'});
+  if(totalTimerSec>qTotal*60)sugs.push({icon:'⏱️',txt:`總時間 ${fmt(totalTimerSec)}，速度可以再快一些。熟練後每題應在60秒內完成。`});
+  if(pct>=90)sugs.push({icon:'🌟',txt:'表現優秀！可以試試更大的陣列，或挑戰限定步數模式。'});
+
+  const sugBox=document.getElementById('sugBox');
+  const sugList=document.getElementById('sugList');sugList.innerHTML='';
+  if(sugs.length>0){
+    sugBox.style.display='block';
+    sugs.forEach(s=>{const d=document.createElement('div');d.className='sug-item';d.innerHTML=`<span class="sug-icon">${s.icon}</span><span>${s.txt}</span>`;sugList.appendChild(d);});
+  } else sugBox.style.display='none';
+
+  // ── Summary table ───────────────────────────────────
+  const tbody=document.getElementById('scTbody');tbody.innerHTML='';
+  qResults.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    const tag=resultTag(r,true);
+    const qScore=r.qScore||0;
+    tr.innerHTML=`<td>${i+1}</td><td>${r.diff.icon}${r.diff.label}</td><td>⚡二分</td><td>${r.target}</td><td>${tag}</td><td>${r.steps}</td><td style="color:${r.wrong>0?'var(--red)':'var(--green)'}">${r.wrong}</td><td style="color:var(--accent2);font-weight:800">${qScore}/20</td><td>${fmt(r.sec)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Reset submit
+  const sb=document.getElementById('submitBtn');sb.disabled=false;sb.textContent='送出成績 →';
+  document.getElementById('submitSt').textContent='';document.getElementById('submitSt').className='submit-st';
+
+  sc.scrollIntoView({behavior:'smooth',block:'start'});
+  submitGS();
+}
+
+// ── Submit to Google Sheet ─────────────────────────────
+function submitGS(){
+  const btn=document.getElementById('submitBtn');
+  const st=document.getElementById('submitSt');
+  if(!btn||!st) return;
+  if(GAS_URL===''||GAS_URL==='填入你的GAS網址'){
+    st.className='submit-st fail';
+    st.textContent='⚠️ 老師尚未設定 GAS 網址，請通知老師。';
+    return;
+  }
+  btn.disabled=true;
+  st.className='submit-st sending';
+  st.textContent='⏳ 傳送中...';
+
+  const pct=Math.round(qResults.reduce(function(a,r){return a+(r.qScore||0);},0));
+  const perfect=qResults.filter(function(r){return !r.forfeited&&r.wrong===0&&r.skipped===0;}).length;
+
+  // 各步驟累計答錯次數
+  const stepNames=['確認L/R','計算mid','判斷方向','選邊界','填索引'];
+  const stepErrTotals=[0,0,0,0,0];
+  qResults.forEach(function(r){
+    if(r.stepErrors){
+      stepNames.forEach(function(n,i){
+        stepErrTotals[i]+=(r.stepErrors[n]||0);
+      });
+    }
+  });
+  const stepErrStr=stepNames.map(function(n,i){return n+':'+stepErrTotals[i]+'次';}).join('、');
+
+  const detail=qResults.map(function(r,i){
+    const qScore=r.qScore||0;
+    const status=r.forfeited?'放棄':r.found?'找到':'未找到';
+    return '第'+(i+1)+'題('+(r.diff?r.diff.label:'')+')目標'+r.target+' '+status+' '+qScore+'/20分 錯'+r.wrong+'次';
+  }).join(' | ');
+
+  const payload={
+    class:sClass, seat:sSeat, name:sName,
+    type:QUIZ_TYPE, pct:pct,
+    perfect:perfect+'/'+qTotal,
+    steps:qTotSteps, wrong:qWrongAll, skip:qSkipAll,
+    time:totalTimerSec, detail:detail,
+    stepErrors:stepErrStr
+  };
+
+  let done=false;
+  const timer=setTimeout(function(){
+    if(done) return; done=true;
+    st.className='submit-st ok';
+    st.textContent='✅ 成績已送出！';
+    btn.textContent='已送出 ✓';
+  },6000);
+
+  fetch(GAS_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(payload)})
+  .then(function(){
+    if(done)return;done=true;clearTimeout(timer);
+    st.className='submit-st ok';st.textContent='✅ 成績已送出！';btn.textContent='已送出 ✓';
+  })
+  .catch(function(){
+    if(done)return;done=true;clearTimeout(timer);
+    st.className='submit-st fail';st.textContent='⚠️ 送出失敗，請再試一次';btn.disabled=false;
+  });
+}
+
+// ── Log ────────────────────────────────────────────────
+function addLog(text,cls){
+  document.getElementById('logPanel').style.display='block';
+  const list=document.getElementById('logList');
+  const e=document.createElement('div');e.className=`le ${cls}`;
+  const n=document.createElement('div');n.className='lsn'+(cls==='ll'?' ln':'');n.textContent=list.children.length+1;
+  const t=document.createElement('div');t.className='ltx';t.innerHTML=text;
+  e.appendChild(n);e.appendChild(t);list.appendChild(e);list.scrollTop=list.scrollHeight;
+}
+
+// ── Init ───────────────────────────────────────────────
+window.onload=function(){
+  document.getElementById('sModal').style.display='flex';
+};
+</script>
+</body>
+</html>

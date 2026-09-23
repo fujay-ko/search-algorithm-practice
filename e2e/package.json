@@ -1,0 +1,13 @@
+{
+  "name": "search-algorithm-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Smoke tests for search-algorithm-practice static site",
+  "scripts": {
+    "test": "playwright test",
+    "serve": "node server.js .. 8080"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

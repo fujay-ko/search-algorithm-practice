@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教師儀表板 — 搜尋演算法測驗統計</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1117;--panel:#1a1d2e;--panel2:#22263a;
+  --accent:#4f8ef7;--accent2:#a78bfa;--green:#34d399;--red:#f87171;
+  --yellow:#fbbf24;--orange:#fb923c;--text:#e8eaf6;--muted:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito','Noto Sans TC',sans-serif;max-width:860px;margin:0 auto;padding:18px 14px 60px;}
+.home-nav{margin:0 0 6px;}
+.home-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:800;color:var(--muted);text-decoration:none;padding:6px 14px;border:1px solid #ffffff15;border-radius:50px;transition:all .18s;}
+.home-link:hover{color:var(--text);border-color:var(--accent);}
+h1{font-size:22px;font-weight:900;margin:10px 0 4px;}
+.sub{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:16px;}
+.card{background:var(--panel);border:1px solid #ffffff0d;border-radius:16px;padding:16px;margin-bottom:14px;}
+.card-t{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin:8px 0 4px;}
+input{width:100%;padding:10px 12px;font-size:13px;border-radius:10px;border:1px solid #ffffff20;background:#10131f;color:var(--text);font-family:inherit;}
+input:focus{outline:none;border-color:var(--accent);}
+.btn{display:inline-block;padding:10px 18px;font-size:13px;font-weight:800;border-radius:12px;border:none;cursor:pointer;background:var(--accent);color:#fff;font-family:inherit;margin-top:12px;margin-right:8px;}
+.btn.ghost{background:var(--panel2);color:var(--text);border:1px solid #ffffff15;}
+.btn:disabled{opacity:.5;cursor:wait;}
+.status{font-size:12px;font-weight:700;margin-top:10px;min-height:18px;}
+.status.ok{color:var(--green);}
+.status.err{color:var(--red);}
+.status.warn{color:var(--yellow);}
+.sum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.sum-item{background:var(--panel2);border-radius:12px;padding:12px;text-align:center;}
+.sum-n{font-size:24px;font-weight:900;font-family:'Nunito',sans-serif;}
+.sum-l{font-size:12px;color:var(--muted);font-weight:700;}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #ffffff0a;}
+th{color:var(--muted);font-weight:800;font-size:12px;}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.bar-name{font-size:12px;font-weight:700;width:80px;color:var(--muted);flex-shrink:0;}
+.bar-bg{flex:1;background:#ffffff10;border-radius:50px;height:8px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#c2410c,var(--red));}
+.bar-num{font-size:12px;font-weight:800;width:40px;text-align:right;}
+.sec-t{font-size:13px;font-weight:900;margin:14px 0 6px;color:var(--accent2);}
+.blur-hi{color:var(--red);font-weight:800;}
+.hint{font-size:12px;color:var(--muted);line-height:1.7;background:var(--panel2);border-radius:10px;padding:10px 12px;margin-top:10px;}
+.hint b{color:var(--yellow);}
+@media(max-width:560px){.sum-grid{grid-template-columns:repeat(3,1fr);}.sum-n{font-size:19px;}}
+</style>
+</head>
+<body>
+<nav class="home-nav"><a class="home-link" href="index.html">← 回首頁</a></nav>
+<h1>📊 教師儀表板</h1>
+<div class="sub">搜尋演算法測驗 — 各班成績統計（需部署新版 gas_script.js 並啟用 ?action=stats）</div>
+
+<div class="card" id="cfgCard">
+  <div class="card-t">⚙️ 連線設定</div>
+  <label for="gasUrl">GAS 網路應用程式網址</label>
+  <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+  <label for="passcode">儀表板密碼（防學生好奇，非正式加密；首次輸入即設定）</label>
+  <input type="password" id="passcode" placeholder="請輸入密碼" autocomplete="off">
+  <button class="btn" id="loadBtn" onclick="unlockAndLoad()">載入統計 📥</button>
+  <div class="status" id="cfgSt" role="status" aria-live="polite"></div>
+  <div class="hint">首次使用：在上方填入部署 <b>新版 gas_script.js</b> 後的網址，並自訂一組密碼（會記在這台電腦）。之後開啟需輸入同一組密碼。若顯示「統計服務未啟用」，表示該網址仍是舊版腳本，請重新部署。</div>
+</div>
+
+<div id="result"></div>
+
+<script>
+// 注意：此密碼只擋「學生隨手點開」，存在 localStorage 明碼，不是真正的安全機制。
+// 真正敏感的成績請以 Google 試算表權限控管為準。
+var CFG_KEY='teacher_dash_cfg';
+var PASS_KEY='teacher_dash_pass';
+
+function getCfg(){
+  try{return JSON.parse(localStorage.getItem(CFG_KEY)||'{}');}catch(e){return {};}
+}
+function setStatus(txt,cls){
+  var el=document.getElementById('cfgSt');
+  el.textContent=txt;el.className='status '+(cls||'');
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  var cfg=getCfg();
+  if(cfg.url)document.getElementById('gasUrl').value=cfg.url;
+});
+
+function unlockAndLoad(){
+  var url=document.getElementById('gasUrl').value.trim().replace(/\/$/,'');
+  var pw=document.getElementById('passcode').value;
+  if(!url){setStatus('請先填入 GAS 網址。','err');return;}
+  if(!pw){setStatus('請輸入密碼。','err');return;}
+  var saved=null;
+  try{saved=localStorage.getItem(PASS_KEY);}catch(e){}
+  if(saved){
+    if(pw!==saved){setStatus('密碼錯誤。','err');return;}
+  }else{
+    try{localStorage.setItem(PASS_KEY,pw);}catch(e){}
+  }
+  try{localStorage.setItem(CFG_KEY,JSON.stringify({url:url}));}catch(e){}
+  loadStats(url);
+}
+
+function loadStats(url){
+  var btn=document.getElementById('loadBtn');
+  btn.disabled=true;btn.textContent='載入中…';
+  setStatus('正在讀取統計…','warn');
+  fetch(url+'?action=stats')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      btn.disabled=false;btn.textContent='載入統計 📥';
+      if(!d||d.status!=='ok'||!d.sheets){setStatus('統計服務未啟用：此網址回應的不是統計資料，請部署新版 gas_script.js。','err');return;}
+      if(d.sheets.length===0){setStatus('連線成功，但試算表尚無成績資料。','warn');document.getElementById('result').innerHTML='';return;}
+      setStatus('✅ 載入成功（更新時間：'+new Date(d.updated).toLocaleString()+')','ok');
+      render(d.sheets);
+    })
+    .catch(function(){
+      btn.disabled=false;btn.textContent='載入統計 📥';
+      setStatus('讀取失敗：網址錯誤、未公開存取，或仍是舊版腳本（不支援 ?action=stats）。','err');
+    });
+}
+
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function render(sheets){
+  var html='';
+  sheets.forEach(function(sh){
+    html+='<div class="card"><div class="card-t">📝 '+esc(sh.type)+'</div>';
+    html+='<div class="sum-grid">'+
+      '<div class="sum-item"><div class="sum-n">'+sh.count+'</div><div class="sum-l">作答人次</div></div>'+
+      '<div class="sum-item"><div class="sum-n" style="color:var(--accent)">'+sh.avg+'</div><div class="sum-l">平均分</div></div>'+
+      '<div class="sum-item"><div class="sum-n" style="color:var(--red)">'+(sh.blurList?sh.blurList.length:0)+'</div><div class="sum-l">有切頁紀錄</div></div>'+
+      '</div>';
+    // 各步錯誤
+    var errs=sh.stepErrors||{};
+    var keys=Object.keys(errs);
+    if(keys.length){
+      var mx=Math.max.apply(null,keys.map(function(k){return errs[k];}).concat([0]));
+      html+='<div class="sec-t">各步驟累計錯誤</div>';
+      keys.forEach(function(k){
+        var pct=mx>0?Math.round(errs[k]/mx*100):0;
+        html+='<div class="bar-row"><div class="bar-name">'+esc(k)+'</div>'+
+          '<div class="bar-bg"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
+          '<div class="bar-num">'+errs[k]+'次</div></div>';
+      });
+    }
+    // 切頁名單
+    if(sh.blurList&&sh.blurList.length){
+      html+='<div class="sec-t">⚠️ 切頁次數（由高到低，僅供參考）</div><table><thead><tr><th>學生</th><th>切頁次數</th></tr></thead><tbody>';
+      sh.blurList.forEach(function(b){
+        html+='<tr><td>'+esc(b.name)+'</td><td class="blur-hi">'+b.blur+' 次</td></tr>';
+      });
+      html+='</tbody></table>';
+    }
+    // 最近 10 筆
+    if(sh.recent&&sh.recent.length){
+      html+='<div class="sec-t">最近送出（最多 10 筆）</div><table><thead><tr><th>學生</th><th>分數</th></tr></thead><tbody>';
+      sh.recent.forEach(function(r){
+        html+='<tr><td>'+esc(r.who)+'</td><td>'+r.pct+' 分</td></tr>';
+      });
+      html+='</tbody></table>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('result').innerHTML=html;
+}
+</script>
+</body>
+</html>
